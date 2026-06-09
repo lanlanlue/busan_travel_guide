@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釜山六天五夜情侶行程懶人包</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+:root{
+  --primary:#1a9fd4;--primary-light:#E8F4F8;--primary-dark:#0c3f56;--primary-border:#B8DDE8;
+  --teal:#1D9E75;--teal-light:#E1F5EE;--teal-border:#5DCAA5;--teal-dark:#085041;
+  --amber:#d97706;--amber-light:#FAEEDA;--amber-border:#EF9F27;--amber-dark:#633806;
+  --purple:#7F77DD;--purple-light:#EEEDFE;--purple-border:#AFA9EC;--purple-dark:#3C3489;
+  --coral:#D85A30;--coral-light:#FAECE7;--coral-border:#F0997B;
+  --red-light:#FCEBEB;--red-dark:#7F1F1F;
+  --bg:#f0f6fa;--surface:#ffffff;--surface2:#f8fafc;
+  --text1:#0d2137;--text2:#4a6070;--text3:#8a9aaa;
+  --border:rgba(0,100,150,0.1);--border2:rgba(0,100,150,0.18);
+  --radius-sm:6px;--radius:10px;--radius-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans','Noto Sans TC',sans-serif;background:var(--bg);color:var(--text1);font-size:14px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+
+/* Hero */
+.hero{background:var(--primary-dark);border-radius:var(--radius-lg);padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:rgba(26,159,212,0.15)}
+.hero::after{content:'';position:absolute;left:-40px;bottom:-40px;width:160px;height:160px;border-radius:50%;background:rgba(26,159,212,0.1)}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:0.5px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 12px;font-size:11px;color:rgba(255,255,255,0.8);margin-bottom:12px}
+.hero-title{font-size:26px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:6px}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px}
+.flight-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+@media(max-width:520px){.flight-grid{grid-template-columns:1fr}}
+.flight-card{background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.15);border-radius:var(--radius);padding:10px 14px}
+.flight-dir{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.flight-main{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.flight-time{font-size:18px;font-weight:600;color:#fff}
+.flight-arrow{color:rgba(255,255,255,0.3);font-size:14px}
+.flight-port{font-size:11px;color:rgba(255,255,255,0.55)}
+.flight-note{font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px}
+.b-teal{background:var(--teal-light);color:var(--teal-dark);border:0.5px solid var(--teal-border)}
+.b-purple{background:var(--purple-light);color:var(--purple-dark);border:0.5px solid var(--purple-border)}
+.b-amber{background:var(--amber-light);color:var(--amber-dark);border:0.5px solid var(--amber-border)}
+
+/* Opt box */
+.opt-box{background:#EAF3DE;border:0.5px solid #97C459;border-radius:var(--radius);padding:14px 16px;margin-bottom:20px}
+.opt-title{font-size:13px;font-weight:600;color:#1a4a0a;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.opt-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:12px;color:#27500A;line-height:1.55}
+.opt-item:last-child{margin-bottom:0}
+.opt-item i{font-size:14px;flex-shrink:0;margin-top:1px;color:#3B6D11}
+
+/* Tab nav */
+.tab-nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px;background:var(--surface);border-radius:var(--radius-lg);padding:6px;box-shadow:var(--shadow);border:0.5px solid var(--border)}
+.tab-btn{padding:7px 14px;border-radius:var(--radius);font-size:12px;font-weight:500;cursor:pointer;color:var(--text2);transition:all .15s;white-space:nowrap;border:none;background:none}
+.tab-btn:hover{background:var(--surface2);color:var(--text1)}
+.tab-btn.active{background:var(--primary);color:#fff}
+.day-sec{display:none}.day-sec.show{display:block}
+
+/* Day header */
+.day-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.day-num-big{font-size:48px;font-weight:700;color:var(--primary-border);line-height:1}
+.day-head-info{}
+.day-head-title{font-size:18px;font-weight:600;color:var(--text1);line-height:1.3}
+.day-head-sub{font-size:12px;color:var(--text3);margin-top:4px}
+
+/* Banner alerts */
+.banner{border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.55}
+.banner i{font-size:16px;flex-shrink:0;margin-top:1px}
+.banner-title{font-weight:600;margin-bottom:2px}
+.bn-purple{background:var(--purple-light);border:0.5px solid var(--purple-border);color:var(--purple-dark)}
+.bn-teal{background:var(--teal-light);border:0.5px solid var(--teal-border);color:var(--teal-dark)}
+.bn-amber{background:var(--amber-light);border:0.5px solid var(--amber-border);color:var(--amber-dark)}
+.bn-info{background:var(--primary-light);border:0.5px solid var(--primary-border);color:var(--primary-dark)}
+
+/* Timeline */
+.tl{position:relative;padding-left:30px}
+.tl-spine{position:absolute;left:10px;top:12px;bottom:12px;width:1.5px;background:var(--border2)}
+.blk{position:relative;margin-bottom:14px}
+.blk-dot{position:absolute;left:-30px;top:8px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.blk-dot i{font-size:9px;color:#fff}
+.dot-blue{background:var(--primary)}
+.dot-gray{background:#94a3b8}
+.dot-teal{background:var(--teal)}
+.dot-purple{background:var(--purple)}
+.dot-amber{background:var(--amber-border)}
+.dot-pink{background:#D4537E}
+.dot-coral{background:var(--coral)}
+
+/* Cards */
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;box-shadow:var(--shadow)}
+.card.card-blue{border-left:3px solid var(--primary)}
+.card.card-teal{border-left:3px solid var(--teal)}
+.card.card-purple{border-left:3px solid var(--purple)}
+.card.card-amber{border-left:3px solid var(--amber-border)}
+.card.card-booked{border-left:3px solid var(--teal);background:#fafffc}
+.ct{font-size:11px;font-weight:600;color:var(--primary);margin-bottom:3px;letter-spacing:.2px}
+.cn{font-size:14px;font-weight:600;color:var(--text1);margin-bottom:6px;line-height:1.4}
+.cd{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.tag{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:500}
+.tc{background:var(--primary-light);color:#0c447c}
+.tp{background:var(--purple-light);color:var(--purple-dark)}
+.tg{background:var(--teal-light);color:var(--teal-dark)}
+.ta{background:var(--amber-light);color:var(--amber-dark)}
+.tw{background:var(--red-light);color:var(--red-dark)}
+.tn{background:var(--surface2);color:var(--text2);border:0.5px solid var(--border)}
+.transport{background:var(--surface2);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:7px;border:0.5px solid var(--border)}
+.transport i{font-size:14px;color:var(--primary);flex-shrink:0}
+.tip{display:flex;align-items:flex-start;gap:6px;font-size:11px;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border);line-height:1.55;color:var(--text2)}
+.tip i{font-size:13px;flex-shrink:0;margin-top:1px}
+.tip.tip-warn{color:var(--amber-dark)}.tip.tip-warn i{color:var(--amber-border)}
+.tip.tip-ok{color:var(--teal-dark)}.tip.tip-ok i{color:var(--teal)}
+.tip.tip-info{color:#0c447c}.tip.tip-info i{color:var(--primary)}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)}
+.lnk{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:5px 10px;border-radius:var(--radius-sm);border:0.5px solid;transition:opacity .15s}
+.lnk:hover{opacity:.8}
+.lnk-map{background:var(--primary-light);color:#0c447c;border-color:var(--primary-border)}
+.lnk-web{background:var(--surface2);color:var(--text1);border-color:var(--border2)}
+.lnk-book{background:var(--teal-light);color:var(--teal-dark);border-color:var(--teal-border)}
+.lnk-pass{background:var(--purple-light);color:var(--purple-dark);border-color:var(--purple-border)}
+
+/* Steps */
+.step-list{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.step{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6}
+.sn{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px}
+.sn-blue{background:var(--primary-light);color:#0c447c}
+.sn-teal{background:var(--teal-light);color:var(--teal-dark)}
+.sn-purple{background:var(--purple-light);color:var(--purple-dark)}
+.sb{flex:1;color:var(--text2)}.sb b{color:var(--text1);font-weight:500}
+
+/* Sub card */
+.sub-card{background:var(--surface2);border-radius:var(--radius);padding:12px 14px;margin:8px 0;border:0.5px solid var(--border)}
+.sub-card-title{font-size:12px;font-weight:600;color:var(--text1);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.sub-card-title i{font-size:14px;color:var(--primary)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:10px 0}
+table.std{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+table.std th{background:var(--primary-light);color:var(--primary-dark);font-weight:600;padding:8px 10px;text-align:left;border-bottom:1px solid var(--primary-border);font-size:11px}
+table.std td{padding:8px 10px;border-bottom:0.5px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5}
+table.std tr:last-child td{border-bottom:none}
+table.std td b{color:var(--text1);font-weight:500}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
+.info-c{background:var(--surface2);border-radius:var(--radius);padding:12px;text-align:center;border:0.5px solid var(--border)}
+.info-n{font-size:20px;font-weight:700;color:var(--text1)}
+.info-l{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* Cabin comparison */
+.cabin-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:480px){.cabin-grid{grid-template-columns:1fr}}
+.cabin{border-radius:var(--radius);padding:12px;border:0.5px solid}
+.cabin-a{background:var(--primary-light);border-color:var(--primary-border)}
+.cabin-b{background:var(--purple-light);border-color:var(--purple-border)}
+.cabin-t{font-size:12px;font-weight:600;margin-bottom:4px}
+.cabin-a .cabin-t{color:#0c447c}.cabin-b .cabin-t{color:var(--purple-dark)}
+.cabin-d{font-size:11px;line-height:1.6}
+.cabin-a .cabin-d{color:#185FA5}.cabin-b .cabin-d{color:var(--purple-dark)}
+
+/* Tax refund */
+.tax-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px}
+.tax-stat{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow)}
+.tax-stat-n{font-size:20px;font-weight:700;color:var(--text1)}
+.tax-stat-l{font-size:11px;color:var(--text3);margin-top:2px}
+.tax-method{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:480px){.tax-method{grid-template-columns:1fr}}
+.tm{border-radius:var(--radius);padding:14px;border:0.5px solid}
+.tm-a{background:var(--primary-light);border-color:var(--primary-border)}
+.tm-b{background:var(--purple-light);border-color:var(--purple-border)}
+.tm-title{font-size:13px;font-weight:600;margin-bottom:6px}
+.tm-a .tm-title{color:#0c447c}.tm-b .tm-title{color:var(--purple-dark)}
+.tm-body{font-size:11px;line-height:1.65}
+.tm-a .tm-body{color:#185FA5}.tm-b .tm-body{color:var(--purple-dark)}
+.bdg-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.bdg{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:500}
+.bdg-ok{background:var(--teal-light);color:var(--teal-dark)}
+.bdg-no{background:var(--red-light);color:var(--red-dark)}
+.bdg-warn{background:var(--amber-light);color:var(--amber-dark)}
+
+/* Section headers inside tabs */
+.sec-h{font-size:13px;font-weight:600;color:var(--text1);margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.sec-h i{font-size:15px;color:var(--primary)}
+.sep{height:0.5px;background:var(--border);margin:16px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><i class="ti ti-map-pin" aria-hidden="true"></i>釜山 · 韓國</div>
+    <div class="hero-title">釜山六天五夜情侶懶人包</div>
+    <div class="hero-sub">完整行程 · Q&A 修正整合版 · 含退稅完整攻略</div>
+    <div class="flight-grid">
+      <div class="flight-card">
+        <div class="flight-dir"><i class="ti ti-plane-departure" aria-hidden="true"></i> 去程</div>
+        <div class="flight-main">
+          <span class="flight-time">14:40</span>
+          <i class="ti ti-arrow-right flight-arrow" aria-hidden="true"></i>
+          <span class="flight-time">18:00</span>
+        </div>
+        <div class="flight-note">桃園 TPE → 金海 PUS · Day 1 週五</div>
+      </div>
+      <div class="flight-card">
+        <div class="flight-dir"><i class="ti ti-plane-arrival" aria-hidden="true"></i> 回程</div>
+        <div class="flight-main">
+          <span class="flight-time">12:45</span>
+          <i class="ti ti-arrow-right flight-arrow" aria-hidden="true"></i>
+          <span class="flight-time">14:10</span>
+        </div>
+        <div class="flight-note">金海 PUS → 桃園 TPE · Day 6 週三</div>
+      </div>
+    </div>
+    <div class="badge-row">
+      <span class="badge b-teal"><i class="ti ti-check" aria-hidden="true"></i>天空膠囊 11:00 已訂</span>
+      <span class="badge b-teal"><i class="ti ti-check" aria-hidden="true"></i>海濱列車 13:30 已訂</span>
+      <span class="badge b-purple"><i class="ti ti-id-badge" aria-hidden="true"></i>Pass 48hr 出發前購買</span>
+      <span class="badge b-amber"><i class="ti ti-alert-triangle" aria-hidden="true"></i>K-ETA 出發前申請</span>
+    </div>
+  </div>
+</div>
+
+<div class="opt-box">
+  <div class="opt-title"><i class="ti ti-sparkles" aria-hidden="true"></i>行程優化說明（共 5 點）</div>
+  <div class="opt-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><b>Day 3 午餐時間確認：</b>龍宮寺入口附近海鮮餐廳距 Skyline Luge 約 10 分鐘車程，11:20 用餐、12:35 抵達 Luge 等待 13:00 開卡，節奏完全從容</span></div>
+  <div class="opt-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><b>Day 4 午餐策略調整：</b>青沙浦改為輕食，正式午餐移至 X The Sky 附近 LCT 商場 B1，省去二次移動；Sky Café 屬咖啡廳性質，不需預訂</span></div>
+  <div class="opt-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><b>Day 5 出發提早至 08:00：</b>加入手翻書後甘川洞需約 2.5 小時，08:00 出發確保 09:00 入村，11:20 出發仍可在 12:10 前完成松島纜車 Pass 壓線</span></div>
+  <div class="opt-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><b>Day 4 膠囊列車提早出發：</b>改為 10:20 出發（原 10:30），預留售票取票與排隊時間，準時對上 11:00 場次</span></div>
+  <div class="opt-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><b>Day 6 提前預約計程車：</b>前一晚用 Kakao T 預約 09:15 出發計程車，避免週三早上上班車潮臨時叫不到車</span></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="goTab('d1',this)">Day 1 · 週五</button>
+  <button class="tab-btn" onclick="goTab('d2',this)">Day 2 · 週六</button>
+  <button class="tab-btn" onclick="goTab('d3',this)">Day 3 · 週日</button>
+  <button class="tab-btn" onclick="goTab('d4',this)">Day 4 · 週一</button>
+  <button class="tab-btn" onclick="goTab('d5',this)">Day 5 · 週二</button>
+  <button class="tab-btn" onclick="goTab('d6',this)">Day 6 · 週三</button>
+  <button class="tab-btn" onclick="goTab('tax',this)">退稅攻略</button>
+</div>
+
+<!-- DAY 1 -->
+<div id="d1" class="day-sec show">
+  <div class="day-head">
+    <div class="day-num-big">01</div>
+    <div class="day-head-info">
+      <div class="day-head-title">抵達釜山 · 夜晚夜景開場</div>
+      <div class="day-head-sub">週五 · 14:40 桃園出發 → 18:00 落地金海</div>
+    </div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-gray"><i class="ti ti-plane-departure" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">14:40 · 桃園機場出發</div>
+        <div class="cn">TPE → PUS · 飛行約 1 小時 20 分</div>
+        <div class="cd">建議 12:00 前抵達桃園機場 T2。週五下午出境人潮多，預留 2.5 小時辦理登機與安檢。回程行李限重請提前確認，因為在釜山會大量購物。</div>
+        <div class="tag-row"><span class="tn tag">桃園 T2 出境</span><span class="tn tag">飛行 ~80 分鐘</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-web" href="https://www.taoyuan-airport.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>桃園機場官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-plane-arrival" aria-hidden="true"></i></div>
+      <div class="card card-blue">
+        <div class="ct">18:00 抵達 · 金海國際機場</div>
+        <div class="cn">機場 → 飯店 Check-in（市立美術館站周邊）</div>
+        <div class="cd">出關後立即在 B1 便利商店購買 T-money 交通卡並加值 20,000 KRW，整趟旅程地鐵公車全數使用。接著在 B1 搭乘金海輕軌（BGL），全程約 62 分鐘，是週五傍晚最穩定的選擇。</div>
+        <div class="tag-row"><span class="tc tag">BGL+地鐵 約62分</span><span class="tc tag">~2,100 KRW/人</span><span class="ta tag">週五嚴禁搭計程車</span></div>
+        <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>金海輕軌 BGL → 沙上站 → 地鐵 2 號線 → 市立美術館站</div>
+        <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>週五傍晚市區極度塞車，計程車費用可能飆至 50,000+ KRW 且時間無法預估，地鐵固定 62 分鐘最安全</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Gimhae+Airport+Station+BGL" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>輕軌站地圖</a>
+          <a class="lnk lnk-web" href="https://www.airport.co.kr/gimhaeeng/main.do" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>金海機場官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-building-skyscraper" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">20:45 ~ 22:30</div>
+        <div class="cn">The Bay 101 · 冬柏島夜景</div>
+        <div class="cd">釜山最具代表性的夜景地點，戶外廣場免費開放、摩天輪與遊艇碼頭夜間燈光倒映海面極為浪漫。建議直接找一間海景咖啡廳入座，感受抵達釜山的第一個夜晚。摩天輪可另購票搭乘（約 12,000 KRW/人）。</div>
+        <div class="tag-row"><span class="tn tag">免費入場</span><span class="tc tag">計程車 ~5,000 KRW</span><span class="tn tag">開放至 24:00</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>飯店計程車約 10 分，或地鐵 2 號線至冬柏站步行 5 分</div>
+        <div class="tip tip-ok"><i class="ti ti-heart" aria-hidden="true"></i>不需強求拍照景點，找一間面海座位點杯飲品靜靜欣賞，情侶氛圍更佳</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=The+Bay+101+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.thebay101.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div id="d2" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big">02</div>
+    <div class="day-head-info">
+      <div class="day-head-title">海雲台海岸線 · 週六無人機秀</div>
+      <div class="day-head-sub">週六 · 海景大滿足 + 廣安里限定浪漫</div>
+    </div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-waves" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">10:00 ~ 13:30</div>
+        <div class="cn">海雲台海灘 & 傳統市場午餐</div>
+        <div class="cd">韓國最知名的白沙灘，長約 1.5 公里。旁邊的海雲台傳統市場是覓食必去：海鮮煎餅（해물파전）、魚糕（어묵）、活生魚片，價格實惠道地。建議在市場吃完午餐後再移動。</div>
+        <div class="tag-row"><span class="tn tag">海灘免費</span><span class="tc tag">地鐵 1,550 KRW/人</span><span class="tn tag">市場 10:00 開</span></div>
+        <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>飯店地鐵 2 號線 → 해운대역（海雲台站），約 10 分鐘 2 站</div>
+        <div class="tip tip-warn"><i class="ti ti-clock" aria-hidden="true"></i>週六人潮最旺，建議 10:00 一早抵達，避開正午最擁擠時段</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Haeundae+Beach+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>海雲台地圖</a>
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=해운대전통시장" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>傳統市場地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-mountain" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">14:00 ~ 16:30</div>
+        <div class="cn">五六島天空步道（스카이워크）</div>
+        <div class="cd">懸掛在海岸峭壁上的玻璃步道，離地約 35 公尺，腳下是碧藍的南海。需免費申請入場證（現場領取）。附近展望台天氣好時可遠眺日本。建議在此補充體力備戰晚上無人機秀。</div>
+        <div class="tag-row"><span class="tn tag">免費</span><span class="tc tag">計程車 ~15,000 KRW</span><span class="tn tag">09:00–18:00</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>海雲台搭計程車約 20 分直達，建議 Kakao T 叫車</div>
+        <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>穿涼鞋不可入場（現場提供套鞋）；玻璃步道限重 100kg</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Oryukdo+Skywalk+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.bisco.or.kr/oryukdoskywalk/" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-pink"><i class="ti ti-drone" aria-hidden="true"></i></div>
+      <div class="card card-blue">
+        <div class="ct">18:00 ~ 21:30 · 週六限定</div>
+        <div class="cn">廣安里海灘 · 廣安大橋無人機秀</div>
+        <div class="cd">廣安里比海雲台更適合情侶，沙灘正對廣安大橋。週六無人機秀通常 20:00 與 22:00 各一場（每場約 10 分鐘），建議 18:00 先在沿岸找一間面海燒肉店卡位，邊吃邊等。吃完後沿廣安里海灘步行是釜山最美的夜晚散步路線。民樂生魚片街也在附近步行可達。</div>
+        <div class="tag-row"><span class="tn tag">無人機秀免費</span><span class="tc tag">計程車 ~12,000 KRW</span><span class="tw tag">週六限定 20:00/22:00</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>五六島搭計程車前往廣安里，約 15 分鐘</div>
+        <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>備案：無人機秀常因天候取消，改為沿廣安里海灘夜走至廣安大橋橋頭拍夜景，同樣極美</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Gwangalli+Beach+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>廣安里地圖</a>
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=민락회타운+부산" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>民樂生魚片街</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div id="d3" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big">03</div>
+    <div class="day-head-info">
+      <div class="day-head-title">Pass 開卡日 · 龍宮寺 + 滑車 + Spa Land</div>
+      <div class="day-head-sub">週日 · 13:00 Pass 開始計時 → 到期 Day 5 週二 13:00</div>
+    </div>
+  </div>
+  <div class="banner bn-purple">
+    <i class="ti ti-id-badge" aria-hidden="true"></i>
+    <div><div class="banner-title">Visit Busan Pass 48hr 開卡日</div>
+    斜坡滑車 13:00 第一次嗶卡後正式計時。建議出發前在 App 確認最新兌換景點清單</div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-building-church" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">09:30 ~ 11:15</div>
+        <div class="cn">海東龍宮寺（해동용궁사）</div>
+        <div class="cd">韓國唯一臨海寺廟，金龍雕像伸向碧海，視覺衝擊極強。入口有 108 個石階步行入場，沿途有十二生肖石像與許願池。早上人少光線好，是行程中最值得早起的景點。免門票，沿海觀音殿視野極佳。</div>
+        <div class="tag-row"><span class="tg tag">免費入場</span><span class="tc tag">計程車 ~20,000 KRW</span><span class="tn tag">04:30–19:20</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>飯店計程車直達機張，約 30 分鐘，週日早上路況順暢</div>
+        <div class="tip tip-ok"><i class="ti ti-camera" aria-hidden="true"></i>最佳拍攝位置：入口牌坊向下拍階梯、海上觀音殿側面、下方海岸礁石區</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Haedong+Yonggungsa+Temple+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.yongkungsa.or.kr" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-coral"><i class="ti ti-utensils" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">11:20 ~ 12:20 · 午餐（優化：填補空白時段）</div>
+        <div class="cn">龍宮寺入口附近海鮮餐廳</div>
+        <div class="cd">龍宮寺入口外 2–3 分鐘步行範圍即有數間韓式海鮮湯飯、炸醬麵與生魚片定食，方便快速。原行程 11:30 結束到 13:00 開卡有 90 分鐘空白，在此用餐後 12:20 出發，12:35 抵達 Luge 售票處，仍有 25 分鐘等候 13:00 開卡，完全從容不趕。</div>
+        <div class="tag-row"><span class="tn tag">步行 2–3 分可達</span><span class="tn tag">約 20,000–30,000 KRW/人</span></div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-info-circle" aria-hidden="true"></i>關於機張市場的距離說明</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.6">機張市場（기장시장）與龍宮寺同屬基張郡，實際車程約 10–20 分鐘（非一小時）。若你驗證後確認距離可接受，機張市場活蟹與海鮮品質更好，但午餐時間需縮短至 45 分鐘。建議用 Naver Map 出發前再確認一次。</div>
+          <div class="link-row" style="margin-top:6px;padding-top:0;border-top:none">
+            <a class="lnk lnk-map" href="https://maps.google.com/?q=기장시장" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>機張市場地圖</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-purple"><i class="ti ti-id-badge" aria-hidden="true"></i></div>
+      <div class="card card-purple">
+        <div class="ct">12:35 抵達等候 → 13:00 · Pass 開卡！</div>
+        <div class="cn">Skyline Luge 釜山 · 斜坡滑車</div>
+        <div class="cd">從山頂沿滑道俯衝而下的極速體驗，軌道全長 1,700 公尺，沿途有機張海岸線景致。共 4 條賽道，搭配空中纜椅（Sky Lift）上山。Pass 標準兌換 2 次搭乘，每輪上山+下滑約 12–15 分鐘，2 次合計約 30–40 分鐘。可現場加購多玩幾次（每次約 9,000–12,000 KRW）。</div>
+        <div class="tag-row"><span class="tp tag">Pass 兌換 2 次</span><span class="ta tag">13:00 嗶卡計時開始</span><span class="tn tag">10:00–19:00</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>龍宮寺入口餐廳計程車至 Luge，約 10 分鐘</div>
+        <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>此刻 13:00 嗶卡 → Pass 精確到期：Day 5 週二 13:00，之後所有景點兌換須在此前完成</div>
+        <div class="tip tip-info"><i class="ti ti-info-circle" aria-hidden="true"></i>建議選最長的 International 賽道，彎道最多體驗最完整；排隊後直接上纜椅，不需等</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Skyline+Luge+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.skylineluge.com/busan" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+          <a class="lnk lnk-pass" href="https://www.klook.com/zh-TW/activity/3199-visit-busan-pass/" target="_blank"><i class="ti ti-id-badge" aria-hidden="true"></i>Pass 購買 Klook</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-teal"><i class="ti ti-droplet" aria-hidden="true"></i></div>
+      <div class="card card-purple">
+        <div class="ct">16:30 ~ 20:30</div>
+        <div class="cn">新世界 Centum City · Spa Land 頂級汗蒸幕</div>
+        <div class="cd">世界最大百貨地下室的溫泉汗蒸幕（金氏世界紀錄）。22 種主題浴池含羅馬浴、芬蘭浴、鹽療室、土窯房，情侶可一起進入公共汗蒸區與地球村主題室。Pass 免費入場但限時 4 小時，16:30 進入後可在裡面餐廳吃晚餐省去外出移動。</div>
+        <div class="tag-row"><span class="tp tag">Pass 免費（限 4 小時）</span><span class="tc tag">計程車 ~20,000 KRW</span><span class="tn tag">09:00–22:00</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>機張搭計程車回 Centum City 站，約 25 分鐘</div>
+        <div class="tip tip-ok"><i class="ti ti-heart" aria-hidden="true"></i>帶換洗衣物進場（現場提供汗蒸服），在裡面餐廳解決晚餐，是整趟行程最放鬆的夜晚</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Shinsegae+Centum+City+Spa+Land" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.shinsegae.com/store/centumcity/spaland" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div id="d4" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big">04</div>
+    <div class="day-head-info">
+      <div class="day-head-title">鐵道核心日 · 天空膠囊 & X The Sky</div>
+      <div class="day-head-sub">週一 · 兩段已預訂場次，時間嚴格執行</div>
+    </div>
+  </div>
+  <div class="banner bn-teal">
+    <i class="ti ti-check" aria-hidden="true"></i>
+    <div><div class="banner-title">已預訂場次確認（不扣 Pass）</div>
+    天空膠囊 尾浦出發 11:00–11:30（6回次）· 海濱列車 青沙浦出發 13:30–14:00（10回次）</div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-gray"><i class="ti ti-car" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">10:20 出發（比原計畫提早 10 分）</div>
+        <div class="cn">飯店 → 海雲台藍線公園 尾浦站</div>
+        <div class="cd">計程車約 15 分鐘可達尾浦站。提早 10 分出發是為了預留現場取票、核對訂位、排隊入場時間。抵達後先找售票窗口確認訂位資訊，膠囊列車座位有限且準時出發。</div>
+        <div class="tag-row"><span class="tc tag">計程車 ~6,000 KRW</span><span class="ta tag">10:20 出發勿更晚</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Blueline+Park+Mipo+Station+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>尾浦站地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-teal"><i class="ti ti-train" aria-hidden="true"></i></div>
+      <div class="card card-booked">
+        <div class="ct">11:00 ~ 11:30 · 已預訂</div>
+        <div class="cn">天空膠囊列車（스카이캡슐）· 尾浦 → 青沙浦</div>
+        <div class="cd">2–4 人座透明膠囊車廂懸掛在海崖上方，沿釜山東海岸緩緩前行，窗外是絕壁下的藍色南海。全程約 30 分鐘，速度緩慢最適合欣賞與拍照。第一個轉彎處視角最佳，進車廂後先準備好相機。持預訂憑證入場，不扣 Pass。</div>
+        <div class="tag-row"><span class="tg tag">已付費預訂</span><span class="tn tag">不扣 Pass</span><span class="tn tag">6 回次場次</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Haeundae+Blueline+Park+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.bluelinepark.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>藍線公園官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-coffee" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">11:30 ~ 13:15 · 輕食優化</div>
+        <div class="cn">青沙浦漫遊 · 咖啡廳輕食下午茶</div>
+        <div class="cd">青沙浦是釜山近年最熱門的文青海岸小村，有燈塔、紅藍鐵路棚架、面海咖啡廳群。此段改為咖啡廳輕食（吐司、鬆餅），保留食慾給 X The Sky 附近的正式午餐。建議步行至紅藍燈塔拍照，景色獨特是打卡必去。</div>
+        <div class="tag-row"><span class="tn tag">咖啡廳輕食 ~15,000 KRW</span><span class="tn tag">步行即達各景點</span></div>
+        <div class="tip tip-warn"><i class="ti ti-clock" aria-hidden="true"></i>正式午餐移至 X The Sky 附近 LCT B1 商場，省去下午再找餐廳的移動時間</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=청사포+부산" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>青沙浦地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-teal"><i class="ti ti-train" aria-hidden="true"></i></div>
+      <div class="card card-booked">
+        <div class="ct">13:30 ~ 14:00 · 已預訂</div>
+        <div class="cn">海濱列車（해변열차）· 青沙浦 → 尾浦</div>
+        <div class="cd">緊貼海岸線行駛的復古小火車，座位面向大海，玻璃窗外是礁石與浪花。全程 4 站，持預訂憑證入場，不扣 Pass。回到膠囊列車起點尾浦後，步行 3 分鐘至 LCT 大樓。</div>
+        <div class="tag-row"><span class="tg tag">已付費預訂</span><span class="tn tag">不扣 Pass</span><span class="tn tag">10 回次場次</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-web" href="https://www.bluelinepark.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>藍線公園官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-purple"><i class="ti ti-building-skyscraper" aria-hidden="true"></i></div>
+      <div class="card card-purple">
+        <div class="ct">14:15 ~ 16:30 · Pass 計時第 ~25 小時</div>
+        <div class="cn">釜山 X The Sky 高空觀景台 + 午餐</div>
+        <div class="cd">位於 LCT The Sharp 101 樓，離地 411 公尺，視野涵蓋海雲台、廣安大橋、五六島全景。館內設有透明玻璃地板區（99F）、360 度環形觀景廊（99F–100F）、以及 98F 的 Sky Café 咖啡廳。午餐建議在下方 LCT B1 商場用正餐後上觀景台，或在 Sky Café 點輕食，咖啡廳性質無需預訂。</div>
+        <div class="tag-row"><span class="tp tag">Pass 免費入場</span><span class="tn tag">步行 3 分至 LCT</span><span class="tn tag">10:00–21:00</span><span class="ta tag">週一人流少</span></div>
+
+        <div class="sec-h" style="margin-top:12px;font-size:12px"><i class="ti ti-list-numbers" aria-hidden="true"></i>Pass 入場完整步驟</div>
+        <div class="step-list">
+          <div class="step"><div class="sn sn-purple">1</div><div class="sb"><b>抵達 LCT The Sharp 大廳（B1 或 1F）</b><br>從尾浦站步行約 3 分鐘，大廳有指標指向「X The Sky 售票處」。</div></div>
+          <div class="step"><div class="sn sn-purple">2</div><div class="sb"><b>前往售票窗口出示 Pass 換票</b><br>告知「Visit Busan Pass 兌換」，出示 App QR Code 或實體卡，工作人員掃描後列印入場票。</div></div>
+          <div class="step"><div class="sn sn-purple">3</div><div class="sb"><b>搭乘高速直達電梯至 98–100F</b><br>約 50 秒抵達頂樓，耳朵可能有輕微耳壓感。</div></div>
+          <div class="step"><div class="sn sn-purple">4</div><div class="sb"><b>遊覽三個樓層</b><br>100F 露天展望台（建議帶薄外套）→ 99F 透明玻璃地板 + 環形觀景廊（拍照首選）→ 98F Sky Café 點飲品俯瞰釜山</div></div>
+        </div>
+        <div class="tip tip-ok"><i class="ti ti-heart" aria-hidden="true"></i>99F 透明地板 + 廣安大橋方向窗邊是最熱門拍攝點，進場後先衝這裡，人少時卡位，再去 Sky Café 坐下來慢慢欣賞</div>
+        <div class="tip tip-info"><i class="ti ti-coffee" aria-hidden="true"></i>Sky Café 飲品約 8,000–12,000 KRW，輕食另計，不強制消費但環境非常適合情侶</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Busan+X+the+Sky+LCT" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>LCT 地圖</a>
+          <a class="lnk lnk-web" href="https://www.busanxthesky.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+          <a class="lnk lnk-pass" href="https://www.klook.com/zh-TW/activity/3199-visit-busan-pass/" target="_blank"><i class="ti ti-id-badge" aria-hidden="true"></i>Pass 說明</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-gray"><i class="ti ti-shopping-bag" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">17:00 ~ 晚上</div>
+        <div class="cn">Centum City 百貨商圈慢活晚餐</div>
+        <div class="cd">新世界 Centum City 就在飯店附近，B1–B2 美食街有韓牛燒肉、參雞湯、海鮮鍋等各式韓餐。今晚輕鬆消費，保留體力迎接 Day 5 的 Pass 最終衝刺日。</div>
+        <div class="tag-row"><span class="tn tag">飯店步行可達</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Shinsegae+Centum+City+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>Centum City 地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div id="d5" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big">05</div>
+    <div class="day-head-info">
+      <div class="day-head-title">Pass 最終壓線 · 韓服 + 手翻書 + 纜車 + 大採購</div>
+      <div class="day-head-sub">週二 · Pass 於 13:00 到期，所有兌換須在此前完成</div>
+    </div>
+  </div>
+  <div class="banner bn-amber">
+    <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+    <div><div class="banner-title">Pass 到期倒數 · 時間管理關鍵日</div>
+    甘川洞 09:00（含手翻書）→ 11:20 出發 → 松島纜車 11:45 抵達 → 12:10 前完成兌換 → Pass 任務完成</div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-amber"><i class="ti ti-run" aria-hidden="true"></i></div>
+      <div class="card card-amber">
+        <div class="ct">08:00 出發（比原計畫提早 30 分）</div>
+        <div class="cn">飯店 → 甘川洞文化村（東西大轉移）</div>
+        <div class="cd">甘川洞在釜山西南端，距飯店最遠。加入手翻書後甘川洞需約 2.5 小時，因此需從 08:30 提早至 08:00 出發，確保 09:00 入村並按時完成所有活動。計程車直達比地鐵換乘更快更穩定。</div>
+        <div class="tag-row"><span class="tc tag">計程車 ~20,000–25,000 KRW</span><span class="ta tag">必須計程車，勿搭地鐵</span></div>
+        <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>飯店 → 甘川洞文化村，計程車直達約 35–40 分鐘</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-purple"><i class="ti ti-walk" aria-hidden="true"></i></div>
+      <div class="card card-purple">
+        <div class="ct">09:00 ~ 11:20</div>
+        <div class="cn">甘川洞文化村 · 韓服 + 手翻書 + 漫遊</div>
+        <div class="cd">釜山版「馬丘比丘」，山坡上密密麻麻的彩色房屋是釜山最具視覺衝擊的景觀。Pass 免費兌換韓服，穿上後在彩色階梯、壁畫巷弄、小王子雕像前拍照。</div>
+        <div class="tbl-wrap">
+          <table class="std">
+            <tr><th style="width:110px">時間</th><th style="width:130px">地點</th><th>說明</th></tr>
+            <tr><td>09:00–09:25</td><td><b>韓服換裝</b></td><td>Pass 免費，趁早選款式；注意選舒適鞋，村內坡度陡</td></tr>
+            <tr><td>09:25–09:45</td><td><b>入口廣場→彩色階梯</b></td><td>最密集拍照段，坡度平緩，停留 20 分鐘</td></tr>
+            <tr><td>09:45–10:10</td><td><b>天空展望台 & 小王子</b></td><td>俯瞰全村最佳構圖位置，拍完即刻前往手翻書</td></tr>
+            <tr><td>10:10–10:55</td><td><b>手翻書工作室</b></td><td>拍攝+製作+等候約 40–50 分鐘，務必優先做，勿留到最後</td></tr>
+            <tr><td>10:55–11:15</td><td><b>壁畫巷弄漫遊</b></td><td>20 分鐘夠繞一輪，不必強求全逛</td></tr>
+            <tr><td>11:15–11:20</td><td><b>還韓服 & 出發準備</b></td><td>整理行李，叫計程車前往松島</td></tr>
+          </table>
+        </div>
+        <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>手翻書工作室（플립북 스튜디오）：抵達入村後先在服務中心確認今日是否營業，再安排時間順序</div>
+        <div class="tip tip-ok"><i class="ti ti-camera" aria-hidden="true"></i>手翻書費用約 10,000–15,000 KRW/人，製作完成後可立即播放觀看，是絕佳紀念品</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Gamcheon+Culture+Village+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>甘川洞地圖</a>
+          <a class="lnk lnk-web" href="https://www.gamcheon.or.kr" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=감천문화마을+플립북" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>手翻書工作室地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-amber"><i class="ti ti-aerial-lift" aria-hidden="true"></i></div>
+      <div class="card card-purple">
+        <div class="ct">11:45 抵達 → 12:10 完成兌換 · Pass 最終壓線！</div>
+        <div class="cn">松島海上纜車（송도해상케이블카）& 龍宮雲橋</div>
+        <div class="cd">韓國最長海上纜車（來回約 1.6 公里），從松島海水浴場連結至巖南公園山頂，腳下是碧綠的南海。山頂連接龍宮雲橋（懸空吊橋，全長 127 公尺），Pass 可同時兌換兩項。</div>
+
+        <div class="sec-h" style="margin-top:12px;font-size:12px"><i class="ti ti-list-numbers" aria-hidden="true"></i>Pass 兌換完整步驟（13:00 前完成即可）</div>
+        <div class="step-list">
+          <div class="step"><div class="sn sn-teal">1</div><div class="sb"><b>11:45 抵達松島海上纜車售票處</b><br>計程車在「송도해상케이블카」下車，售票處在海水浴場入口旁，非常顯眼。</div></div>
+          <div class="step"><div class="sn sn-teal">2</div><div class="sb"><b>找到 Pass 專用兌換窗口</b><br>售票區有「Visit Busan Pass 兌換」標示，避免走到一般購票隊伍排錯。</div></div>
+          <div class="step"><div class="sn sn-teal">3</div><div class="sb"><b>兌換纜車來回票 × 2 人</b><br>選擇艙型：<div class="cabin-grid" style="margin-top:6px">
+            <div class="cabin cabin-a"><div class="cabin-t">一般艙（일반캐빈）</div><div class="cabin-d">Pass 標準兌換，免費，透明側窗視野良好</div></div>
+            <div class="cabin cabin-b"><div class="cabin-t">水晶艙（크리스탈캐빈）</div><div class="cabin-d">玻璃底板可看腳下海面，Pass 不包含，需加購差額約 3,000 KRW/人。<b>情侶強烈推薦升級！</b></div></div>
+          </div></div></div>
+          <div class="step"><div class="sn sn-teal">4</div><div class="sb"><b>同時兌換龍宮雲橋票 × 2 人</b><br>這是分開的景點，Pass 包含但需<b>單獨兌換</b>。在同一窗口告知「雲橋票也要兌換」。確認拿到：纜車來回票 × 2 + 雲橋票 × 2，共 4 張。</div></div>
+          <div class="step"><div class="sn sn-teal">5</div><div class="sb"><b>12:10 兌換完成 = Pass 壓線成功</b><br>兌換完成即記錄使用，不論何時搭乘都算完成。可先輕鬆等一下再搭纜車。</div></div>
+          <div class="step"><div class="sn sn-teal">6</div><div class="sb"><b>搭纜車 → 山頂 → 龍宮雲橋（共約 60–75 分鐘）</b><br>纜車來回約 20–25 分鐘；步行至雲橋 5 分鐘；雲橋全長 127 公尺走完約 10–15 分鐘。</div></div>
+        </div>
+        <div class="tag-row"><span class="tp tag">Pass 免費（纜車+雲橋）</span><span class="tc tag">計程車 ~8,000 KRW</span><span class="tg tag">週二正常開放</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Songdo+Sea+Cable+Car+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
+          <a class="lnk lnk-web" href="https://www.songdocablecar.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>官網</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-coral"><i class="ti ti-fish" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">13:15 ~ 15:00</div>
+        <div class="cn">松島烤貝殼午餐</div>
+        <div class="cd">松島海水浴場周邊有多家「조개구이」（烤貝殼）專賣店，扇貝、蛤蜊、鮑魚、螺肉在炭火上現烤。約 2 人份 40,000–60,000 KRW，附贈小菜與米飯。Pass 任務完成後的最美犒賞。</div>
+        <div class="tag-row"><span class="tn tag">步行至海灘旁</span><span class="tn tag">約 40,000–60,000 KRW / 2人</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=송도해수욕장+조개구이" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>松島烤貝殼地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-blue"><i class="ti ti-shopping-cart" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">15:30 ~ 21:30</div>
+        <div class="cn">南浦洞商圈大採購 · 伴手禮全數買齊</div>
+        <div class="cd">BIFF 廣場、光復路時裝街、Olive Young 旗艦店在此齊聚。建議購物清單：面膜（Mediheal / JM Solution）、護膚品、韓系零食、韓服文創品。若行李超重，南浦洞地下街有行李箱托運服務。<b>買完晚上回飯店直接打包，明早退房才不手忙腳亂。</b>退稅收據全部留好。</div>
+        <div class="tag-row"><span class="tc tag">計程車 ~7,000 KRW</span><span class="tn tag">Olive Young 至 21:30</span><span class="tn tag">光復路至 22:00</span></div>
+        <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>晚上地鐵 1 號線南浦站回飯店</div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Nampodong+Busan" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>南浦洞地圖</a>
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=Olive+Young+남포점+부산" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>Olive Young 地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div id="d6" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big">06</div>
+    <div class="day-head-info">
+      <div class="day-head-title">優雅收尾 · 返回台灣</div>
+      <div class="day-head-sub">週三 · 航班 12:45 · 10:30 前務必抵達機場</div>
+    </div>
+  </div>
+  <div class="tl">
+    <div class="tl-spine"></div>
+    <div class="blk">
+      <div class="blk-dot dot-gray"><i class="ti ti-coffee" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">08:30 ~ 09:15</div>
+        <div class="cn">享用早餐 & 悠閒退房</div>
+        <div class="cd">昨晚已在南浦洞採購完畢並打包行李，早上從容出發。退房前確認：護照、機票電子票、所有充電器、轉接頭、退稅收據（非常重要）。</div>
+        <div class="tip tip-warn"><i class="ti ti-checklist" aria-hidden="true"></i>退房確認清單：護照 · 機票 · T-money 卡（可帶回台灣留念）· 所有充電設備 · 退稅收據</div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-amber"><i class="ti ti-car" aria-hidden="true"></i></div>
+      <div class="card card-amber">
+        <div class="ct">09:15 出發 · 前一晚預約 Kakao T</div>
+        <div class="cn">飯店 → 金海國際機場（計程車直達）</div>
+        <div class="cd">行李多時不適合搭地鐵換乘，計程車直達最省力。週三 09:00–10:00 是上班尖峰，建議<b>前一晚在 Kakao T App 預約 09:15 出發的計程車</b>，設定目的地為金海國際機場，確保準時出發。</div>
+        <div class="tag-row"><span class="tc tag">計程車 ~25,000–30,000 KRW</span><span class="ta tag">前一晚預約 Kakao T</span></div>
+        <div class="link-row">
+          <a class="lnk lnk-web" href="https://www.kakaomobility.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>Kakao T 叫車 App</a>
+        </div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="blk-dot dot-teal"><i class="ti ti-receipt" aria-hidden="true"></i></div>
+      <div class="card">
+        <div class="ct">10:30 ~ 12:00 · 機場流程</div>
+        <div class="cn">辦理登機 · 行李托運 · 退稅 · 安檢</div>
+        <div class="cd">抵達後依序處理，退稅需在安檢前完成，詳細流程請見「退稅攻略」分頁。退稅最高可退約 9–10%，南浦洞購買的護膚品與衣物都可以申請。安檢後進入免稅區還可補購零食（好麗友、海苔、人參糖）。</div>
+        <div class="tag-row"><span class="tg tag">即時退稅 ~9–10%</span><span class="tn tag">12:45 起飛</span><span class="tn tag">14:10 抵達桃園</span></div>
+        <div class="banner bn-info" style="margin-top:10px;margin-bottom:0">
+          <i class="ti ti-info-circle" aria-hidden="true"></i>
+          <div>退稅完整流程與注意事項請切換至上方「退稅攻略」分頁查看</div>
+        </div>
+        <div class="link-row">
+          <a class="lnk lnk-web" href="https://www.airport.co.kr/gimhaeeng/main.do" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>金海機場官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-grid" style="margin-top:24px">
+    <div class="info-c"><div class="info-n">6天5夜</div><div class="info-l">完整行程</div></div>
+    <div class="info-c"><div class="info-n">Pass 48hr</div><div class="info-l">Day 3–5 省超多</div></div>
+    <div class="info-c"><div class="info-n">2 場次</div><div class="info-l">藍線已預訂</div></div>
+    <div class="info-c"><div class="info-n">5 項優化</div><div class="info-l">時間&體驗提升</div></div>
+  </div>
+</div>
+
+<!-- TAX REFUND -->
+<div id="tax" class="day-sec">
+  <div class="day-head">
+    <div class="day-num-big" style="font-size:36px;color:var(--teal)">退稅</div>
+    <div class="day-head-info">
+      <div class="day-head-title">韓國退稅完整攻略</div>
+      <div class="day-head-sub">資格條件 · 兩種方式 · 機場流程 · 常見踩坑</div>
+    </div>
+  </div>
+
+  <div class="tax-stat-grid">
+    <div class="tax-stat"><div class="tax-stat-n">30,000</div><div class="tax-stat-l">KRW · 單店最低消費</div></div>
+    <div class="tax-stat"><div class="tax-stat-n">~8.5–10%</div><div class="tax-stat-l">最高退稅比例</div></div>
+    <div class="tax-stat"><div class="tax-stat-n">3 個月</div><div class="tax-stat-l">購買後申請期限</div></div>
+    <div class="tax-stat"><div class="tax-stat-n">75 萬</div><div class="tax-stat-l">KRW · 單次現金上限</div></div>
+  </div>
+
+  <div class="sec-h"><i class="ti ti-license" aria-hidden="true"></i>退稅資格條件</div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="step-list" style="margin:0">
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">持外國護照的非韓國居民（觀光客）</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">在貼有「Tax Free」標誌的商店消費</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">同一店家單筆消費 30,000 KRW 以上（含稅）</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">購買後 3 個月內出境申請</div></div>
+      <div class="step"><div class="sn" style="background:var(--red-light);color:var(--red-dark)"><i class="ti ti-x" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">食品、藥品、餐廳、住宿服務費——<b>不可退稅</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--red-light);color:var(--red-dark)"><i class="ti ti-x" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">已開封使用的商品——<b>原則上不可退稅</b></div></div>
+    </div>
+  </div>
+
+  <div class="sec-h"><i class="ti ti-arrows-exchange" aria-hidden="true"></i>兩種退稅方式比較</div>
+  <div class="tax-method">
+    <div class="tm tm-a">
+      <div class="tm-title">即時退稅（店內直接退）</div>
+      <div class="tm-body">購物當下在店內辦理，扣除手續費後當場退現金或刷卡折抵。出境時仍需在海關蓋章確認，否則需補回退稅金額。</div>
+      <div class="bdg-row">
+        <span class="bdg bdg-ok">當場拿錢</span><span class="bdg bdg-ok">方便快速</span><span class="bdg bdg-warn">手續費較高</span>
+      </div>
+    </div>
+    <div class="tm tm-b">
+      <div class="tm-title">一般退稅（機場統一辦理）</div>
+      <div class="tm-body">店家給退稅單，在機場出境前至退稅窗口辦理。退款較完整，但需保留所有收據且在機場安檢前完成。</div>
+      <div class="bdg-row">
+        <span class="bdg bdg-ok">退款較多</span><span class="bdg bdg-warn">機場需排隊</span><span class="bdg bdg-warn">收據勿遺失</span>
+      </div>
+    </div>
+  </div>
+  <div class="banner bn-teal" style="margin-top:4px">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <div>Olive Young、化妝品店建議選「即時退稅」當場折抵最方便。百貨公司大額消費選「一般退稅」，金額大時值得在機場排隊。</div>
+  </div>
+
+  <div class="sec-h"><i class="ti ti-list-check" aria-hidden="true"></i>機場退稅完整流程（Day 6 一般退稅）</div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="step-list" style="margin:0">
+      <div class="step"><div class="sn sn-blue">1</div><div class="sb"><b>購物時索取退稅單</b><br>結帳時說「Tax Refund 해주세요」，店員給退稅單（영수증）與購物袋，<b>商品不可開封</b></div></div>
+      <div class="step"><div class="sn sn-blue">2</div><div class="sb"><b>整理退稅單（出發前一晚）</b><br>所有退稅單 + 收據 + 護照準備好，依退稅公司分類（Global Blue / KT 等分開）</div></div>
+      <div class="step"><div class="sn sn-blue">3</div><div class="sb"><b>機場 1F 海關蓋章（進安檢前）</b><br>出示商品實體 + 退稅單，請海關蓋出口確認章。<b>放入托運行李的商品也要在托運前拿出來給海關看</b></div></div>
+      <div class="step"><div class="sn sn-blue">4</div><div class="sb"><b>辦理行李托運</b><br>海關蓋章後，退稅商品若要托運可放入行李箱辦理托運</div></div>
+      <div class="step"><div class="sn sn-blue">5</div><div class="sb"><b>前往退稅窗口領款（仍在安檢前）</b><br>找 Global Blue / KT 退稅窗口，出示護照 + 蓋章退稅單，選擇現金或退回信用卡</div></div>
+      <div class="step"><div class="sn sn-blue">6</div><div class="sb"><b>通過安檢進免稅區</b><br>上述全部完成後再進安檢。Day 6 建議 <b>10:30 抵達、11:15 前完成退稅</b>，預留 45 分鐘</div></div>
+    </div>
+  </div>
+
+  <div class="sec-h"><i class="ti ti-alert-triangle" aria-hidden="true"></i>常見踩坑 & 注意事項</div>
+  <div class="banner bn-amber">
+    <i class="ti ti-package" aria-hidden="true"></i>
+    <div><b>商品不可開封：</b>退稅申請時商品必須是原封狀態。保養品、衣服買了不要急著拆開包裝，等回到台灣再開。海關發現已開封可能拒絕退稅。</div>
+  </div>
+  <div class="banner bn-amber">
+    <i class="ti ti-receipt" aria-hidden="true"></i>
+    <div><b>退稅單一定要保留：</b>店家給的 Tax Refund Cheque 若遺失無法辦理。建議統一夾進護照夾，或拍照備份。</div>
+  </div>
+  <div class="banner bn-amber">
+    <i class="ti ti-clock" aria-hidden="true"></i>
+    <div><b>托運行李含退稅商品順序：</b>海關蓋章 → 行李托運 → 退稅窗口領款，順序不可錯。若先托運行李再想退稅，含退稅商品的箱子無法再從傳送帶上取回。</div>
+  </div>
+  <div class="banner bn-teal">
+    <i class="ti ti-building-bank" aria-hidden="true"></i>
+    <div><b>退稅金額建議領現金：</b>退回信用卡可能需 4–8 週才入帳且有匯率損耗，直接領韓圜現金最划算，剩餘可留著下次用。</div>
+  </div>
+  <div class="banner bn-teal">
+    <i class="ti ti-device-mobile" aria-hidden="true"></i>
+    <div><b>Global Blue App 提前查詢：</b>下載後掃描退稅單條碼可預先確認退稅金額，不用到機場才知道能拿多少。</div>
+  </div>
+
+  <div class="sec-h"><i class="ti ti-shopping-bag" aria-hidden="true"></i>此行可退稅的購物清單</div>
+  <div class="card">
+    <div class="step-list" style="margin:0">
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">Olive Young / Innisfree 等護膚品（可即時退稅）</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">百貨公司服飾（Centum City / 樂天百貨）· 金額大建議一般退稅</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">Nike / Adidas 韓國門市球鞋 · 比台灣便宜 15–25%，加退稅更划算</div></div>
+      <div class="step"><div class="sn sn-teal"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">南浦洞光復路服裝類 · 單筆超過 30,000 KRW 時記得要退稅單</div></div>
+      <div class="step"><div class="sn" style="background:var(--red-light);color:var(--red-dark)"><i class="ti ti-x" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">超市零食、藥妝食品類——<b>不可退稅</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--red-light);color:var(--red-dark)"><i class="ti ti-x" style="font-size:11px" aria-hidden="true"></i></div><div class="sb">餐廳、咖啡廳、交通費用——<b>服務類一律不退</b></div></div>
+    </div>
+    <div class="link-row">
+      <a class="lnk lnk-web" href="https://www.globalblue.com/tax-free-shopping/korea" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>Global Blue 官網</a>
+      <a class="lnk lnk-web" href="https://www.ktaxfree.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>KT 退稅官網</a>
+      <a class="lnk lnk-map" href="https://maps.google.com/?q=Gimhae+Airport+Tax+Refund" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>金海機場退稅窗口</a>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function goTab(id,el){
+  document.querySelectorAll('.day-sec').forEach(s=>s.classList.remove('show'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('show');
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
