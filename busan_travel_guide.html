@@ -1004,6 +1004,39 @@
       background: var(--border);
       margin: 16px 0
     }
+
+    /* Memo tab */
+    .memo-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .memo-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);cursor:pointer;transition:all .15s}
+    .memo-btn:hover{background:var(--surface2)}
+    .memo-btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .memo-btn.primary:hover{opacity:.9}
+    .memo-btn.danger{color:var(--red-dark);border-color:var(--coral-border)}
+    .memo-btn.danger:hover{background:var(--red-light)}
+    .memo-section{margin-bottom:20px}
+    .memo-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+    .memo-section-title{font-size:13px;font-weight:600;color:var(--text1);display:flex;align-items:center;gap:7px}
+    .memo-section-title i{font-size:15px;color:var(--primary)}
+    .memo-add-row{display:flex;gap:8px;margin-bottom:10px}
+    .memo-input{flex:1;font-size:13px;padding:9px 12px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit}
+    .memo-input:focus{outline:none;border-color:var(--primary)}
+    .memo-add-btn{flex-shrink:0;width:40px;height:40px;border-radius:var(--radius);border:0.5px solid var(--primary);background:var(--primary-light);color:var(--primary);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+    .memo-add-btn:hover{background:var(--primary);color:#fff}
+    .memo-list{display:flex;flex-direction:column;gap:6px}
+    .memo-item{display:flex;align-items:flex-start;gap:10px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;box-shadow:var(--shadow)}
+    .memo-checkbox{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--primary-border);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;background:var(--surface)}
+    .memo-checkbox.checked{background:var(--primary);border-color:var(--primary)}
+    .memo-checkbox i{font-size:11px;color:#fff;display:none}
+    .memo-checkbox.checked i{display:block}
+    .memo-text{flex:1;font-size:13px;color:var(--text1);line-height:1.6;word-break:break-word;cursor:text}
+    .memo-text.done{color:var(--text3);text-decoration:line-through}
+    .memo-del{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text3);cursor:pointer;font-size:14px;transition:all .15s}
+    .memo-del:hover{background:var(--red-light);color:var(--red-dark)}
+    .memo-empty{font-size:12px;color:var(--text3);text-align:center;padding:20px;border:1px dashed var(--border2);border-radius:var(--radius)}
+    .memo-status{font-size:11px;color:var(--text3);margin-top:4px}
+    .memo-status.show-saved{color:var(--teal-dark)}
+    .memo-textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit;resize:vertical;min-height:90px;line-height:1.6}
+    .memo-textarea:focus{outline:none;border-color:var(--primary)}
   </style>
 </head>
 
@@ -1070,6 +1103,9 @@
       <button class="tab-btn" onclick="goTab('tmoney',this)">T-money 兌換指南</button>
       <button class="tab-btn" onclick="goTab('tpass',this)">T Pass 兌換攻略</button>
       <button class="tab-btn" onclick="goTab('checklist',this)">行前檢查清單</button>
+      <button class="tab-btn" onclick="goTab('rain',this)">☂ 雨備行程</button>
+      <button class="tab-btn" onclick="goTab('backuppass',this)">🎫 備用 Pass 景點</button>
+      <button class="tab-btn" onclick="goTab('memo',this)">📝 備忘清單</button>
     </div>
 
     <!-- DAY 1 -->
@@ -2609,6 +2645,734 @@
       </div>
     </div>
 
+    <!-- RAIN BACKUP TAB -->
+    <div id="rain" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:38px">☂</div>
+        <div class="day-head-info">
+          <div class="day-head-title">雨備行程攻略</div>
+          <div class="day-head-sub">6 月釜山氣候分析 · 各天雨天替代方案 · 必備裝備清單</div>
+        </div>
+      </div>
+
+      <!-- Weather Overview -->
+      <div class="banner bn-amber" style="margin-bottom:12px">
+        <i class="ti ti-cloud-rain" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">釜山 6 月下旬至 7 月初氣候概況（2026 年預測）</div>
+          <div style="font-size:12px;line-height:1.7;margin-top:4px">
+            氣溫：白天 <b>24–29°C</b>，夜晚 <b>19–22°C</b>，體感悶熱潮濕。UV 指數高（6–8），防曬不可少。<br>
+            <b>梅雨期重疊提醒：</b>釜山所在的南部地方梅雨預計 <b>6 月 23–25 日前後開始，至 7 月 24–25 日前後結束</b>，也就是說 <b>6/26–7/01 這段期間完全落在梅雨季節內</b>，需以「天天有雨可能」的心態安排行程。<br>
+            雨型特徵：2026 年預報強調「국지성 게릴라 호우」（局地性強降雨），降雨不是全天均勻分布，而是<b>短時間內集中強降雨</b>，可能比往年更難預測，務必每天早上查詢即時雷達。
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="info-grid" style="margin-bottom:16px">
+        <div class="info-c"><div class="info-n">24–29°C</div><div class="info-l">白天均溫</div></div>
+        <div class="info-c"><div class="info-n">17–18 天</div><div class="info-l">梅雨期降雨天數</div></div>
+        <div class="info-c"><div class="info-n">341mm</div><div class="info-l">南部梅雨期均降雨量</div></div>
+        <div class="info-c"><div class="info-n">~85%</div><div class="info-l">平均濕度</div></div>
+        <div class="info-c"><div class="info-n">局地強降雨</div><div class="info-l">2026 預報特徵</div></div>
+        <div class="info-c"><div class="info-n">6/23–25</div><div class="info-l">梅雨預計開始</div></div>
+      </div>
+
+      <div class="banner bn-amber" style="margin-bottom:16px">
+        <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">最重要的提醒</div>
+          以 6/26–7/01 為基準，整段行程都在梅雨季節內，<b>每天都有顯著降雨機率</b>。2026 年預報特別強調「局地性強降雨」，意味著降雨可能更集中、更突然，且更難只靠「早上 vs 下午」來預判。<b>每天早上務必查詢即時降雨雷達，並隨身攜帶雨具</b>，所有戶外行程都應該有室內備案。
+        </div>
+      </div>
+
+      <!-- Day by day rain plans -->
+      <div class="sec-h"><i class="ti ti-calendar-event" aria-hidden="true"></i>各天雨備替代方案</div>
+
+      <!-- Day 1 -->
+      <div class="card" style="margin-bottom:10px">
+        <div class="ct" style="color:var(--amber)">Day 1 · 抵達日</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 影響有限</div>
+        <div class="cd">Day 1 以交通和入住為主，主要影響 The Bay 101 夜景體驗。梅雨期局地強降雨可能造成市區排水不佳，地鐵轉乘時建議預留多一點時間。</div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-cloud-rain" aria-hidden="true"></i>雨天方案</div>
+          <div class="fix-row" style="font-size:12px;color:var(--text2);line-height:1.7">
+            夜景改看 The Bay 101 室內酒吧 / 咖啡廳，坐在落地窗旁欣賞雨中夜景，氛圍更有情調。或改在飯店附近 <b>Centum City 百貨 센텀시티</b> 地下美食街覓食，直接放棄夜景留待明天補訪。
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="card" style="margin-bottom:10px">
+        <div class="ct" style="color:var(--amber)">Day 2 · 高影響</div>
+        <div class="cn">下雨影響度 ★★★★★ 海灘 + 無人機秀皆受影響</div>
+        <div class="cd">海雲台海灘在雨天仍可散步，但梅雨期局地強降雨下無人機秀幾乎必定取消（風速 + 降雨雙重風險）。五六島天空步道下雨禁止入場（濕滑危險）。建議將此天視為高機率全面調整的一天。</div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">
+            <b>① 早上室內替代：</b>海雲台 <b>SEA LIFE 水族館 씨라이프부산아쿠아리움</b>（해운대역 步行 5 分，約 28,000 KRW/人）— 全室內，1.5–2 小時，雨天必去<br>
+            <b>② 下午替代：</b>改訪 <b>釜山博物館 부산박물관</b>（地鐵 2 號線 대연역 下車，免費）或 <b>F1963 복합문화공간</b> 文青複合文化空間（室內展覽 + 書店 + 咖啡廳）<br>
+            <b>③ 五六島備案：</b>雨天改為 <b>UN 紀念公園 유엔기념공원</b>（莊嚴靜謐，微雨漫步別有氛圍，免費）<br>
+            <b>④ 晚上無人機秀取消：</b>改去廣安里沿岸找間海景居酒屋 이자카야，雨中廣安大橋燈光一樣浪漫
+          </div>
+        </div>
+        <div class="link-row">
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=SEA+LIFE+Busan+Aquarium" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>水族館地圖</a>
+          <a class="lnk lnk-map" href="https://maps.google.com/?q=F1963+부산" target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>F1963 地圖</a>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="card" style="margin-bottom:10px">
+        <div class="ct" style="color:var(--amber)">Day 3 · 中高影響</div>
+        <div class="cn">下雨影響度 ★★★☆☆ 龍宮寺 + 滑車受影響</div>
+        <div class="cd">龍宮寺下雨階梯濕滑但仍可入場，雨中寺廟有獨特意境。Skyline Luge <b>下雨天停駛</b>（官方政策）是最大風險點。Spa Land 全室內完全不受影響。</div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">
+            <b>① Skyline Luge 停駛：</b>直接跳過，前往 <b>機張 기장 Gijang 巨型壁畫村</b> 或至機張市場 기장시장 吃螃蟹午餐，下午提早移動至 Spa Land。Pass A 套的 Luge 若無法使用，可聯繫 Klook 說明天候停駛申請補償<br>
+            <b>② 龍宮寺雨天攻略：</b>穿防水鞋、帶傘，早上人更少，雨中的海上觀音殿煙雨朦朧另有禪意，是晴天看不到的景色<br>
+            <b>③ 提早進 Spa Land：</b>Luge 取消後直接殺去 Spa Land 센텀시티 스파랜드，早點入場泡滿 4 小時，最高度利用 Pass
+          </div>
+        </div>
+        <div class="banner bn-amber" style="margin-top:10px;margin-bottom:0">
+          <i class="ti ti-phone" aria-hidden="true"></i>
+          <div>Skyline Luge 雨天確認電話：<b>+82-51-722-1000</b>。出發前 1 小時致電確認當日是否正常營業，下雨有時仍可等天氣轉好後開放</div>
+        </div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="card" style="margin-bottom:10px">
+        <div class="ct" style="color:var(--primary)">Day 4 · 低影響</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 主要室內或有遮蔽</div>
+        <div class="cd">天空膠囊和海濱列車有車廂遮蔽，微雨照常運行（強風豪雨除外）。青沙浦的咖啡廳皆有室內座位。X The Sky 全室內。雨天影響最小的一天。</div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-cloud-rain" aria-hidden="true"></i>雨天微調</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">
+            <b>① 膠囊列車強風停駛（罕見）：</b>聯繫藍線公園 블루라인파크 客服確認，若停駛申請改期或退款<br>
+            <b>② 青沙浦改為室內重心：</b>燈塔戶外區跳過，專注在室內咖啡廳午茶，反而更放鬆<br>
+            <b>③ X The Sky 100F 露天展望台：</b>雨天關閉，但 99F 室內環形觀景廊照常開放，雲霧繚繞的釜山全景另有氣勢
+          </div>
+        </div>
+        <div class="tip tip-info" style="margin-top:8px"><i class="ti ti-info-circle" aria-hidden="true"></i>藍線公園官方說明：輕雨（小雨）通常照常運行；強降雨或颱風警報才停駛。出發前確認：<a href="https://www.bluelinepark.com" target="_blank" style="color:var(--primary)">bluelinepark.com</a></div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="card" style="margin-bottom:10px">
+        <div class="ct" style="color:var(--amber)">Day 5 · 中高影響</div>
+        <div class="cn">下雨影響度 ★★★★☆ 甘川洞坡道 + 松島纜車受影響</div>
+        <div class="cd">甘川洞文化村 감천문화마을 石板路雨天極滑，穿韓服更需注意。松島纜車 송도해상케이블카 微雨照常，但颱風或強風停駛。龍宮雲橋戶外懸空橋雨天禁止入場。</div>
+        <div class="sub-card">
+          <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">
+            <b>① 甘川洞雨天策略：</b>租傘（入口有售，約 2,000 KRW）或帶折疊傘。韓服建議選長裙款，褲裝款不適合雨天。手翻書工作室全室內不受影響，優先完成<br>
+            <b>② 龍宮雲橋停開備案：</b>松島海岸散步 + 松島岩場礁石區可填補，或改至附近 <b>암남공원 巖南公園</b> 室內展館<br>
+            <b>③ 若整日大雨備案（極端情況）：</b>
+            全天改至 <b>신세계백화점 센텀시티 新世界百貨 Centum City</b> 室內大逛特逛：B1–B2 美食、1F 化妝品退稅集中購、4F Starbucks Reserve 座位充足，搭配 Spa Land 提前入場，整天不出百貨也滿足<br>
+            <b>④ 南浦洞採購：</b>完全不受雨天影響，地下街 + 室內商場，反而雨天人少好逛
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="ct" style="color:var(--primary)">Day 6 · 返程日</div>
+        <div class="cn">下雨影響度 ★☆☆☆☆ 完全不影響</div>
+        <div class="cd">返程日無室外行程，計程車直達機場，雨天完全不影響任何安排。</div>
+      </div>
+
+      <!-- Must-have rain gear -->
+      <div class="sec-h"><i class="ti ti-backpack" aria-hidden="true"></i>雨天必備裝備清單</div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="tag-row" style="margin-bottom:10px">
+          <span class="tw tag">⚡ 必帶</span><span class="ta tag">建議攜帶</span><span class="tn tag">選配</span>
+        </div>
+        <div class="step-list" style="margin:0">
+          <div class="step">
+            <div class="sn" style="background:var(--red-light);color:var(--red-dark);font-size:10px">必</div>
+            <div class="sb"><b>輕量折疊傘</b>——非雨衣，釜山風大雨衣易翻，輕傘更實用。建議傘徑 100cm 以上，才能兩人同撐</div>
+          </div>
+          <div class="step">
+            <div class="sn" style="background:var(--red-light);color:var(--red-dark);font-size:10px">必</div>
+            <div class="sb"><b>防水運動鞋 or 涼鞋</b>——龍宮寺、甘川洞石板坡道濕滑，純布鞋或帆布鞋雨天非常危險，穿有防滑底的鞋</div>
+          </div>
+          <div class="step">
+            <div class="sn" style="background:var(--red-light);color:var(--red-dark);font-size:10px">必</div>
+            <div class="sb"><b>防水手機袋 or 防水保護殼</b>——甘川洞拍照、車上取票都要用手機，進水報銷整趟旅行</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">建</div>
+            <div class="sb"><b>薄防水外層（風衣款）</b>——6 月釜山 23–27°C，雨衣太熱，超輕薄防水風衣兼顧防雨與透氣，折疊後只有拳頭大</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">建</div>
+            <div class="sb"><b>防水後背包套 or 防水袋</b>——伴手禮、相機、行程文件放在防水袋中，從甘川洞買回的紙袋第一個被淋濕</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">選</div>
+            <div class="sb"><b>備用鞋墊 or 吸濕除臭噴霧</b>——濕鞋走一天後腳容易起水泡，備用鞋墊可在便利商店（편의점）買到</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">選</div>
+            <div class="sb"><b>快乾毛巾小方巾</b>——Spa Land 毛巾需租借，自備一條也方便隨時擦雨水</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rain-friendly indoor spots -->
+      <div class="sec-h"><i class="ti ti-building" aria-hidden="true"></i>釜山最佳雨天室內景點備選庫</div>
+      <div class="tbl-wrap">
+        <table class="std">
+          <tr>
+            <th style="width:160px">景點</th>
+            <th style="width:90px">交通</th>
+            <th style="width:70px">費用</th>
+            <th>適合時機</th>
+          </tr>
+          <tr>
+            <td><b>SEA LIFE 水族館</b><br><span class="ko">씨라이프부산아쿠아리움</span></td>
+            <td>해운대역 步行 5 分</td>
+            <td>~28,000 KRW/人</td>
+            <td>Day 2 海雲台雨天首選，全室內 1.5h</td>
+          </tr>
+          <tr>
+            <td><b>Spa Land</b><br><span class="ko">스파랜드</span></td>
+            <td>센텀시티역 直結</td>
+            <td>Pass 免費（限 4h）</td>
+            <td>任何天，Day 3 雨天 Luge 取消可提早入場</td>
+          </tr>
+          <tr>
+            <td><b>新世界百貨 Centum City</b><br><span class="ko">신세계백화점 센텀시티</span></td>
+            <td>센텀시티역 直結</td>
+            <td>免費入場</td>
+            <td>Day 5 全天大雨備案，B1 美食＋購物全包</td>
+          </tr>
+          <tr>
+            <td><b>F1963</b><br><span class="ko">에프원나인육삼</span></td>
+            <td>수영역 步行 10 分</td>
+            <td>免費入場</td>
+            <td>Day 2 下午備案，工業風文化空間、書店、咖啡廳</td>
+          </tr>
+          <tr>
+            <td><b>釜山博物館</b><br><span class="ko">부산박물관</span></td>
+            <td>대연역 步行 5 分</td>
+            <td>免費</td>
+            <td>任何天雨天補救，了解釜山歷史，約 1.5h</td>
+          </tr>
+          <tr>
+            <td><b>BIFF 廣場地下商城</b><br><span class="ko">BIFF광장 지하상가</span></td>
+            <td>남포역 步行 3 分</td>
+            <td>免費入場</td>
+            <td>Day 5 南浦洞購物，全室內無懼大雨</td>
+          </tr>
+          <tr>
+            <td><b>樂天百貨광복점</b><br><span class="ko">롯데백화점 광복점</span></td>
+            <td>남포역 步行 5 分</td>
+            <td>免費入場</td>
+            <td>Day 5 南浦洞備案，樓頂有海景露台（晴天）</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Weather check apps -->
+      <div class="sec-h"><i class="ti ti-device-mobile" aria-hidden="true"></i>出發前 & 在當地的天氣確認方式</div>
+      <div class="card">
+        <div class="step-list" style="margin:0">
+          <div class="step">
+            <div class="sn sn-blue">1</div>
+            <div class="sb"><b>Naver Weather 네이버 날씨</b>——最準確的韓國當地天氣，在韓國使用幾乎實時更新，可查每小時預報。搜尋「부산 날씨」即可</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">2</div>
+            <div class="sb"><b>韓國氣象廳 기상청 날씨누리</b>——官方預報，可查釜山區域小時預報與降雨雷達，網址：weather.go.kr</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">3</div>
+            <div class="sb"><b>Kakao Map 카카오맵 天氣圖層</b>——在 App 地圖上直接看降雨雷達，非常直覺，可確認雨什麼時候會停</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">建</div>
+            <div class="sb"><b>每天早上 08:00 確認當日預報</b>——6 月釜山多為午後陣雨，早上查雷達可判斷幾點會下，彈性調整上午出發還是室內先行</div>
+          </div>
+        </div>
+        <div class="link-row">
+          <a class="lnk lnk-web" href="https://www.weather.go.kr/w/index.do" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>韓國氣象廳官網</a>
+          <a class="lnk lnk-web" href="https://map.kakao.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>Kakao Map 雨達</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- END RAIN TAB -->
+
+    <!-- BACKUP PASS ATTRACTIONS TAB -->
+    <div id="backuppass" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:38px">🎫</div>
+        <div class="day-head-info">
+          <div class="day-head-title">備用 Pass 景點清單</div>
+          <div class="day-head-sub">Visit Busan Pass 全景點 · 雨天替換用 · A 套（紫）/ B 套（藍）一覽</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-info-circle" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">如何使用這份清單</div>
+          <div style="font-size:12px;line-height:1.7;margin-top:4px">
+            BIG 5 Pass 規則：A 套（紫色）選 2 個景點、B 套（藍色）選 3 個景點，180 天內任意兌換。若行程中某天因雨取消原定 Pass 景點（如 Skyline Luge 雨天停駛、龍宮雲橋雨天禁入），可從本表中挑選<b>同顏色分類</b>的室內或交通方便景點作替換。<b>推薦度</b>為综合評論與性價比的客觀評估，僅供參考。
+          </div>
+        </div>
+      </div>
+
+      <!-- A套 紫色 Purple -->
+      <div class="sec-h"><i class="ti ti-square-rounded" style="color:var(--purple)" aria-hidden="true"></i>A 套景點（紫色 Purple Group A）</div>
+      <div class="banner bn-purple" style="margin-bottom:12px">
+        <i class="ti ti-id-badge" aria-hidden="true"></i>
+        <div style="font-size:12px;line-height:1.6">紫色景點通常為高單價、人氣較高的設施。BIG 5 Pass 可從紫色清單選 <b>2 個</b>。你目前已選：<b>Skyline Luge</b>（Day 3）、<b>Busan X the Sky</b>（Day 4）。</div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="std">
+          <tr>
+            <th style="width:150px">景點名稱</th>
+            <th style="width:75px">一般票價</th>
+            <th style="width:60px">需預約</th>
+            <th style="width:55px">室內/外</th>
+            <th style="width:65px">交通便利度</th>
+            <th style="width:60px">推薦度</th>
+            <th>備註</th>
+          </tr>
+          <tr>
+            <td><b>Skyline Luge Busan</b><br><span class="ko">스카이라인 루지 부산</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 3</span></td>
+            <td>~15,000 KRW<br>(2次套票)</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外</td>
+            <td><span class="tag ta">計程車為主</span></td>
+            <td>★★★★☆</td>
+            <td>機張區，<b>下雨會暫停營運</b>，雨天此景點最容易被取消，需備案</td>
+          </tr>
+          <tr>
+            <td><b>Busan X the Sky</b><br><span class="ko">부산엑스더스카이</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 4</span></td>
+            <td>27,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">地鐵+步行</span></td>
+            <td>★★★★★</td>
+            <td>LCT The Sharp 101F，<b>全室內，雨天最佳備案</b>，99F 透明地板必拍</td>
+          </tr>
+          <tr>
+            <td><b>Lotte World Adventure Busan</b><br><span class="ko">롯데월드 어드벤처 부산</span></td>
+            <td>47,000–62,000 KRW<br>(全日券)</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外+室內</td>
+            <td><span class="tag tw">較遠，需地鐵+公車或計程車約40分</span></td>
+            <td>★★★★☆</td>
+            <td>機張奧西利亞，<b>下雨多項遊樂設施會停駛</b>，但室內設施仍可玩，整天行程</td>
+          </tr>
+          <tr>
+            <td><b>Spa Land Centum City</b><br><span class="ko">스파랜드 센텀시티</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 3</span></td>
+            <td>25,000 KRW<br>(限時)</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">地鐵直結</span></td>
+            <td>★★★★★</td>
+            <td>新世界百貨地下，<b>全室內，雨天最佳備案之一</b>，22種主題浴池</td>
+          </tr>
+          <tr>
+            <td><b>Busan City Tour Bus</b><br><span class="ko">부산시티투어버스</span></td>
+            <td>~15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外（車上室內）</td>
+            <td><span class="tag tg">巴士站固定發車</span></td>
+            <td>★★★☆☆</td>
+            <td>觀光巴士繞行市區景點，下雨仍可乘坐但下車拍照受限</td>
+          </tr>
+          <tr>
+            <td><b>Busan Diamond Bay Yacht</b><br><span class="ko">부산다이아몬드베이요트</span></td>
+            <td>~40,000 KRW</td>
+            <td><span class="tag tw">需預約（約3週前）</span></td>
+            <td>室外</td>
+            <td><span class="tag ta">廣安里搭乘</span></td>
+            <td>★★★★☆</td>
+            <td>遊艇遊廣安大橋海域，<b>天候不佳會取消改期</b>，不建議雨天備案（需提前預約不適合臨時替換）</td>
+          </tr>
+          <tr>
+            <td><b>ClubD Oasis</b><br><span class="ko">클럽디오아시스</span></td>
+            <td>~30,000 KRW</td>
+            <td><span class="tag ta">建議預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">海雲台地鐵周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>海雲台室內水上樂園/SPA設施，雨天可作備案但需確認時段</td>
+          </tr>
+          <tr>
+            <td><b>Daeyoung Taekwondo</b><br><span class="ko">대영태권도</span></td>
+            <td>~20,000 KRW</td>
+            <td><span class="tag ta">建議預約</span></td>
+            <td>室內</td>
+            <td><span class="tag ta">廣安里周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>跆拳道體驗課程，室內活動雨天不受影響，需團體報名</td>
+          </tr>
+          <tr>
+            <td><b>Hotel Aqua Palace Spa & Sauna</b><br><span class="ko">아쿠아펠리스 스파&사우나</span></td>
+            <td>~20,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag ta">廣安里周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>飯店附設汗蒸幕，雨天可作為 Spa Land 的替代方案</td>
+          </tr>
+          <tr>
+            <td><b>Surf Holic Dadaepo</b><br><span class="ko">서프홀릭 다대포</span></td>
+            <td>~30,000 KRW</td>
+            <td><span class="tag ta">建議預約</span></td>
+            <td>室外</td>
+            <td><span class="tag tw">較遠，需地鐵+步行約45分</span></td>
+            <td>★★☆☆☆</td>
+            <td>多大浦衝浪體驗，<b>雨天/風大不適合</b>，不建議作為雨備</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- B套 藍色 Blue -->
+      <div class="sec-h" style="margin-top:24px"><i class="ti ti-square-rounded" style="color:var(--primary)" aria-hidden="true"></i>B 套景點（藍色 Blue Group B）</div>
+      <div class="banner bn-info" style="margin-bottom:12px">
+        <i class="ti ti-id-badge" aria-hidden="true"></i>
+        <div style="font-size:12px;line-height:1.6">藍色景點通常為單價較低、特色體驗類設施。BIG 5 Pass 可從藍色清單選 <b>3 個</b>。你目前已選：<b>甘川洞韓服</b>、<b>手翻書 Flipbook Studio</b>、<b>松島海上纜車</b>（皆排入 Day 5）。</div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="std">
+          <tr>
+            <th style="width:150px">景點名稱</th>
+            <th style="width:75px">一般票價</th>
+            <th style="width:60px">需預約</th>
+            <th style="width:55px">室內/外</th>
+            <th style="width:65px">交通便利度</th>
+            <th style="width:60px">推薦度</th>
+            <th>備註</th>
+          </tr>
+          <tr>
+            <td><b>Gamcheon Romantic Hanbok</b><br><span class="ko">감천 로맨틱 한복</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 5</span></td>
+            <td>~15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內(換裝)+室外(穿著遊覽)</td>
+            <td><span class="tag tw">計程車為主，較遠</span></td>
+            <td>★★★★★</td>
+            <td>甘川洞文化村內，<b>雨天石板路濕滑需注意</b>，韓服長裙款較適合雨天</td>
+          </tr>
+          <tr>
+            <td><b>Flipbook Studio</b><br><span class="ko">플립북 스튜디오</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 5</span></td>
+            <td>~10,000–15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tw">同甘川洞，較遠</span></td>
+            <td>★★★★☆</td>
+            <td>甘川洞文化村內，<b>全室內完全不受天氣影響</b>，是 Day 5 雨天最穩定的環節</td>
+          </tr>
+          <tr>
+            <td><b>Songdo Marine Cable Car</b><br><span class="ko">송도해상케이블카</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 5</span></td>
+            <td>~20,000–22,000 KRW<br>(一般艙來回)</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外(纜車本身可遮蔽)</td>
+            <td><span class="tag ta">計程車約15分</span></td>
+            <td>★★★★☆</td>
+            <td>松島，<b>強風/雷雨會停駛</b>，微雨通常正常運行，出發前確認官網</td>
+          </tr>
+          <tr>
+            <td><b>Songdo Yonggung Suspension Bridge</b><br><span class="ko">송도용궁구름다리</span></td>
+            <td>非Pass項目<br>約3,000 KRW自費</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外</td>
+            <td><span class="tag ta">同松島纜車站</span></td>
+            <td>★★★☆☆</td>
+            <td><b>雨天禁止入場（懸空吊橋濕滑危險）</b>，須留意天候，此為自費非 Pass 包含</td>
+          </tr>
+          <tr>
+            <td><b>Busan Tower</b><br><span class="ko">부산타워</span></td>
+            <td>10,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內(展望台)</td>
+            <td><span class="tag tg">南浦站步行+手扶梯</span></td>
+            <td>★★★★☆</td>
+            <td>龍頭山公園內，<b>室內展望台雨天不受影響</b>，南浦洞購物可順遊，CP值高</td>
+          </tr>
+          <tr>
+            <td><b>Busan Museum of Movies</b><br><span class="ko">부산영화체험박물관</span></td>
+            <td>~9,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">釜山站周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>電影主題互動展館，<b>全室內，雨天備案佳</b>，適合喜歡電影的旅客</td>
+          </tr>
+          <tr>
+            <td><b>Haeundae Beach Train</b><br><span class="ko">해운대 블루라인파크 해변열차</span><br><span class="tag tg" style="margin-top:3px;display:inline-block">已排入 Day 4（另購膠囊）</span></td>
+            <td>~10,000–16,000 KRW</td>
+            <td><span class="tag ta">建議事先預約</span><br>(熱門時段易售完)</td>
+            <td>室外(車廂內遮蔽)</td>
+            <td><span class="tag tg">地鐵+步行</span></td>
+            <td>★★★★☆</td>
+            <td>微雨可正常行駛(車廂有遮蔽)，但強風雨可能停駛，出發前確認</td>
+          </tr>
+          <tr>
+            <td><b>Museum 1</b><br><span class="ko">뮤지엄1</span></td>
+            <td>~18,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">海雲台周邊</span></td>
+            <td>★★★★☆</td>
+            <td>沉浸式數位藝術展覽（類似TeamLab），<b>全室內，雨天首選</b>，拍照效果極佳</td>
+          </tr>
+          <tr>
+            <td><b>Haeon Hanbok</b><br><span class="ko">해온한복</span></td>
+            <td>~15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內(換裝)+室外(遊覽)</td>
+            <td><span class="tag tg">海雲台周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>海雲台韓服體驗，與甘川洞韓服功能類似，雨天遊覽受限</td>
+          </tr>
+          <tr>
+            <td><b>Hillspa</b><br><span class="ko">힐스파</span></td>
+            <td>~15,000–20,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">海雲台周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>海雲台溫泉設施，<b>全室內</b>，與 Spa Land 類似但規模較小</td>
+          </tr>
+          <tr>
+            <td><b>SEA LIFE Busan Aquarium</b><br><span class="ko">씨라이프부산아쿠아리움</span></td>
+            <td>~28,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">해운대역 步行5分</span></td>
+            <td>★★★★★</td>
+            <td><b>全室內水族館，雨備首選</b>，180度玻璃海底隧道，約1.5–2小時</td>
+          </tr>
+          <tr>
+            <td><b>Brick Campus Busan</b><br><span class="ko">브릭캠퍼스부산</span></td>
+            <td>~16,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tw">機張，較遠</span></td>
+            <td>★★★☆☆</td>
+            <td>樂高積木主題館，全室內，鄰近 Skyline Luge，若 Luge 取消可順遊</td>
+          </tr>
+          <tr>
+            <td><b>Busan National Science Museum</b><br><span class="ko">국립부산과학관</span></td>
+            <td>免費–4,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tw">機張，較遠</span></td>
+            <td>★★★☆☆</td>
+            <td>科學博物館，全室內，適合 Day 3 機張區雨天備案</td>
+          </tr>
+          <tr>
+            <td><b>Ahopsan Forest</b><br><span class="ko">아홉산숲</span></td>
+            <td>~3,000 KRW</td>
+            <td><span class="tag ta">建議預約</span></td>
+            <td>室外</td>
+            <td><span class="tag tw">機張，需接駁車</span></td>
+            <td>★★★★☆</td>
+            <td>知名竹林步道（影視拍攝地），<b>雨天泥濘需注意，竹林雨中意境佳但不建議豪雨前往</b></td>
+          </tr>
+          <tr>
+            <td><b>Arte Museum Busan</b><br><span class="ko">아르떼뮤지엄부산</span></td>
+            <td>~18,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tw">기장，較遠，計程車或接駁</span></td>
+            <td>★★★★★</td>
+            <td>沉浸式數位光影藝術展（類似teamLab），<b>全室內，極佳雨備</b>，拍照效果絕佳</td>
+          </tr>
+          <tr>
+            <td><b>Running Man Busan</b><br><span class="ko">런닝맨 부산</span></td>
+            <td>~19,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">西面周邊</span></td>
+            <td>★★★★☆</td>
+            <td>韓綜主題互動樂園，<b>全室內</b>，適合親子或喜歡綜藝的旅客，約1.5–2小時</td>
+          </tr>
+          <tr>
+            <td><b>DIAegg（密室逃脫）</b><br><span class="ko">디아에그</span></td>
+            <td>~25,000–30,000 KRW</td>
+            <td><span class="tag tw">需預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">西面周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>密室逃脫遊戲，全室內，需提前預約時段，雨天備案需安排好時間</td>
+          </tr>
+          <tr>
+            <td><b>Laser Arena (Samjeong Tower / Seomyeon)</b><br><span class="ko">레이저아레나</span></td>
+            <td>~15,000–20,000 KRW</td>
+            <td><span class="tag ta">建議預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">西面周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>雷射戰場體驗，全室內，適合喜歡刺激活動的旅客</td>
+          </tr>
+          <tr>
+            <td><b>Seomyeon Museum of Art</b><br><span class="ko">서면미술관</span></td>
+            <td>~10,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag tg">西面站周邊</span></td>
+            <td>★★★☆☆</td>
+            <td>小型美術館，全室內，西面購物之餘可順遊</td>
+          </tr>
+          <tr>
+            <td><b>Arte Museum (Yeongdo)</b><br><span class="ko">아르떼뮤지엄</span></td>
+            <td>~18,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag ta">影島，計程車較方便</span></td>
+            <td>★★★★☆</td>
+            <td>另一處數位藝術展館（影島館），全室內</td>
+          </tr>
+          <tr>
+            <td><b>Korea National Maritime Museum</b><br><span class="ko">국립해양박물관</span></td>
+            <td>免費（特展另計）</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內</td>
+            <td><span class="tag ta">影島，公車或計程車</span></td>
+            <td>★★★★☆</td>
+            <td>免費海洋博物館，<b>全室內且免費，性價比極高的雨備選擇</b></td>
+          </tr>
+          <tr>
+            <td><b>Chulsu and Younghee（韓服）</b><br><span class="ko">철수와영희</span></td>
+            <td>~15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內(換裝)+室外(遊覽)</td>
+            <td><span class="tag ta">影島，計程車較方便</span></td>
+            <td>★★★☆☆</td>
+            <td>影島韓服體驗，雨天遊覽受限但換裝拍照在室內</td>
+          </tr>
+          <tr>
+            <td><b>Taejongdae Danubi Train</b><br><span class="ko">태종대 다누비열차</span></td>
+            <td>~4,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室外(車廂可遮蔽)</td>
+            <td><span class="tag ta">影島，公車或計程車</span></td>
+            <td>★★★★☆</td>
+            <td>太宗台環島小火車，<b>微雨可乘坐(車廂遮蔽)</b>，但景觀公園步道雨天較濕滑</td>
+          </tr>
+          <tr>
+            <td><b>Nakdong River Ecological Cruise</b><br><span class="ko">낙동강생태탐방선</span></td>
+            <td>~12,000 KRW</td>
+            <td><span class="tag tw">需預約</span></td>
+            <td>室外(船艙可遮蔽)</td>
+            <td><span class="tag tw">較遠，需地鐵+接駁</span></td>
+            <td>★★★☆☆</td>
+            <td>洛東江生態遊船，<b>強風雨天可能停駛</b>，船艙有遮蔽但景觀受限</td>
+          </tr>
+          <tr>
+            <td><b>Ibgogae（韓服）</b><br><span class="ko">입고개</span></td>
+            <td>~15,000 KRW</td>
+            <td><span class="tag tn">免預約</span></td>
+            <td>室內(換裝)+室外(遊覽)</td>
+            <td><span class="tag tw">較遠</span></td>
+            <td>★★★☆☆</td>
+            <td>西部圈韓服體驗，與甘川洞韓服功能類似</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Quick rain-day recommendations -->
+      <div class="sec-h" style="margin-top:24px"><i class="ti ti-star" aria-hidden="true"></i>雨天最佳替換 Top 5（綜合評估）</div>
+      <div class="card">
+        <div class="step-list" style="margin:0">
+          <div class="step">
+            <div class="sn sn-purple">1</div>
+            <div class="sb"><b>SEA LIFE Busan Aquarium</b>（B套/藍）—— 全室內水族館，海雲台地鐵站步行5分極方便，CP值與體驗感都最高，Day 2 海雲台行程雨天首選</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">2</div>
+            <div class="sb"><b>Arte Museum Busan</b>（B套/藍）—— 沉浸式數位光影展，視覺效果驚艷且全室內，適合作為 Day 3 機張區的雨天替代</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">3</div>
+            <div class="sb"><b>Korea National Maritime Museum</b>（B套/藍）—— 免費入場且全室內，影島地區雨天備案中最划算的選擇</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">4</div>
+            <div class="sb"><b>Busan Tower</b>（B套/藍）—— 室內展望台搭配南浦洞購物，雨天行程彈性最大，CP值高</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">5</div>
+            <div class="sb"><b>Museum 1</b>（B套/藍）—— 海雲台周邊沉浸式藝術館，與 SEA LIFE 同區，雨天可作為備案二選一</div>
+          </div>
+        </div>
+        <div class="tip tip-warn" style="margin-top:10px"><i class="ti ti-alert-triangle" aria-hidden="true"></i>需特別留意停駛風險的景點：<b>Skyline Luge</b>（雨天暫停）、<b>Songdo Yonggung Suspension Bridge</b>（雨天禁入）、<b>Diamond Bay Yacht</b>（需提前3週預約，不適合臨時更換）、<b>Lotte World</b>（部分戶外設施雨天停駛）</div>
+      </div>
+
+    </div>
+    <!-- END BACKUP PASS TAB -->
+
+    <!-- MEMO TAB -->
+    <div id="memo" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:38px">📝</div>
+        <div class="day-head-info">
+          <div class="day-head-title">備忘清單</div>
+
+          <div class="day-head-sub">採購清單 · 口袋店家 · 資料儲存在你的瀏覽器（可匯出備份）</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-device-floppy" aria-hidden="true"></i>
+        <div>
+          所有資料只存在<b>這個瀏覽器</b>（localStorage），換裝置或清除瀏覽器資料會消失。建議行前先<b>匯出備份</b>，到當地後也可以隨時匯出存到雲端筆記。
+        </div>
+      </div>
+
+      <div class="memo-toolbar">
+        <button class="memo-btn primary" onclick="memoExport()"><i class="ti ti-download" aria-hidden="true"></i>匯出備份（JSON）</button>
+        <button class="memo-btn" onclick="memoImportClick()"><i class="ti ti-upload" aria-hidden="true"></i>匯入備份</button>
+        <input type="file" id="memoFileInput" accept="application/json" style="display:none" onchange="memoImport(event)">
+        <button class="memo-btn danger" onclick="memoClearAll()"><i class="ti ti-trash" aria-hidden="true"></i>清空全部</button>
+      </div>
+      <div id="memoStatus" class="memo-status"></div>
+
+      <!-- 採購清單 -->
+      <div class="memo-section">
+        <div class="memo-section-head">
+          <div class="memo-section-title"><i class="ti ti-shopping-cart" aria-hidden="true"></i>採購清單</div>
+        </div>
+        <div class="memo-add-row">
+          <input type="text" id="shopInput" class="memo-input" placeholder="例如：Olive Young 面膜、機場限定零食...">
+          <div class="memo-add-btn" onclick="memoAdd('shop')"><i class="ti ti-plus" aria-hidden="true"></i></div>
+        </div>
+        <div id="shopList" class="memo-list"></div>
+      </div>
+
+      <!-- 口袋店家 / 景點 -->
+      <div class="memo-section">
+        <div class="memo-section-head">
+          <div class="memo-section-title"><i class="ti ti-map-pin-star" aria-hidden="true"></i>口袋店家 / 景點</div>
+        </div>
+        <div class="memo-add-row">
+          <input type="text" id="spotInput" class="memo-input" placeholder="例如：青沙浦海景咖啡廳、南浦洞烤肉店...">
+          <div class="memo-add-btn" onclick="memoAdd('spot')"><i class="ti ti-plus" aria-hidden="true"></i></div>
+        </div>
+        <div id="spotList" class="memo-list"></div>
+      </div>
+
+      <!-- 自由筆記 -->
+      <div class="memo-section">
+        <div class="memo-section-head">
+          <div class="memo-section-title"><i class="ti ti-notes" aria-hidden="true"></i>自由筆記</div>
+        </div>
+        <textarea id="freeNote" class="memo-textarea" placeholder="任何想記下的事：尺寸、預算上限、朋友交代的代購、想問飯店的事..." oninput="memoSaveNote()"></textarea>
+      </div>
+
+    </div>
+    <!-- END MEMO TAB -->
+
   </div>
   <script>
     function goTab(id, el) {
@@ -2617,7 +3381,178 @@
       document.getElementById(id).classList.add('show');
       el.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (id === 'memo') memoRenderAll();
     }
+
+    /* ===== 備忘清單 Memo Tab ===== */
+    const MEMO_KEY = 'busan_memo_v1';
+
+    function memoLoad() {
+      try {
+        const raw = localStorage.getItem(MEMO_KEY);
+        if (!raw) return { shop: [], spot: [], note: '' };
+        const data = JSON.parse(raw);
+        return {
+          shop: Array.isArray(data.shop) ? data.shop : [],
+          spot: Array.isArray(data.spot) ? data.spot : [],
+          note: typeof data.note === 'string' ? data.note : ''
+        };
+      } catch (e) {
+        return { shop: [], spot: [], note: '' };
+      }
+    }
+
+    function memoSave(data) {
+      localStorage.setItem(MEMO_KEY, JSON.stringify(data));
+      memoShowStatus('已自動儲存');
+    }
+
+    function memoShowStatus(msg) {
+      const el = document.getElementById('memoStatus');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show-saved');
+      setTimeout(() => { el.textContent = ''; el.classList.remove('show-saved'); }, 1500);
+    }
+
+    function memoAdd(type) {
+      const inputId = type === 'shop' ? 'shopInput' : 'spotInput';
+      const input = document.getElementById(inputId);
+      const val = input.value.trim();
+      if (!val) return;
+      const data = memoLoad();
+      data[type].push({ text: val, done: false });
+      memoSave(data);
+      input.value = '';
+      memoRenderList(type);
+    }
+
+    function memoToggle(type, idx) {
+      const data = memoLoad();
+      if (data[type][idx]) {
+        data[type][idx].done = !data[type][idx].done;
+        memoSave(data);
+        memoRenderList(type);
+      }
+    }
+
+    function memoDelete(type, idx) {
+      const data = memoLoad();
+      data[type].splice(idx, 1);
+      memoSave(data);
+      memoRenderList(type);
+    }
+
+    function memoEdit(type, idx, el) {
+      const newText = el.textContent.trim();
+      const data = memoLoad();
+      if (data[type][idx] && newText) {
+        data[type][idx].text = newText;
+        memoSave(data);
+      } else {
+        memoRenderList(type);
+      }
+    }
+
+    function memoRenderList(type) {
+      const listEl = document.getElementById(type === 'shop' ? 'shopList' : 'spotList');
+      if (!listEl) return;
+      const data = memoLoad();
+      const items = data[type];
+      if (!items.length) {
+        listEl.innerHTML = '<div class="memo-empty">尚無項目，新增一項開始記錄吧</div>';
+        return;
+      }
+      listEl.innerHTML = items.map((item, idx) => `
+        <div class="memo-item">
+          <div class="memo-checkbox ${item.done ? 'checked' : ''}" onclick="memoToggle('${type}',${idx})">
+            <i class="ti ti-check" aria-hidden="true"></i>
+          </div>
+          <div class="memo-text ${item.done ? 'done' : ''}" contenteditable="true"
+               onblur="memoEdit('${type}',${idx},this)"
+               onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">${memoEscape(item.text)}</div>
+          <div class="memo-del" onclick="memoDelete('${type}',${idx})"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+      `).join('');
+    }
+
+    function memoEscape(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function memoSaveNote() {
+      const data = memoLoad();
+      data.note = document.getElementById('freeNote').value;
+      memoSave(data);
+    }
+
+    function memoRenderAll() {
+      const data = memoLoad();
+      memoRenderList('shop');
+      memoRenderList('spot');
+      const noteEl = document.getElementById('freeNote');
+      if (noteEl && document.activeElement !== noteEl) {
+        noteEl.value = data.note || '';
+      }
+    }
+
+    function memoExport() {
+      const data = memoLoad();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'busan_memo_backup.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      memoShowStatus('已匯出備份檔案');
+    }
+
+    function memoImportClick() {
+      document.getElementById('memoFileInput').click();
+    }
+
+    function memoImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          const data = {
+            shop: Array.isArray(imported.shop) ? imported.shop : [],
+            spot: Array.isArray(imported.spot) ? imported.spot : [],
+            note: typeof imported.note === 'string' ? imported.note : ''
+          };
+          memoSave(data);
+          memoRenderAll();
+          memoShowStatus('匯入成功！');
+        } catch (err) {
+          alert('檔案格式錯誤，請確認是正確匯出的備份檔案');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function memoClearAll() {
+      if (!confirm('確定要清空所有備忘清單與筆記嗎？此動作無法復原（建議先匯出備份）')) return;
+      memoSave({ shop: [], spot: [], note: '' });
+      memoRenderAll();
+      memoShowStatus('已清空');
+    }
+
+    // 初次載入時，如果預設顯示的就是 memo tab 則渲染
+    document.addEventListener('DOMContentLoaded', function () {
+      const memoTab = document.getElementById('memo');
+      if (memoTab && memoTab.classList.contains('show')) {
+        memoRenderAll();
+      }
+    });
   </script>
 </body>
 
