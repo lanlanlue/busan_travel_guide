@@ -4228,7 +4228,6 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('show');
       el.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (id === 'memo') memoRenderAll();
       if (id === 'checklist') checklistRender();
       if (id === 'card-rewards') cardRewardRenderAll();
