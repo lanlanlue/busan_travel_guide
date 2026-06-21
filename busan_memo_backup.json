@@ -1,5 +1,54 @@
 {
-  "shop": [],
+  "shop": [
+    {
+      "text": "Samyang 三養 Buldak Fried Rice 불닭볶음밥（辣雞炒飯/炒飯包）：超商/超市參考 ₩2,500–4,500；可比價是否有 2+1 或多入組",
+      "done": false
+    },
+    {
+      "text": "by:True Olive Oil 100% Dolgim 올리브유100% 돌김（橄欖油海苔/桌上海苔）：參考 ₩4,000–8,000/盒或多包組；確認是否為 100% 橄欖油款",
+      "done": false
+    },
+    {
+      "text": "Daiso 大創粉色耐熱矽膠夾/隔熱取物工具 내열 실리콘 집기 도구（圖片款）：大創參考 ₩1,000–3,000；現場確認名稱與用途",
+      "done": false
+    },
+    {
+      "text": "Biodance Cera-nol Gel Toner Pads 세라놀 젤 토너 패드（60 pads）：Olive Young/美妝店參考 ₩24,000–32,000；低於 ₩24,000 可入手",
+      "done": false
+    },
+    {
+      "text": "Biodance Bio-Collagen Real Deep Mask 바이오 콜라겐 리얼 딥 마스크：單片參考 ₩6,000–8,000；4入組參考 ₩24,000–33,000；看 Olive Young 組合促銷",
+      "done": false
+    },
+    {
+      "text": "PD3 Dr. Reju-All Advanced PDRN Rejuvenating Cream（PDRN 修護霜）：參考 ₩25,000–35,000；低於 ₩25,000 可考慮多買",
+      "done": false
+    },
+    {
+      "text": "PD3 Dr. Reju-All Advanced PDRN Rejuvenating Lip Serum（PDRN 唇部精華）：參考 ₩12,000–18,000；確認是否為 Lip Serum 而非 Cream",
+      "done": false
+    },
+    {
+      "text": "MEDIHEAL 面膜：TEATREE 茶樹款 + HYALURONATE 玻尿酸款；單片參考 ₩1,000–2,500，10片組參考 ₩10,000–18,000；優先買 1+1/10片組",
+      "done": false
+    },
+    {
+      "text": "LATIB Olive Lemon Shot 올리브레몬샷（橄欖檸檬飲/保健飲）：參考 ₩20,000–35,000/盒（依入數差異大）；現場確認 25ml x 幾入與有效期限",
+      "done": false
+    },
+    {
+      "text": "Haitai-Calbee Honey Butter Chip 허니버터칩（蜂蜜奶油洋芋片）：小包參考 ₩1,700–2,000；大包參考 ₩2,800–3,500；超市比超商便宜",
+      "done": false
+    },
+    {
+      "text": "찍먹 Nacho 찍먹나쵸（沾醬式 Nacho 玉米片/起司或莎莎醬款）：參考 ₩2,000–3,500；確認醬料口味與保存期限",
+      "done": false
+    },
+    {
+      "text": "Lotte Binch Premier Matcha 빈츠 프리미어 말차（抹茶巧克力餅乾）：參考 ₩3,000–5,500；超市/樂天超市常有折扣",
+      "done": false
+    }
+  ],
   "spot": [
     {
       "text": "老宅邸燒肉 Old Mansion (올드맨션)：https://maps.app.goo.gl/jxY68fE5EACEfFQY8 較遠在西面站",

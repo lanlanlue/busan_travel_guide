@@ -742,6 +742,56 @@
       color: var(--primary)
     }
 
+    .route-note {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.75
+    }
+
+    .route-note b {
+      color: var(--text1);
+      font-weight: 600
+    }
+
+    .route-note .ko {
+      color: var(--primary-dark);
+      font-weight: 500
+    }
+
+    .metro-map-wrap {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: var(--shadow);
+      overflow-x: auto
+    }
+
+    .metro-map-img {
+      display: block;
+      width: 100%;
+      min-width: 760px;
+      height: auto;
+      border-radius: var(--radius-sm)
+    }
+
+    .rate-table-wrap {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: center
+    }
+
+    .rate-table-img {
+      display: block;
+      width: min(100%, 560px);
+      height: auto;
+      border-radius: var(--radius-sm)
+    }
+
     /* Tables */
     .tbl-wrap {
       overflow-x: auto;
@@ -1036,6 +1086,24 @@
     .memo-status{font-size:11px;color:var(--text3);margin-top:4px}
     .memo-status.show-saved{color:var(--teal-dark)}
     .memo-textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit;resize:vertical;min-height:90px;line-height:1.6}
+
+    /* Interactive checklist */
+    .check-panel{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);margin-bottom:18px}
+    .check-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .check-progress{font-size:12px;color:var(--text2);font-weight:500}
+    .check-progress-bar{height:7px;background:var(--surface2);border:0.5px solid var(--border);border-radius:20px;overflow:hidden;flex:1;min-width:160px}
+    .check-progress-fill{height:100%;width:0;background:var(--teal);transition:width .2s}
+    .check-reset{font-size:11px;color:var(--red-dark);border:0.5px solid var(--coral-border);background:var(--red-light);border-radius:var(--radius-sm);padding:5px 9px;cursor:pointer}
+    .check-group{margin-top:12px}
+    .check-group:first-child{margin-top:0}
+    .check-group-title{font-size:12px;font-weight:600;color:var(--text1);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .check-list{display:flex;flex-direction:column;gap:8px}
+    .check-item{display:flex;align-items:flex-start;gap:10px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 11px;cursor:pointer}
+    .check-item.done .check-text{color:var(--text3);text-decoration:line-through}
+    .check-text{font-size:12px;line-height:1.55;color:var(--text1);flex:1}
+    .check-text b{font-weight:600;color:var(--text1)}
+    .check-item.done .check-text b{color:var(--text3)}
+    .check-save-note{font-size:11px;color:var(--text3);margin-top:8px}
     .memo-textarea:focus{outline:none;border-color:var(--primary)}
   </style>
 </head>
@@ -1073,7 +1141,7 @@
           <span class="badge b-teal"><i class="ti ti-check" aria-hidden="true"></i>海濱列車 13:30 已訂</span>
           <span class="badge b-purple"><i class="ti ti-id-badge" aria-hidden="true"></i>BIG 5 A 套（紫色）· 出發前購買</span>
           <span class="badge b-purple"><i class="ti ti-id-badge" aria-hidden="true"></i>BIG 5 B 套（藍色）· 出發前購買</span>
-          <span class="badge b-amber"><i class="ti ti-alert-triangle" aria-hidden="true"></i>K-ETA 出發前申請</span>
+          <span class="badge b-amber"><i class="ti ti-alert-triangle" aria-hidden="true"></i>K-ETA 出發前確認</span>
         </div>
       </div>
     </div>
@@ -1101,8 +1169,12 @@
       <button class="tab-btn" onclick="goTab('d6',this)">Day 6 · 週三</button>
       <button class="tab-btn" onclick="goTab('tax',this)">退稅攻略</button>
       <button class="tab-btn" onclick="goTab('tmoney',this)">T-money 兌換指南</button>
+      <button class="tab-btn" onclick="goTab('exchange-rate',this)">匯率表</button>
       <button class="tab-btn" onclick="goTab('tpass',this)">T Pass 兌換攻略</button>
+      <button class="tab-btn" onclick="goTab('metro-map',this)">地鐵路線圖</button>
+      <button class="tab-btn" onclick="goTab('quick-ref',this)">現場速查包</button>
       <button class="tab-btn" onclick="goTab('checklist',this)">行前檢查清單</button>
+      <button class="tab-btn" onclick="goTab('korea-notes',this)">韓國注意事項</button>
       <button class="tab-btn" onclick="goTab('rain',this)">☂ 雨備行程</button>
       <button class="tab-btn" onclick="goTab('backuppass',this)">🎫 備用 Pass 景點</button>
       <button class="tab-btn" onclick="goTab('memo',this)">📝 備忘清單</button>
@@ -1143,22 +1215,23 @@
           <div class="blk-dot dot-blue"><i class="ti ti-plane-arrival" aria-hidden="true"></i></div>
           <div class="card card-blue">
             <div class="ct">18:00 抵達 · 金海國際機場</div>
-            <div class="cn">機場 → 飯店 Check-in（市立美術館站周邊）</div>
+            <div class="cn">機場 → 飯店 Check-in（Travelodge Suites Busan Centum）</div>
             <div class="cd">出關後立即在 B1 便利商店購買 T-money 交通卡並加值 20,000 KRW，整趟旅程地鐵公車全數使用。接著在 B1 搭乘金海輕軌（BGL），全程約 62
               分鐘，是週五傍晚最穩定的選擇。</div>
             <div class="tag-row"><span class="tc tag">BGL+地鐵 約62分</span><span class="tc tag">~2,100 KRW/人</span><span
                 class="ta tag">週五嚴禁搭計程車</span></div>
-            <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>金海輕軌 BGL → 沙上站 → 地鐵 2 號線 → 市立美術館站</div>
+            <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>金海輕軌 BGL 공항역 → 사상역 → 地鐵 2 號線 장산 方向 → 벡스코역 / 센텀시티역</div>
             <div class="sub-card">
               <div class="sub-card-title"><i class="ti ti-info-circle" aria-hidden="true"></i>詳細交通說明 & 搭乘流程</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.6">
+              <div class="route-note">
                 <b>▪ 完整步驟：</b><br>
-                ① 出關後在 B1 便利商店購買 T-money 卡（카드）+ 加值 20,000 KRW<br>
-                ② B1 搭「김해경전철 BGL」至沙上站（사상역, 약 20 分）<br>
-                ③ 步行 2 分鐘至沙上地鐵站<br>
-                ④ 搭「지하철 2호선」往冬柏方向，6 站至市立美術館站（약 15 分）<br>
+                ① 出關後往 <span class="ko">B1 김해경전철 / Light Rail</span> 指標走，先在 B1 便利商店買 T-money（카드）並加值 20,000 KRW。<br>
+                ② 從 <span class="ko">공항역</span> 搭金海輕軌 BGL 往 <span class="ko">사상</span> 方向，於 <span class="ko">사상역</span> 下車。<br>
+                ③ 依「도시철도 2호선」指標步行轉乘釜山地鐵 2 號線，不出站重新購票，刷 T-money 進閘即可。<br>
+                ④ 搭 2 號線往 <span class="ko">장산 / Jangsan</span> 方向，建議在 <span class="ko">벡스코역（BEXCO）</span> 下車；若 Naver Map 顯示 <span class="ko">센텀시티역</span> 更近，改在 Centum City 下車。<br>
+                ⑤ 目的地輸入 <b>Travelodge Suites Busan Centum / 트래블로지 스위트 부산 센텀</b>，地址 21 APEC-ro。建議出口以 Naver Map 當日路線為準；BEXCO 站優先找靠 APEC-ro、BEXCO 會展中心方向出口。<br>
                 <br>
-                <b>▪ 重點提醒：</b> 班次頻繁 (5-10 分一班) • 下車時需嗶卡 • 行李多找行李架 • 全程無須換乘超過 2 次
+                <b>▪ 重點提醒：</b> 沙上站轉乘需走一段連通道，行李多時靠右慢走；金海輕軌與地鐵下車都要嗶卡。若延誤到 20:30 後才離開機場，可改 Kakao T 叫車，目的地貼「트래블로지 스위트 부산 센텀」。
               </div>
             </div>
             <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>週五傍晚市區極度塞車，計程車費用可能飆至
@@ -1181,6 +1254,13 @@
             <div class="tag-row"><span class="tn tag">免費入場</span><span class="tc tag">計程車 ~5,000 KRW</span><span
                 class="tn tag">開放至 24:00</span></div>
             <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>飯店計程車約 10 分，或地鐵 2 號線至冬柏站步行 5 分</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>交通細節</div>
+              <div class="route-note">
+                <b>計程車首選：</b>Kakao T 目的地輸入 <span class="ko">더베이101</span>，從 Travelodge Suites Busan Centum 約 10 分鐘。<br>
+                <b>地鐵備案：</b>從飯店步行至 BEXCO 或 Centum City 站搭 2 號線往 <span class="ko">장산</span> 方向，至 <span class="ko">동백역</span> 下車；出站後往冬柏島 / The Bay 101 指標步行。夜間回程建議直接叫 Kakao T，避免找錯出口。
+              </div>
+            </div>
             <div class="tip tip-ok"><i class="ti ti-heart" aria-hidden="true"></i>不需強求拍照景點，找一間面海座位點杯飲品靜靜欣賞，情侶氛圍更佳</div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=The+Bay+101+Busan" target="_blank"><i
@@ -1221,6 +1301,13 @@
                 class="tn tag">市場 10:00 開</span></div>
             <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>飯店地鐵 2 號線 → 해운대역（海雲台站），約 10 分鐘 2 站
             </div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>交通細節</div>
+              <div class="route-note">
+                <b>去程：</b>從飯店步行至 BEXCO 或 Centum City 站，搭 2 號線往 <span class="ko">장산</span> 方向至 <span class="ko">해운대역</span>。出站後優先走海雲台海水浴場 / Haeundae Beach 指標出口，往海邊直走約 8-10 分鐘。<br>
+                <b>市場動線：</b>海雲台傳統市場位於海雲台站與海灘之間，吃豬肉湯飯後再往海灘走最順。若週六人潮太滿，回程可從海灘邊叫車到五六島，不必走回地鐵站。
+              </div>
+            </div>
             <div class="tip tip-warn"><i class="ti ti-clock" aria-hidden="true"></i>週六人潮最旺，建議 10:00 一早抵達，避開正午最擁擠時段</div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=Haeundae+Beach+Busan" target="_blank"><i
@@ -1239,6 +1326,13 @@
             <div class="tag-row"><span class="tn tag">免費</span><span class="tc tag">計程車 ~15,000 KRW</span><span
                 class="tn tag">09:00–18:00</span></div>
             <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>海雲台搭計程車約 20 分直達，建議 Kakao T 叫車</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>叫車與下車點</div>
+              <div class="route-note">
+                <b>Kakao T 目的地：</b><span class="ko">오륙도 스카이워크</span>。海雲台海灘上車時建議選飯店門口、咖啡廳門口或大路口作上車點，沙灘入口常臨停困難。<br>
+                <b>不建議地鐵：</b>五六島沒有地鐵直達，地鐵轉公車會拉長到 60 分鐘以上；本段直接計程車最穩。
+              </div>
+            </div>
             <div class="tip tip-warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i>穿涼鞋不可入場（現場提供套鞋）；玻璃步道限重
               100kg</div>
             <div class="link-row">
@@ -1259,6 +1353,13 @@
             <div class="tag-row"><span class="tn tag">無人機秀免費</span><span class="tc tag">計程車 ~12,000 KRW</span><span
                 class="tw tag">週六限定 20:00/22:00</span></div>
             <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>五六島搭計程車前往廣安里，約 15 分鐘</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>交通細節</div>
+              <div class="route-note">
+                <b>計程車：</b>Kakao T 目的地輸入 <span class="ko">광안리해수욕장</span> 或餐廳名稱，請在廣安海邊道路下車，方便先卡位晚餐。<br>
+                <b>地鐵備案：</b>若回飯店，從 <span class="ko">광안역</span> 或 <span class="ko">금련산역</span> 搭 2 號線往 <span class="ko">장산</span> 方向回 BEXCO / Centum City。22:00 後建議 Kakao T 回飯店，目的地貼 <span class="ko">트래블로지 스위트 부산 센텀</span>。
+              </div>
+            </div>
             <div class="tip tip-warn"><i class="ti ti-alert-triangle"
                 aria-hidden="true"></i>備案：無人機秀常因天候取消，改為沿廣安里海灘夜走至廣安大橋橋頭拍夜景，同樣極美</div>
             <div class="link-row">
@@ -1380,7 +1481,7 @@
             <div class="ct">18:00 ~ 20:30 · 自由晚餐</div>
             <div class="cn">韓牛燒肉 / Centum City 美食街 · 飯店周邊</div>
             <div class="cd">Day 3 晚間輕鬆安排，無任何行程壓力。建議選項：<br>
-              (1) <b>飯店周邊韓牛燒肉</b>——市立美術館站周邊有多間平價韓牛燒肉店，每人約 25,000–40,000 KRW<br>
+              (1) <b>飯店周邊韓牛燒肉</b>——Centum City / BEXCO 周邊有多間平價韓牛燒肉店，每人約 25,000–40,000 KRW<br>
               (2) <b>Centum City B1 美食街</b>——新世界百貨地下美食街，選擇多樣，參雞湯、石鍋拌飯、炸雞均有<br>
               (3) <b>海邊散步收尾</b>——廣安里海岸夜景步道，邊散步邊吃路邊小吃，低消費高享受</div>
             <div class="tag-row"><span class="tn tag">飯店步行/計程車</span><span class="tn tag">自由消費，約 25,000–50,000 KRW</span></div>
@@ -1414,6 +1515,14 @@
             <div class="cn">飯店 → 海雲台藍線公園 尾浦站</div>
             <div class="cd">計程車約 15 分鐘可達尾浦站。提早 10 分出發是為了預留現場取票、核對訂位、排隊入場時間。抵達後先找售票窗口確認訂位資訊，膠囊列車座位有限且準時出發。</div>
             <div class="tag-row"><span class="tc tag">計程車 ~6,000 KRW</span><span class="ta tag">10:20 出發勿更晚</span></div>
+            <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>Kakao T：트래블로지 스위트 부산 센텀 → 해운대블루라인파크 미포정거장</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>交通細節</div>
+              <div class="route-note">
+                <b>計程車首選：</b>目的地輸入 <span class="ko">해운대블루라인파크 미포정거장</span>，下車後直接往「Sky Capsule / 스카이캡슐」售票與乘車入口走。<br>
+                <b>地鐵備案：</b>從 BEXCO / Centum City 搭 2 號線往 <span class="ko">장산</span> 至 <span class="ko">중동역</span> 或 <span class="ko">해운대역</span>，再步行或短程計程車到尾浦；因需取票，本日不建議用地鐵壓時間。
+              </div>
+            </div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=Blueline+Park+Mipo+Station+Busan"
                 target="_blank"><i class="ti ti-map-pin" aria-hidden="true"></i>尾浦站地圖</a>
@@ -1461,6 +1570,12 @@
             <div class="cd">緊貼海岸線行駛的復古小火車，座位面向大海，玻璃窗外是礁石與浪花。全程 4 站，持預訂憑證入場，不扣 Pass。回到膠囊列車起點尾浦後，步行 3 分鐘至 LCT 大樓。</div>
             <div class="tag-row"><span class="tg tag">已付費預訂</span><span class="tn tag">不扣 Pass</span><span
                 class="tn tag">10 回次場次</span></div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>回到尾浦後動線</div>
+              <div class="route-note">
+                下車後先確認物品與預訂憑證，再沿海岸往 <b>LCT The Sharp / Busan X The Sky</b> 方向步行。尾浦站到 LCT 約 3-5 分鐘，路面平坦；若下雨或腳痠，可在尾浦站門口短程叫車到 <span class="ko">부산엑스더스카이</span>。
+              </div>
+            </div>
             <div class="link-row">
               <a class="lnk lnk-web" href="https://www.bluelinepark.com" target="_blank"><i class="ti ti-external-link"
                   aria-hidden="true"></i>藍線公園官網</a>
@@ -1476,6 +1591,14 @@
               98F 的 Sky Café 咖啡廳。午餐建議在下方 LCT B1 商場用正餐後上觀景台，或在 Sky Café 點輕食，咖啡廳性質無需預訂。</div>
             <div class="tag-row"><span class="tp tag">BIG 5 A 套 免費入場</span><span class="tn tag">步行 3 分至 LCT</span><span
                 class="tn tag">10:00–21:00</span><span class="ta tag">週一人流少</span></div>
+
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>交通細節</div>
+              <div class="route-note">
+                <b>從尾浦：</b>沿海雲台海邊往 LCT 高樓群走，搜尋 <span class="ko">부산엑스더스카이</span>。入口在 LCT 商場 / 大廳側，依「X The Sky」指標進入。<br>
+                <b>回飯店：</b>若晚餐回 Centum City，可從 LCT 叫車回 <span class="ko">트래블로지 스위트 부산 센텀</span> 約 10-15 分鐘；地鐵則走到 <span class="ko">중동역</span> 或 <span class="ko">해운대역</span> 搭 2 號線往 <span class="ko">양산 / 사상</span> 方向回 BEXCO / Centum City。
+              </div>
+            </div>
 
             <div class="sec-h" style="margin-top:12px;font-size:12px"><i class="ti ti-list-numbers"
                 aria-hidden="true"></i>Pass 入場完整步驟</div>
@@ -1520,6 +1643,7 @@
             <div class="cn">Centum City 百貨商圈慢活晚餐</div>
             <div class="cd">新世界 Centum City 就在飯店附近，B1–B2 美食街有韓牛燒肉、參雞湯、海鮮鍋等各式韓餐。今晚輕鬆消費，保留體力迎接 Day 5 的 Pass 最終衝刺日。</div>
             <div class="tag-row"><span class="tn tag">飯店步行可達</span></div>
+            <div class="transport"><i class="ti ti-walk" aria-hidden="true"></i>飯店 ↔ 新世界 Centum City / Spa Land：步行約 8-12 分，或地鐵 2 號線 센텀시티역 周邊出口</div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=Shinsegae+Centum+City+Busan" target="_blank"><i
                   class="ti ti-map-pin" aria-hidden="true"></i>Centum City 地圖</a>
@@ -1571,6 +1695,13 @@
             <div class="tag-row"><span class="tc tag">計程車 ~20,000–25,000 KRW</span><span
                 class="ta tag">必須計程車，勿搭地鐵</span></div>
             <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>飯店 → 甘川洞文化村，計程車直達約 35–40 分鐘</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>叫車與備案</div>
+              <div class="route-note">
+                <b>Kakao T 目的地：</b><span class="ko">감천문화마을</span>，上車點設在 Travelodge Suites Busan Centum 正門或飯店旁大路。請司機停在文化村入口 / 服務中心附近，不要停在山下市場。<br>
+                <b>為何不搭地鐵：</b>需 2 號線轉 1 號線再接公車或爬坡，耗時與體力都不划算；本日有韓服與手翻書時間壓力，計程車是必要成本。
+              </div>
+            </div>
           </div>
         </div>
         <div class="blk">
@@ -1686,6 +1817,13 @@
             </div>
             <div class="tag-row"><span class="tp tag">BIG 5 B 套 免費（纜車）</span><span class="ta tag">龍宮雲橋 自付費 ~8,000–10,000 Won</span><span class="tc tag">計程車 ~8,000
                 KRW</span><span class="tg tag">週二正常開放</span></div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>甘川洞 → 松島交通</div>
+              <div class="route-note">
+                <b>Kakao T 目的地：</b><span class="ko">송도해상케이블카</span> 或 <span class="ko">송도베이스테이션</span>。從甘川洞入口叫車，不要在村內窄巷等車。<br>
+                <b>下車點：</b>松島海水浴場側的纜車下站 / 售票處，抵達後先換 Pass 票，再安排午餐與龍宮雲橋。若下雨或強風，先到售票處確認纜車是否正常營運。
+              </div>
+            </div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=Songdo+Sea+Cable+Car+Busan" target="_blank"><i
                   class="ti ti-map-pin" aria-hidden="true"></i>地圖</a>
@@ -1717,6 +1855,13 @@
             <div class="tag-row"><span class="tc tag">計程車 ~7,000 KRW</span><span class="tn tag">Olive Young 至
                 21:30</span><span class="tn tag">光復路至 22:00</span></div>
             <div class="transport"><i class="ti ti-train" aria-hidden="true"></i>晚上地鐵 1 號線南浦站回飯店</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>南浦洞回飯店</div>
+              <div class="route-note">
+                <b>地鐵路線：</b>從 <span class="ko">남포역</span> 搭 1 號線往 <span class="ko">노포</span> 方向，至 <span class="ko">서면역</span> 轉 2 號線往 <span class="ko">장산</span> 方向，於 BEXCO / Centum City 下車後步行回 Travelodge Suites Busan Centum。<br>
+                <b>採購後備案：</b>若手上購物袋多或超過 21:30，直接 Kakao T 回飯店，目的地輸入 <span class="ko">트래블로지 스위트 부산 센텀</span>；南浦洞上車點選光復路大路口或 BIFF 廣場外側，避免市場巷弄。
+              </div>
+            </div>
             <div class="link-row">
               <a class="lnk lnk-map" href="https://maps.google.com/?q=Nampodong+Busan" target="_blank"><i
                   class="ti ti-map-pin" aria-hidden="true"></i>南浦洞地圖</a>
@@ -1758,6 +1903,13 @@
                 出發的計程車</b>，設定目的地為金海國際機場，確保準時出發。</div>
             <div class="tag-row"><span class="tc tag">計程車 ~25,000–30,000 KRW</span><span class="ta tag">前一晚預約 Kakao
                 T</span></div>
+            <div class="transport"><i class="ti ti-car" aria-hidden="true"></i>Kakao T：트래블로지 스위트 부산 센텀 → 김해국제공항 국제선청사</div>
+            <div class="sub-card">
+              <div class="sub-card-title"><i class="ti ti-route" aria-hidden="true"></i>機場下車點</div>
+              <div class="route-note">
+                目的地請選 <span class="ko">김해국제공항 국제선청사</span>（金海國際機場國際線航廈），不要選國內線。上車前確認行李數量，抵達後先看航空公司櫃台區域，再處理退稅商品與托運順序。
+              </div>
+            </div>
             <div class="link-row">
               <a class="lnk lnk-web" href="https://www.kakaomobility.com" target="_blank"><i class="ti ti-external-link"
                   aria-hidden="true"></i>Kakao T 叫車 App</a>
@@ -2035,7 +2187,7 @@
           <tr>
             <td><b>飯店附近</b><br>CU/GS25</br></td>
             <td><span class="bdg bdg-warn">備方案</span></td>
-            <td>若機場便利店排隊過長，飯店周邊必有便利商店可購買。市立美術館站附近至少 2-3 間。但此時已是 19:00+，建議機場就買好。</td>
+            <td>若機場便利店排隊過長，飯店周邊必有便利商店可購買。BEXCO / Centum City 周邊至少 2-3 間。但此時已是 19:00+，建議機場就買好。</td>
             <td>宵夜零食</td>
           </tr>
           <tr>
@@ -2119,6 +2271,29 @@
         <div><b>Google Pay / Apple Pay：</b>釜山主要景點與百貨接受，但偏遠地區與傳統市場仍需現金。建議現金 + T-money 卡雙管齊下。</div>
       </div>
 
+    </div>
+
+    <!-- EXCHANGE RATE -->
+    <div id="exchange-rate" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:36px;color:var(--teal)">₩</div>
+        <div class="day-head-info">
+          <div class="day-head-title">韓元兌台幣匯率參考表</div>
+          <div class="day-head-sub">2026/06 月均 · 現場估算 · WOWPASS / 換匯所實付仍以牌告為準</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-info-circle" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">使用方式</div>
+          本表以 2026/06/01–06/20 日匯率均值估算，約 <b>₩1,000 = NT$20.7</b>。近一週大致橫盤，旅行估算可抓 <b>₩1,000 = NT$20.5–20.9</b>；刷卡、WOWPASS、換匯所可能另有 0.5–3% 成本。
+        </div>
+      </div>
+
+      <div class="rate-table-wrap">
+        <img class="rate-table-img" src="krw_twd_rate_table_2026-06.png" alt="2026 年 6 月韓元兌台幣匯率參考表，使用月均匯率 ₩1,000 約等於 NT$20.7">
+      </div>
     </div>
 
     <!-- T-PASS -->
@@ -2403,6 +2578,322 @@
 
     </div>
 
+    <!-- METRO MAP -->
+    <div id="metro-map" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:36px;color:var(--primary)">M</div>
+        <div class="day-head-info">
+          <div class="day-head-title">釜山地鐵懶人包路線圖</div>
+          <div class="day-head-sub">機場進市區 · 主要轉乘站 · 本行程常用站點</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-info-circle" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">使用方式</div>
+          手機查看時可左右滑動放大路線圖。實際搭乘仍以 Naver Map 與站內即時標示為準，特別是出口編號與施工改道。
+        </div>
+      </div>
+
+      <div class="metro-map-wrap">
+        <img class="metro-map-img" src="釜山地鐵懶人包地圖.png" alt="釜山地鐵懶人包地圖：標示金海機場、沙上、西面、南浦、Centum City、海雲台等行程常用站">
+      </div>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div id="quick-ref" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:36px;color:var(--teal)">速查</div>
+        <div class="day-head-info">
+          <div class="day-head-title">現場速查包</div>
+          <div class="day-head-sub">韓文地址 · 交通付款 · 當日確認 · 緊急 SOP</div>
+        </div>
+      </div>
+
+      <div class="banner bn-teal" style="margin-bottom:16px">
+        <i class="ti ti-bolt" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">在現場先看這一頁</div>
+          需要叫車、查地址、確認營業、處理遺失物或付款時，先用本頁的韓文關鍵字與 SOP，再回到每日行程看細節。
+        </div>
+      </div>
+
+      <div class="sec-h"><i class="ti ti-map-pin" aria-hidden="true"></i>常用韓文目的地</div>
+      <div class="tbl-wrap">
+        <table class="std">
+          <tr>
+            <th style="width:120px">用途</th>
+            <th>韓文 / 搜尋字</th>
+            <th>備註</th>
+          </tr>
+          <tr>
+            <td><b>飯店</b></td>
+            <td>트래블로지 스위트 부산 센텀<br>21 APEC-ro, Haeundae-gu</td>
+            <td>Kakao T 回飯店直接貼韓文名稱；站點以 BEXCO / Centum City 為基準。</td>
+          </tr>
+          <tr>
+            <td><b>機場</b></td>
+            <td>김해국제공항 국제선청사</td>
+            <td>回程叫車務必選「國際線航廈」，不要選國內線。</td>
+          </tr>
+          <tr>
+            <td><b>尾浦藍線</b></td>
+            <td>해운대블루라인파크 미포정거장</td>
+            <td>Day 4 天空膠囊出發站；準時抵達比省車資重要。</td>
+          </tr>
+          <tr>
+            <td><b>廣安里</b></td>
+            <td>광안리해수욕장</td>
+            <td>看無人機秀與晚餐，用海邊道路作下車點。</td>
+          </tr>
+          <tr>
+            <td><b>甘川洞</b></td>
+            <td>감천문화마을</td>
+            <td>請停在文化村入口 / 服務中心附近，不要停山下市場。</td>
+          </tr>
+          <tr>
+            <td><b>松島纜車</b></td>
+            <td>송도해상케이블카 / 송도베이스테이션</td>
+            <td>先到售票處確認纜車與龍宮雲橋營運狀態。</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="sec-h"><i class="ti ti-credit-card" aria-hidden="true"></i>付款與交通卡速查</div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="step-list" style="margin:0">
+          <div class="step">
+            <div class="sn sn-purple">1</div>
+            <div class="sb"><b>WOWPASS 主卡：</b>可用於一般店家刷卡付款、查消費紀錄，也有 T-money 交通卡功能。拿到卡後立刻綁 App，遺失時可先暫停卡片。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">2</div>
+            <div class="sb"><b>T-money 交通餘額：</b>請把交通餘額和 WOWPASS 消費餘額視為兩個錢包；地鐵 / 公車餘額不足時，用現金在便利商店或地鐵站加值。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">3</div>
+            <div class="sb"><b>機場策略：</b>若金海機場找得到 WOWPASS 機台就直接辦；若找不到，不要卡關，先買一般 T-money 進市區，之後再到大站或商圈機台辦 WOWPASS。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">4</div>
+            <div class="sb"><b>現金底線：</b>每天身上保留 50,000–100,000 KRW 小鈔，用於市場、小吃、T-money 加值、置物櫃與計程車備援。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-h"><i class="ti ti-clock-check" aria-hidden="true"></i>每天出門前 5 分鐘確認</div>
+      <div class="tbl-wrap">
+        <table class="std">
+          <tr>
+            <th style="width:85px">日期</th>
+            <th>必查事項</th>
+            <th style="width:120px">若異常</th>
+          </tr>
+          <tr>
+            <td><b>Day 1</b></td>
+            <td>航班抵達時間、金海機場出關速度、T-money / WOWPASS 是否順利取得。</td>
+            <td>晚到則取消 The Bay 101，改飯店附近晚餐。</td>
+          </tr>
+          <tr>
+            <td><b>Day 2</b></td>
+            <td>廣安里無人機秀公告、五六島天空步道天候、Naver Weather 降雨雷達。</td>
+            <td>改 SEA LIFE、F1963 或廣安里室內餐廳。</td>
+          </tr>
+          <tr>
+            <td><b>Day 3</b></td>
+            <td>Skyline Luge 是否營運、龍宮寺雨勢、機張區路況。</td>
+            <td>Luge 停駛則提早回 Centum / Spa Land。</td>
+          </tr>
+          <tr>
+            <td><b>Day 4</b></td>
+            <td>Blue Line Park 場次、風雨狀況、電子票憑證是否可離線開啟。</td>
+            <td>強風停駛則聯繫客服改期 / 退款，改 X The Sky + Centum 室內行程。</td>
+          </tr>
+          <tr>
+            <td><b>Day 5</b></td>
+            <td>Flipbook Studio 營業、松島纜車、龍宮雲橋、南浦洞採購時間。</td>
+            <td>雲橋關閉就只搭纜車；豪雨則改南浦洞 / 百貨室內。</td>
+          </tr>
+          <tr>
+            <td><b>Day 6</b></td>
+            <td>Kakao T 預約車、退稅單、護照、退稅商品是否可供海關查驗。</td>
+            <td>叫不到車立刻請飯店櫃台協助叫車。</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="sec-h"><i class="ti ti-shield-check" aria-hidden="true"></i>緊急 SOP</div>
+      <div class="card">
+        <div class="step-list" style="margin:0">
+          <div class="step">
+            <div class="sn sn-blue">112</div>
+            <div class="sb"><b>警察：</b>遇到糾紛、遺失重要物品、被騷擾時使用。可請店員或飯店櫃台協助通話。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-blue">119</div>
+            <div class="sb"><b>救護 / 火警：</b>身體不適、受傷或需要救護車時使用。先告知飯店名稱或目前地標。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-teal">1330</div>
+            <div class="sb"><b>旅遊翻譯協助：</b>韓國觀光公社旅遊諮詢，海外可撥 +82-2-1330；遇語言卡住時先找他們。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">卡</div>
+            <div class="sb"><b>WOWPASS / 信用卡遺失：</b>先在 App 暫停 WOWPASS，再聯絡信用卡銀行掛失。不要等回飯店才處理。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">車</div>
+            <div class="sb"><b>計程車遺失物：</b>先截圖 Kakao T 車牌、時間、路線，從 App 客服聯繫；若未用 App，請飯店協助報警查詢。</div>
+          </div>
+          <div class="step">
+            <div class="sn sn-purple">照</div>
+            <div class="sb"><b>護照遺失：</b>先找最後使用地點與飯店，再聯絡台灣駐釜山辦事處；準備護照照片、身分證影本、電子機票與大頭照。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KOREA NOTES -->
+    <div id="korea-notes" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:36px;color:var(--coral)">!</div>
+        <div class="day-head-info">
+          <div class="day-head-title">韓國一定得注意的注意事項</div>
+          <div class="day-head-sub">入境 · 導航 · 交通 · 付款 · 餐廳 · 禮節 · 安全</div>
+        </div>
+      </div>
+
+      <div class="banner bn-amber" style="margin-bottom:16px">
+        <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+        <div>
+          <div class="banner-title">出發前 1 個月務必重新確認</div>
+          入境政策、K-ETA 豁免、退稅規則與景點營業時間都可能調整。本頁以行程準備為主，最終仍以官方網站、航空公司與 Naver Map 當日資訊為準。
+        </div>
+      </div>
+
+      <div class="tl">
+        <div class="tl-spine"></div>
+
+        <div class="blk">
+          <div class="blk-dot dot-amber"><i class="ti ti-passport" aria-hidden="true"></i></div>
+          <div class="card card-amber">
+            <div class="ct">入境與文件</div>
+            <div class="cn">K-ETA、入境卡、護照效期</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>K-ETA：</b>韓國官方曾公告 K-ETA 臨時豁免延長至 2026-12-31，但出發前仍需再次查 K-ETA 官網與航空公司通知。若維持豁免，通常仍需填寫入境卡；若自願申請 K-ETA，可能可免填紙本入境卡但需付費。<br>
+                <b>護照：</b>建議有效期至少超過返台日 6 個月。護照影本、電子機票、飯店地址截圖各存一份在手機與雲端。<br>
+                <b>海關申報：</b>大量相同商品、保健品、酒類、菸品、食品類要留意台灣回程限制；不確定就主動申報。
+              </div>
+            </div>
+            <div class="link-row">
+              <a class="lnk lnk-web" href="https://www.k-eta.go.kr" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>K-ETA 官方</a>
+              <a class="lnk lnk-web" href="https://www.customs.go.kr/english/main.do" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>韓國海關</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-blue"><i class="ti ti-map-2" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">導航與 App</div>
+            <div class="cn">Google Maps 在韓國不夠用</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>必裝：</b>Naver Map、Kakao Map、Kakao T、Papago、Catch Table Global。Google Maps 可查大方向與評論，但步行導航、巷弄路線與公車資訊常不如韓國本地 App。<br>
+                <b>地點搜尋：</b>用韓文名稱最準，例如飯店 <span class="ko">트래블로지 스위트 부산 센텀</span>、機場 <span class="ko">김해국제공항 국제선청사</span>、甘川洞 <span class="ko">감천문화마을</span>。<br>
+                <b>離線準備：</b>出發前把飯店、每日第一站、最後回飯店路線全部截圖，避免網路不穩時卡住。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-teal"><i class="ti ti-train" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">交通與搭車</div>
+            <div class="cn">T-money、地鐵出口、Kakao T</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>T-money：</b>地鐵、公車上下車都要感應；加值多以現金為主，便利商店可加值但不一定能刷外國信用卡加值。<br>
+                <b>出口：</b>釜山地鐵出口多，請先看 Naver Map 建議出口，再跟現場站內指標走；大型站如 沙上、西面、南浦、海雲台 容易走錯方向。<br>
+                <b>Kakao T：</b>叫車時用韓文目的地最準。上車前確認車牌；下車若要拿行李，先把背包與護照放身上，再開後車廂。<br>
+                <b>深夜：</b>22:00 後回飯店優先計程車，尤其廣安里與南浦洞購物後，不要為省小錢硬轉乘。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-purple"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">付款、現金與退稅</div>
+            <div class="cn">不要完全依賴信用卡</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>現金：</b>市場、小吃攤、T-money 加值、部分置物櫃仍常需要現金。每天身上保留 50,000-100,000 KRW 小鈔最安心。<br>
+                <b>信用卡：</b>百貨、餐廳、藥妝多可刷卡，但外國卡偶爾失敗；至少帶兩張不同組織的卡。<br>
+                <b>退稅：</b>退稅商品不要拆封使用，收據與退稅單集中放護照夾。若商品要托運，金海機場流程必須先給海關確認，再托運行李。<br>
+                <b>換匯：</b>機場先換少量，南浦洞或市區再補；不要把所有現金放同一個包。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-coral"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">餐廳與候位</div>
+            <div class="cn">熱門店常用機台，不一定現場排隊</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>候位：</b>許多名店使用 Catch Table 或現場機台。沒有韓國手機時，找「Foreigner / Email」選項，或請店員協助。<br>
+                <b>點餐：</b>韓式餐廳常以人頭計價，烤肉通常至少 2 人份起點；小菜可免費續，但不要浪費太多。<br>
+                <b>飲水：</b>餐廳多自助取水、餐具在桌邊抽屜；吃完不一定要收桌，依店內動線即可。<br>
+                <b>辣度：</b>不能吃辣先說 <span class="ko">맵지 않게 해주세요</span>（請不要太辣）。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-gray"><i class="ti ti-user-heart" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">禮節與日常規則</div>
+            <div class="cn">避免無意間冒犯或被罰</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>地鐵：</b>博愛座空著也盡量不要坐；手扶梯靠右站立依現場人流，尖峰時不要擋路拍照。<br>
+                <b>垃圾：</b>韓國街上垃圾桶少，飲料杯與包裝先帶著，回飯店或便利商店依分類丟。<br>
+                <b>拍照：</b>餐廳、店員、路人入鏡前先避開或詢問；汗蒸幕、浴場、廁所區域嚴禁拍照。<br>
+                <b>插座：</b>韓國 220V、圓孔 C/F 插頭；台灣兩扁腳插頭需轉接頭。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-amber"><i class="ti ti-shield" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">安全與緊急狀況</div>
+            <div class="cn">先記三組電話：112、119、1330</div>
+            <div class="cd">
+              <div class="route-note">
+                <b>112：</b>警察。<b>119：</b>火警 / 救護車。<b>1330：</b>韓國觀光公社旅遊諮詢與翻譯協助，海外可撥 +82-2-1330。<br>
+                <b>護照遺失：</b>先回想最後使用地點，聯絡飯店與計程車 App，再聯繫台灣駐釜山辦事處。護照照片與身分證影本會很有用。<br>
+                <b>颱風 / 豪雨：</b>戶外景點如五六島、Luge、松島雲橋可能停開；當天早上先查 Naver Weather 與景點官網，不要硬衝海邊。<br>
+                <b>個人安全：</b>南浦洞與海雲台夜晚人多，包包背前面；酒吧街遇到糾纏直接進便利商店或請店員幫忙叫警察。
+              </div>
+            </div>
+            <div class="link-row">
+              <a class="lnk lnk-web" href="https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140632" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>1330 旅遊諮詢</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CHECKLIST -->
     <div id="checklist" class="day-sec">
       <div class="day-head">
@@ -2413,20 +2904,14 @@
         </div>
       </div>
 
-      <div class="banner bn-teal" style="margin-bottom:16px">
-        <i class="ti ti-check" aria-hidden="true"></i>
-        <div>
-          <div class="banner-title">🎯 出發前 1 週必做</div>
-          <div style="font-size:12px;color:var(--teal-dark);line-height:1.8">
-            ✓ 確認甘川洞手翻書工作室周日營業（電話：+82-51-204-1499）<br>
-            ✓ 檢查護照有效期（須超過回國日 6 個月以上）<br>
-            ✓ 預訂天空膠囊列車 & 海濱列車（Klook 或 Naver 預訂）<br>
-            ✓ 預約 Day 6 清晨計程車（Kakao T 預約 09:15）<br>
-            ✓ 下載 Naver Map、Kakao Map、Kakao T App<br>
-            ✓ 購買旅遊保險（含行李延誤、景點營業取消）<br>
-            ✓ 設定國際漫遊或購買 AirSim（機場 B1 便利商店買）
-          </div>
+      <div class="check-panel">
+        <div class="check-toolbar">
+          <div class="check-progress" id="checkProgressText">行前檢查：0/0 完成</div>
+          <div class="check-progress-bar" aria-hidden="true"><div class="check-progress-fill" id="checkProgressFill"></div></div>
+          <button class="check-reset" type="button" onclick="checklistReset()">全部取消勾選</button>
         </div>
+        <div id="pretripChecklist"></div>
+        <div class="check-save-note" id="checkSaveNote">勾選狀態會自動儲存在這台裝置的瀏覽器 localStorage。</div>
       </div>
 
       <div class="tl">
@@ -2631,7 +3116,7 @@
                 <b>退稅要點：</b><br>
                 🚨 同一店家單筆消費滿 30,000 KRW 即可申請退稅（非同一天累計金額）<br>
                 ✓ 南浦洞 Olive Young 退稅點最方便（B1）<br>
-                ✓ 機場 T2 也有退稅櫃台，但南浦洞現場退稅更快<br>
+                ✓ 金海機場國際線航廈也有退稅櫃台，但南浦洞現場退稅更快<br>
                 ✓ 收據全部留好，不要丟棄任何購物袋<br>
                 <br>
                 <b>會員卡優惠：</b><br>
@@ -2659,30 +3144,78 @@
       <div class="banner bn-amber" style="margin-bottom:12px">
         <i class="ti ti-cloud-rain" aria-hidden="true"></i>
         <div>
-          <div class="banner-title">釜山 6 月下旬至 7 月初氣候概況（2026 年預測）</div>
+          <div class="banner-title">釜山 6/26–7/1 最新天氣評估（2026/06/21 更新）</div>
           <div style="font-size:12px;line-height:1.7;margin-top:4px">
-            氣溫：白天 <b>24–29°C</b>，夜晚 <b>19–22°C</b>，體感悶熱潮濕。UV 指數高（6–8），防曬不可少。<br>
-            <b>梅雨期重疊提醒：</b>釜山所在的南部地方梅雨預計 <b>6 月 23–25 日前後開始，至 7 月 24–25 日前後結束</b>，也就是說 <b>6/26–7/01 這段期間完全落在梅雨季節內</b>，需以「天天有雨可能」的心態安排行程。<br>
-            雨型特徵：2026 年預報強調「국지성 게릴라 호우」（局地性強降雨），降雨不是全天均勻分布，而是<b>短時間內集中強降雨</b>，可能比往年更難預測，務必每天早上查詢即時雷達。
+            氣溫：白天約 <b>24.8–27.1°C</b>，夜晚約 <b>16.5–18.9°C</b>，早晚比想像中涼，海邊與高樓展望台建議帶薄外套。<br>
+            <b>目前預報重點：</b>6/26（Day 1）有小雨訊號，降雨機率約 <b>38%</b>、預估雨量約 <b>0.9mm</b>；6/27–6/30（Day 2–5）目前以多雲為主，降雨機率約 <b>20–27%</b>；7/1（Day 6）再度有毛毛雨訊號，降雨機率約 <b>45%</b>、預估雨量約 <b>2.8mm</b>。<br>
+            <b>梅雨期提醒：</b>即使目前中段 4 天預報偏乾，行程仍落在韓國南部梅雨季，午後局地陣雨仍可能臨時出現。戶外景點先照原計畫排，但每天早上務必看 Naver Weather / 韓國氣象廳雷達。<br>
+            <b>最終判斷：</b>出發前 3 天開始，以韓國氣象廳、Naver Weather 與當日雷達為準；若雷達顯示局地強降雨，再啟動本頁雨備。
           </div>
         </div>
       </div>
 
       <!-- Stats row -->
       <div class="info-grid" style="margin-bottom:16px">
-        <div class="info-c"><div class="info-n">24–29°C</div><div class="info-l">白天均溫</div></div>
-        <div class="info-c"><div class="info-n">17–18 天</div><div class="info-l">梅雨期降雨天數</div></div>
-        <div class="info-c"><div class="info-n">341mm</div><div class="info-l">南部梅雨期均降雨量</div></div>
-        <div class="info-c"><div class="info-n">~85%</div><div class="info-l">平均濕度</div></div>
-        <div class="info-c"><div class="info-n">局地強降雨</div><div class="info-l">2026 預報特徵</div></div>
-        <div class="info-c"><div class="info-n">6/23–25</div><div class="info-l">梅雨預計開始</div></div>
+        <div class="info-c"><div class="info-n">24.8–27.1°C</div><div class="info-l">白天高溫</div></div>
+        <div class="info-c"><div class="info-n">16.5–18.9°C</div><div class="info-l">夜晚低溫</div></div>
+        <div class="info-c"><div class="info-n">20–45%</div><div class="info-l">每日最高降雨機率</div></div>
+        <div class="info-c"><div class="info-n">0–2.8mm</div><div class="info-l">預估日雨量</div></div>
+        <div class="info-c"><div class="info-n">6/26、7/1</div><div class="info-l">較需雨具</div></div>
+        <div class="info-c"><div class="info-n">6/27–6/30</div><div class="info-l">目前偏多雲</div></div>
+      </div>
+
+      <div class="tbl-wrap" style="margin-bottom:16px">
+        <table class="std">
+          <tr>
+            <th style="width:90px">日期</th>
+            <th style="width:90px">行程日</th>
+            <th>預報判斷</th>
+            <th style="width:110px">雨備等級</th>
+          </tr>
+          <tr>
+            <td><b>6/26</b></td>
+            <td>Day 1</td>
+            <td>小雨 / drizzle，降雨機率約 38%，雨量約 0.9mm。以交通與入住為主，影響有限。</td>
+            <td><span class="tag ta">中低</span></td>
+          </tr>
+          <tr>
+            <td><b>6/27</b></td>
+            <td>Day 2</td>
+            <td>多雲，降雨機率約 22%，預估雨量 0mm。海雲台、五六島、廣安里可照原計畫，但晚間無人機秀仍需查公告。</td>
+            <td><span class="tag tg">低</span></td>
+          </tr>
+          <tr>
+            <td><b>6/28</b></td>
+            <td>Day 3</td>
+            <td>多雲，降雨機率約 20%，預估雨量 0mm。龍宮寺與 Luge 目前可照排，出發前再查 Luge 營運。</td>
+            <td><span class="tag tg">低</span></td>
+          </tr>
+          <tr>
+            <td><b>6/29</b></td>
+            <td>Day 4</td>
+            <td>多雲，降雨機率約 25%，預估雨量 0mm。藍線列車與 X The Sky 風險低，仍需確認強風公告。</td>
+            <td><span class="tag tg">低</span></td>
+          </tr>
+          <tr>
+            <td><b>6/30</b></td>
+            <td>Day 5</td>
+            <td>多雲，降雨機率約 27%，預估雨量 0mm。甘川洞與松島目前可照排，但坡道路線仍建議穿防滑鞋。</td>
+            <td><span class="tag tg">低</span></td>
+          </tr>
+          <tr>
+            <td><b>7/1</b></td>
+            <td>Day 6</td>
+            <td>毛毛雨 / drizzle，降雨機率約 45%，雨量約 2.8mm。返程日影響小，但叫車與行李搬運要預留時間。</td>
+            <td><span class="tag ta">中</span></td>
+          </tr>
+        </table>
       </div>
 
       <div class="banner bn-amber" style="margin-bottom:16px">
         <i class="ti ti-alert-triangle" aria-hidden="true"></i>
         <div>
           <div class="banner-title">最重要的提醒</div>
-          以 6/26–7/01 為基準，整段行程都在梅雨季節內，<b>每天都有顯著降雨機率</b>。2026 年預報特別強調「局地性強降雨」，意味著降雨可能更集中、更突然，且更難只靠「早上 vs 下午」來預判。<b>每天早上務必查詢即時降雨雷達，並隨身攜帶雨具</b>，所有戶外行程都應該有室內備案。
+          目前 6/27–6/30 看起來比原本梅雨季預期更穩，<b>戶外行程可先照原計畫保留</b>；但 6/26 與 7/1 有毛毛雨訊號，且釜山梅雨季可能出現局地強降雨。每天早上 08:00 先查即時雷達，若午後雨帶靠近，再把戶外景點切換到本頁室內備案。
         </div>
       </div>
 
@@ -2692,8 +3225,8 @@
       <!-- Day 1 -->
       <div class="card" style="margin-bottom:10px">
         <div class="ct" style="color:var(--amber)">Day 1 · 抵達日</div>
-        <div class="cn">下雨影響度 ★★☆☆☆ 影響有限</div>
-        <div class="cd">Day 1 以交通和入住為主，主要影響 The Bay 101 夜景體驗。梅雨期局地強降雨可能造成市區排水不佳，地鐵轉乘時建議預留多一點時間。</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 小雨機率中低，影響有限</div>
+        <div class="cd">Day 1 預報有小雨訊號（約 38%、0.9mm），但以交通和入住為主，主要影響 The Bay 101 夜景體驗。若落地後雨勢明顯，地鐵轉乘預留多一點時間。</div>
         <div class="sub-card">
           <div class="sub-card-title"><i class="ti ti-cloud-rain" aria-hidden="true"></i>雨天方案</div>
           <div class="fix-row" style="font-size:12px;color:var(--text2);line-height:1.7">
@@ -2705,8 +3238,8 @@
       <!-- Day 2 -->
       <div class="card" style="margin-bottom:10px">
         <div class="ct" style="color:var(--amber)">Day 2 · 高影響</div>
-        <div class="cn">下雨影響度 ★★★★★ 海灘 + 無人機秀皆受影響</div>
-        <div class="cd">海雲台海灘在雨天仍可散步，但梅雨期局地強降雨下無人機秀幾乎必定取消（風速 + 降雨雙重風險）。五六島天空步道下雨禁止入場（濕滑危險）。建議將此天視為高機率全面調整的一天。</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 目前偏多雲，晚間仍需查秀況</div>
+        <div class="cd">Day 2 目前預報多雲、降雨機率約 22%，海雲台、五六島、廣安里可先照原計畫。但無人機秀受風速與現場公告影響，即使不下雨也可能取消；當天傍晚務必查官方公告。</div>
         <div class="sub-card">
           <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.8">
@@ -2725,8 +3258,8 @@
       <!-- Day 3 -->
       <div class="card" style="margin-bottom:10px">
         <div class="ct" style="color:var(--amber)">Day 3 · 中高影響</div>
-        <div class="cn">下雨影響度 ★★★☆☆ 龍宮寺 + 滑車受影響</div>
-        <div class="cd">龍宮寺下雨階梯濕滑但仍可入場，雨中寺廟有獨特意境。Skyline Luge <b>下雨天停駛</b>（官方政策）是最大風險點。Spa Land 全室內完全不受影響。</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 目前偏多雲，Luge 仍需當日確認</div>
+        <div class="cd">Day 3 目前預報多雲、降雨機率約 20%，龍宮寺與 Luge 可先照排。若臨時下雨，龍宮寺階梯會濕滑，Skyline Luge 可能停駛；Spa Land 全室內完全不受影響。</div>
         <div class="sub-card">
           <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.8">
@@ -2744,8 +3277,8 @@
       <!-- Day 4 -->
       <div class="card" style="margin-bottom:10px">
         <div class="ct" style="color:var(--primary)">Day 4 · 低影響</div>
-        <div class="cn">下雨影響度 ★★☆☆☆ 主要室內或有遮蔽</div>
-        <div class="cd">天空膠囊和海濱列車有車廂遮蔽，微雨照常運行（強風豪雨除外）。青沙浦的咖啡廳皆有室內座位。X The Sky 全室內。雨天影響最小的一天。</div>
+        <div class="cn">下雨影響度 ★☆☆☆☆ 目前偏多雲，影響最低</div>
+        <div class="cd">Day 4 目前預報多雲、降雨機率約 25%，且天空膠囊和海濱列車有車廂遮蔽，微雨通常照常運行（強風豪雨除外）。青沙浦咖啡廳與 X The Sky 都適合彈性避雨。</div>
         <div class="sub-card">
           <div class="sub-card-title"><i class="ti ti-cloud-rain" aria-hidden="true"></i>雨天微調</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.8">
@@ -2760,8 +3293,8 @@
       <!-- Day 5 -->
       <div class="card" style="margin-bottom:10px">
         <div class="ct" style="color:var(--amber)">Day 5 · 中高影響</div>
-        <div class="cn">下雨影響度 ★★★★☆ 甘川洞坡道 + 松島纜車受影響</div>
-        <div class="cd">甘川洞文化村 감천문화마을 石板路雨天極滑，穿韓服更需注意。松島纜車 송도해상케이블카 微雨照常，但颱風或強風停駛。龍宮雲橋戶外懸空橋雨天禁止入場。</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 目前偏多雲，但坡道仍需防滑</div>
+        <div class="cd">Day 5 目前預報多雲、降雨機率約 27%，甘川洞與松島可先照排。即使不下雨，甘川洞坡道也建議穿防滑鞋；松島纜車與龍宮雲橋仍需當天確認風雨公告。</div>
         <div class="sub-card">
           <div class="sub-card-title"><i class="ti ti-swap" aria-hidden="true"></i>雨天替代方案</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.8">
@@ -2777,8 +3310,8 @@
       <!-- Day 6 -->
       <div class="card" style="margin-bottom:16px">
         <div class="ct" style="color:var(--primary)">Day 6 · 返程日</div>
-        <div class="cn">下雨影響度 ★☆☆☆☆ 完全不影響</div>
-        <div class="cd">返程日無室外行程，計程車直達機場，雨天完全不影響任何安排。</div>
+        <div class="cn">下雨影響度 ★★☆☆☆ 有毛毛雨訊號，但返程影響小</div>
+        <div class="cd">Day 6 預報有毛毛雨訊號（約 45%、2.8mm），但無室外景點，計程車直達機場即可。雨天只需預留叫車與行李搬運時間。</div>
       </div>
 
       <!-- Must-have rain gear -->
@@ -3382,6 +3915,142 @@
       el.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (id === 'memo') memoRenderAll();
+      if (id === 'checklist') checklistRender();
+    }
+
+    /* ===== 行前檢查清單 Checklist Tab ===== */
+    const CHECKLIST_KEY = 'busan_pretrip_checklist_v1';
+    const CHECKLIST_ITEMS = [
+      {
+        group: '證件與入境',
+        icon: 'ti-passport',
+        items: [
+          ['passport_valid', '<b>護照效期確認</b>：有效期至少超過返台日 6 個月，並拍照備份到雲端。'],
+          ['keta_entry', '<b>K-ETA / 入境卡確認</b>：出發前 1 個月重新查官方規則；若免 K-ETA，機上仍準備填入境卡與海關申報單。'],
+          ['flight_hotel_docs', '<b>航班與飯店憑證</b>：電子機票、訂房確認、Travelodge Suites Busan Centum 韓文地址皆可離線開啟。'],
+          ['insurance', '<b>旅遊保險</b>：確認含醫療、行李延誤、班機延誤、景點天候取消，並截圖保單號。']
+        ]
+      },
+      {
+        group: '票券與預約',
+        icon: 'ti-ticket',
+        items: [
+          ['blueline_ticket', '<b>藍線公園票券</b>：天空膠囊 11:00、海濱列車 13:30 憑證已下載或截圖。'],
+          ['busan_pass', '<b>Visit Busan Pass / BIG 5</b>：Klook 或官方憑證可開啟，確認 A/B 套景點與 QR Code。'],
+          ['gamcheon_flipbook', '<b>甘川洞手翻書營業確認</b>：出發前 1 週致電 +82-51-204-1499 或查官網。'],
+          ['kakao_t_reserve', '<b>Day 6 計程車預約</b>：前一晚在 Kakao T 預約 09:15 到金海機場國際線航廈。']
+        ]
+      },
+      {
+        group: '付款與通訊',
+        icon: 'ti-credit-card',
+        items: [
+          ['wowpass_plan', '<b>WOWPASS / T-money 策略</b>：金海機場有機台就辦 WOWPASS；沒有就先買 T-money 進市區。'],
+          ['cash_ready', '<b>現金準備</b>：每天保留 50,000–100,000 KRW 小鈔，用於加值、攤販、置物櫃與備援。'],
+          ['cards_ready', '<b>信用卡備援</b>：至少 2 張不同卡組織，海外交易與提款功能已開啟。'],
+          ['network', '<b>網路設定</b>：國際漫遊 / eSIM / Wi-Fi egg 已確認，抵達後能立即使用 Naver Map 與 Kakao T。']
+        ]
+      },
+      {
+        group: 'App 與離線資料',
+        icon: 'ti-device-mobile',
+        items: [
+          ['apps_installed', '<b>必裝 App</b>：Naver Map、Kakao Map、Kakao T、Papago、Catch Table Global、WOWPASS。'],
+          ['offline_maps', '<b>離線截圖</b>：飯店、每日第一站、最後回飯店路線、地鐵圖、匯率表都已截圖收藏。'],
+          ['korean_keywords', '<b>韓文目的地</b>：飯店、機場、甘川洞、松島纜車、廣安里等韓文搜尋字已存在現場速查包。'],
+          ['weather_sources', '<b>天氣來源</b>：Naver Weather / 韓國氣象廳 / Kakao Map 雷達已加入書籤。']
+        ]
+      },
+      {
+        group: '行李與健康',
+        icon: 'ti-backpack',
+        items: [
+          ['adapter_power', '<b>電源用品</b>：韓國 220V 圓孔轉接頭、行動電源、充電線、備用線整理完成。'],
+          ['rain_gear', '<b>雨具與防滑</b>：折疊傘、防水風衣、防滑鞋、夾鏈袋，因 6 月釜山可能局地強降雨。'],
+          ['medicine', '<b>常備藥</b>：感冒藥、腸胃藥、暈車藥、止痛藥、足部貼布。'],
+          ['luggage_weight', '<b>回程行李重量</b>：確認托運 / 手提限制，預留 Day 5 採購空間。']
+        ]
+      },
+      {
+        group: '返程與退稅',
+        icon: 'ti-receipt',
+        items: [
+          ['tax_docs', '<b>退稅資料夾</b>：護照、退稅單、收據集中放；退稅商品不要拆封。'],
+          ['airport_sequence', '<b>金海機場流程</b>：退稅商品給海關看 → 托運行李 → 領退稅 → 安檢。'],
+          ['emergency_contacts', '<b>緊急聯絡</b>：112、119、1330、台灣駐釜山辦事處、保險公司電話已截圖。'],
+          ['final_room_check', '<b>退房前房間巡檢</b>：護照、手機、充電器、轉接頭、退稅單、購物袋全部確認。']
+        ]
+      }
+    ];
+
+    function checklistLoad() {
+      try {
+        const raw = localStorage.getItem(CHECKLIST_KEY);
+        if (!raw) return {};
+        const data = JSON.parse(raw);
+        return data && typeof data === 'object' ? data : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function checklistSave(data) {
+      localStorage.setItem(CHECKLIST_KEY, JSON.stringify(data));
+      const note = document.getElementById('checkSaveNote');
+      if (note) {
+        note.textContent = '已自動儲存檢查狀態';
+        note.classList.add('show-saved');
+        setTimeout(() => {
+          note.textContent = '勾選狀態會自動儲存在這台裝置的瀏覽器 localStorage。';
+          note.classList.remove('show-saved');
+        }, 1400);
+      }
+    }
+
+    function checklistToggle(id) {
+      const data = checklistLoad();
+      data[id] = !data[id];
+      checklistSave(data);
+      checklistRender();
+    }
+
+    function checklistReset() {
+      if (!confirm('確定要取消所有行前檢查勾選嗎？')) return;
+      localStorage.removeItem(CHECKLIST_KEY);
+      checklistRender();
+    }
+
+    function checklistRender() {
+      const root = document.getElementById('pretripChecklist');
+      if (!root) return;
+      const data = checklistLoad();
+      let total = 0;
+      let done = 0;
+      const html = CHECKLIST_ITEMS.map(group => {
+        const items = group.items.map(([id, text]) => {
+          total += 1;
+          const checked = !!data[id];
+          if (checked) done += 1;
+          return `
+            <div class="check-item ${checked ? 'done' : ''}" onclick="checklistToggle('${id}')">
+              <div class="memo-checkbox ${checked ? 'checked' : ''}"><i class="ti ti-check" aria-hidden="true"></i></div>
+              <div class="check-text">${text}</div>
+            </div>
+          `;
+        }).join('');
+        return `
+          <div class="check-group">
+            <div class="check-group-title"><i class="ti ${group.icon}" aria-hidden="true"></i>${group.group}</div>
+            <div class="check-list">${items}</div>
+          </div>
+        `;
+      }).join('');
+      root.innerHTML = html;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      const textEl = document.getElementById('checkProgressText');
+      const fillEl = document.getElementById('checkProgressFill');
+      if (textEl) textEl.textContent = `行前檢查：${done}/${total} 完成 (${pct}%)`;
+      if (fillEl) fillEl.style.width = `${pct}%`;
     }
 
     /* ===== 備忘清單 Memo Tab ===== */
@@ -3551,6 +4220,10 @@
       const memoTab = document.getElementById('memo');
       if (memoTab && memoTab.classList.contains('show')) {
         memoRenderAll();
+      }
+      const checklistTab = document.getElementById('checklist');
+      if (checklistTab) {
+        checklistRender();
       }
     });
   </script>
