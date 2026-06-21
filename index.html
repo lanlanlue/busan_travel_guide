@@ -1087,6 +1087,40 @@
     .memo-status.show-saved{color:var(--teal-dark)}
     .memo-textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit;resize:vertical;min-height:90px;line-height:1.6}
 
+    /* Credit card rewards */
+    .card-rewards{display:grid;gap:12px;margin-top:12px}
+    .reward-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+    .reward-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .reward-title{min-width:0}
+    .reward-name{font-size:15px;font-weight:700;color:var(--text1);line-height:1.35}
+    .reward-rank-note{font-size:11px;color:var(--text3);margin-top:2px}
+    .reward-rate{flex-shrink:0;min-width:74px;text-align:center;background:var(--teal-light);border:0.5px solid var(--teal-border);border-radius:var(--radius-sm);padding:7px 9px;color:var(--teal-dark)}
+    .reward-rate strong{display:block;font-size:19px;line-height:1;font-weight:700}
+    .reward-rate span{display:block;font-size:10px;margin-top:3px}
+    .reward-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+    .reward-info{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 10px}
+    .reward-label{font-size:10px;font-weight:600;color:var(--text3);margin-bottom:3px}
+    .reward-value{font-size:12px;color:var(--text2);line-height:1.55}
+    .reward-value b{color:var(--text1);font-weight:600}
+    .reward-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+    .reward-tag{font-size:10px;font-weight:500;padding:3px 7px;border-radius:16px;background:var(--primary-light);border:0.5px solid var(--primary-border);color:var(--primary-dark)}
+    .reward-tag.warn{background:var(--amber-light);border-color:var(--amber-border);color:var(--amber-dark)}
+    .reward-tag.stop{background:var(--red-light);border-color:var(--coral-border);color:var(--red-dark)}
+    .reward-calc{display:grid;grid-template-columns:minmax(130px,1fr) minmax(130px,1fr);gap:8px;align-items:end;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+    .reward-calc label{display:block;font-size:10px;font-weight:600;color:var(--text3);margin-bottom:4px}
+    .reward-input{width:100%;font-size:13px;padding:8px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);font-family:inherit;color:var(--text1);background:var(--surface)}
+    .reward-input:focus{outline:none;border-color:var(--primary)}
+    .reward-remaining{font-size:12px;color:var(--text2);background:var(--primary-light);border:0.5px solid var(--primary-border);border-radius:var(--radius-sm);padding:8px 10px;min-height:38px}
+    .reward-remaining b{color:var(--primary-dark);font-weight:700}
+    .reward-note-input{grid-column:1 / -1}
+    .reward-note-input .reward-input{font-size:12px}
+
+    @media(max-width:640px){
+      .reward-grid,.reward-calc{grid-template-columns:1fr}
+      .reward-head{align-items:stretch}
+      .reward-rate{min-width:66px}
+    }
+
     /* Interactive checklist */
     .check-panel{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);margin-bottom:18px}
     .check-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
@@ -1177,6 +1211,7 @@
       <button class="tab-btn" onclick="goTab('korea-notes',this)">韓國注意事項</button>
       <button class="tab-btn" onclick="goTab('rain',this)">☂ 雨備行程</button>
       <button class="tab-btn" onclick="goTab('backuppass',this)">🎫 備用 Pass 景點</button>
+      <button class="tab-btn" onclick="goTab('card-rewards',this)">💳 刷卡優惠</button>
       <button class="tab-btn" onclick="goTab('memo',this)">📝 備忘清單</button>
     </div>
 
@@ -3845,6 +3880,286 @@
     </div>
     <!-- END BACKUP PASS TAB -->
 
+    <!-- CREDIT CARD REWARDS TAB -->
+    <div id="card-rewards" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:38px">💳</div>
+        <div class="day-head-info">
+          <div class="day-head-title">韓國刷卡優惠速查</div>
+          <div class="day-head-sub">依釜山旅遊可用最高回饋排序 · 排除新戶優惠 · 以 2026 年 6 月條件為準</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-device-mobile-dollar" aria-hidden="true"></i>
+        <div>
+          主要搭配 <b>Apple Pay</b> 時，優先看「適用方式」欄位。富邦 J 卡與星展 eco 適合韓國當地實體消費；滙豐現金回饋御璽卡適合大額、線上訂房或不想算上限的消費。
+        </div>
+      </div>
+
+      <div class="card-rewards">
+        <div class="reward-card" data-card-id="fubon-j" data-limit="33333">
+          <div class="reward-head">
+            <div class="reward-title">
+              <div class="reward-name">富邦 J 卡 <span class="reward-rank-note">已登錄 6 月日韓泰加碼</span></div>
+              <div class="reward-rank-note">單筆滿 NT$1,000 的韓國實體消費最優先</div>
+            </div>
+            <div class="reward-rate"><strong>6%</strong><span>最高回饋</span></div>
+          </div>
+          <div class="reward-grid">
+            <div class="reward-info">
+              <div class="reward-label">消費回饋</div>
+              <div class="reward-value"><b>日韓泰一般消費最高 3%</b> + 當地實體單筆滿 NT$1,000 加碼 3%。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">回饋上限</div>
+              <div class="reward-value">加碼 3% 每戶每季上限 <b>NT$1,000</b>，約可刷 <b>NT$33,333</b>。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用店家</div>
+              <div class="reward-value">釜山餐廳、咖啡、百貨、藥妝、商店等韓國當地實體面對面交易。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用方式</div>
+              <div class="reward-value"><b>Apple Pay 可用</b>，但需符合韓國實體、單筆滿額與請款條件。</div>
+            </div>
+          </div>
+          <div class="reward-tags">
+            <span class="reward-tag">韓國實體</span>
+            <span class="reward-tag">Apple Pay</span>
+            <span class="reward-tag warn">單筆滿 NT$1,000</span>
+            <span class="reward-tag warn">需 2026/7/15 前請款</span>
+          </div>
+          <div class="reward-calc">
+            <div>
+              <label for="spent-fubon-j">已刷金額（NT$）</label>
+              <input id="spent-fubon-j" class="reward-input" type="number" min="0" inputmode="numeric" placeholder="例如 8500" oninput="cardRewardSave('fubon-j')">
+            </div>
+            <div class="reward-remaining" id="remaining-fubon-j">輸入後自動試算剩餘額度</div>
+            <div class="reward-note-input">
+              <label for="note-fubon-j">小紀錄</label>
+              <input id="note-fubon-j" class="reward-input" type="text" placeholder="例如：Day 2 樂天百貨、Olive Young 已用這張" oninput="cardRewardSave('fubon-j')">
+            </div>
+          </div>
+        </div>
+
+        <div class="reward-card" data-card-id="dbs-eco" data-limit="15000">
+          <div class="reward-head">
+            <div class="reward-title">
+              <div class="reward-name">星展 eco 永續卡</div>
+              <div class="reward-rank-note">韓國實體小額到中額消費強，超過上限後切回滙豐</div>
+            </div>
+            <div class="reward-rate"><strong>5%</strong><span>最高回饋</span></div>
+          </div>
+          <div class="reward-grid">
+            <div class="reward-info">
+              <div class="reward-label">消費回饋</div>
+              <div class="reward-value">國內外一般消費 1% + 韓國當地實體加碼 4%。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">回饋上限</div>
+              <div class="reward-value">加碼 4% 每期帳單上限 <b>600 點</b>，約可刷 <b>NT$15,000</b>。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用店家</div>
+              <div class="reward-value">韓國當地實體商店，需非台幣交易且帳單收國外交易手續費。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用方式</div>
+              <div class="reward-value"><b>Apple Pay 可用</b>；LINE Pay 不列入韓國實體 5% 條件。</div>
+            </div>
+          </div>
+          <div class="reward-tags">
+            <span class="reward-tag">韓國實體</span>
+            <span class="reward-tag">Apple Pay</span>
+            <span class="reward-tag stop">線上訂房不算 5%</span>
+            <span class="reward-tag stop">LINE Pay 不算</span>
+          </div>
+          <div class="reward-calc">
+            <div>
+              <label for="spent-dbs-eco">已刷金額（NT$）</label>
+              <input id="spent-dbs-eco" class="reward-input" type="number" min="0" inputmode="numeric" placeholder="例如 4200" oninput="cardRewardSave('dbs-eco')">
+            </div>
+            <div class="reward-remaining" id="remaining-dbs-eco">輸入後自動試算剩餘額度</div>
+            <div class="reward-note-input">
+              <label for="note-dbs-eco">小紀錄</label>
+              <input id="note-dbs-eco" class="reward-input" type="text" placeholder="例如：小額餐廳、咖啡店用這張" oninput="cardRewardSave('dbs-eco')">
+            </div>
+          </div>
+        </div>
+
+        <div class="reward-card" data-card-id="first-ileo" data-limit="20000">
+          <div class="reward-head">
+            <div class="reward-title">
+              <div class="reward-name">第一銀行 iLEO 信用卡</div>
+              <div class="reward-rank-note">6 月底前可用，作為富邦/星展外的備援</div>
+            </div>
+            <div class="reward-rate"><strong>3%</strong><span>最高回饋</span></div>
+          </div>
+          <div class="reward-grid">
+            <div class="reward-info">
+              <div class="reward-label">消費回饋</div>
+              <div class="reward-value">韓國實體最高 3%；韓國網購/海外線上訂房最高 2%。不計新戶首刷 10%。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">回饋上限</div>
+              <div class="reward-value">實體加碼 1% 每期上限 <b>NT$200</b>，3% 約可刷 <b>NT$20,000</b>；海外 2% 上限約 NT$25,000。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用店家</div>
+              <div class="reward-value">韓國實體店、海外線上訂房/網購；實體需當地幣別且面對面交易。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用方式</div>
+              <div class="reward-value">實體加碼以實體店面交易為核心；Apple Pay 建議以帳單認列為準。</div>
+            </div>
+          </div>
+          <div class="reward-tags">
+            <span class="reward-tag">韓國實體</span>
+            <span class="reward-tag">海外線上</span>
+            <span class="reward-tag warn">需帳戶扣繳 + 電子帳單</span>
+            <span class="reward-tag warn">活動至 2026/6/30</span>
+          </div>
+          <div class="reward-calc">
+            <div>
+              <label for="spent-first-ileo">已刷金額（NT$）</label>
+              <input id="spent-first-ileo" class="reward-input" type="number" min="0" inputmode="numeric" placeholder="例如 3000" oninput="cardRewardSave('first-ileo')">
+            </div>
+            <div class="reward-remaining" id="remaining-first-ileo">輸入後自動試算剩餘額度</div>
+            <div class="reward-note-input">
+              <label for="note-first-ileo">小紀錄</label>
+              <input id="note-first-ileo" class="reward-input" type="text" placeholder="例如：備援卡，單筆小額或線上訂房再評估" oninput="cardRewardSave('first-ileo')">
+            </div>
+          </div>
+        </div>
+
+        <div class="reward-card" data-card-id="hsbc-cashback" data-limit="0">
+          <div class="reward-head">
+            <div class="reward-title">
+              <div class="reward-name">滙豐 現金回饋御璽卡</div>
+              <div class="reward-rank-note">大額、線上、懶得算上限時的穩定主力</div>
+            </div>
+            <div class="reward-rate"><strong>2.22%</strong><span>無上限</span></div>
+          </div>
+          <div class="reward-grid">
+            <div class="reward-info">
+              <div class="reward-label">消費回饋</div>
+              <div class="reward-value">海外消費 <b>2.22%</b>，國內 1.22%。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">回饋上限</div>
+              <div class="reward-value"><b>無年度上限</b>、無最低消費門檻。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用店家</div>
+              <div class="reward-value">韓國實體、海外線上訂房、機票、一般海外刷卡皆適合。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用方式</div>
+              <div class="reward-value">Apple Pay 作為一般海外刷卡使用；大額消費可優先考慮。</div>
+            </div>
+          </div>
+          <div class="reward-tags">
+            <span class="reward-tag">海外通用</span>
+            <span class="reward-tag">Apple Pay</span>
+            <span class="reward-tag">無上限</span>
+            <span class="reward-tag">線上訂房可用</span>
+          </div>
+          <div class="reward-calc">
+            <div>
+              <label for="spent-hsbc-cashback">已刷金額（NT$）</label>
+              <input id="spent-hsbc-cashback" class="reward-input" type="number" min="0" inputmode="numeric" placeholder="可記錄總刷卡額" oninput="cardRewardSave('hsbc-cashback')">
+            </div>
+            <div class="reward-remaining" id="remaining-hsbc-cashback">無回饋上限，適合承接大額消費</div>
+            <div class="reward-note-input">
+              <label for="note-hsbc-cashback">小紀錄</label>
+              <input id="note-hsbc-cashback" class="reward-input" type="text" placeholder="例如：飯店尾款、機票、超過其他卡上限後使用" oninput="cardRewardSave('hsbc-cashback')">
+            </div>
+          </div>
+        </div>
+
+        <div class="reward-card" data-card-id="taishin-richart" data-limit="0">
+          <div class="reward-head">
+            <div class="reward-title">
+              <div class="reward-name">台新 Richart 卡</div>
+              <div class="reward-rank-note">6 月先當備援；7/1 新權益啟動後再重排</div>
+            </div>
+            <div class="reward-rate"><strong>待確認</strong><span>APP 權益</span></div>
+          </div>
+          <div class="reward-grid">
+            <div class="reward-info">
+              <div class="reward-label">消費回饋</div>
+              <div class="reward-value">官網已公告 2026/7/1 起新權益最高 3.8%；6 月出發請以台新 App 目前方案為準。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">回饋上限</div>
+              <div class="reward-value">依 App 指定方案、通路與每期上限認列；未確認前不列主力。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用店家</div>
+              <div class="reward-value">若已切到旅遊/海外相關方案，可用於韓國實體與部分旅遊通路。</div>
+            </div>
+            <div class="reward-info">
+              <div class="reward-label">適用方式</div>
+              <div class="reward-value">Apple Pay 可作為一般刷卡；韓國台新 Pay+ 免國外交易手續費屬 7/1 後新權益，6 月不預設。</div>
+            </div>
+          </div>
+          <div class="reward-tags">
+            <span class="reward-tag warn">6 月需 App 確認</span>
+            <span class="reward-tag">Apple Pay</span>
+            <span class="reward-tag stop">不作 6 月主力</span>
+          </div>
+          <div class="reward-calc">
+            <div>
+              <label for="spent-taishin-richart">已刷金額（NT$）</label>
+              <input id="spent-taishin-richart" class="reward-input" type="number" min="0" inputmode="numeric" placeholder="可記錄測試刷卡額" oninput="cardRewardSave('taishin-richart')">
+            </div>
+            <div class="reward-remaining" id="remaining-taishin-richart">請先在台新 App 確認 6 月權益與上限</div>
+            <div class="reward-note-input">
+              <label for="note-taishin-richart">小紀錄</label>
+              <input id="note-taishin-richart" class="reward-input" type="text" placeholder="例如：7/1 後可重新改為海外/旅遊主力" oninput="cardRewardSave('taishin-richart')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-h"><i class="ti ti-list-check" aria-hidden="true"></i>現場刷卡順序</div>
+      <div class="tbl-wrap">
+        <table class="std">
+          <thead>
+            <tr>
+              <th style="width:28%">場景</th>
+              <th style="width:32%">優先卡</th>
+              <th>注意事項</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>單筆滿 NT$1,000 的韓國實體消費</b></td>
+              <td>富邦 J 卡</td>
+              <td>已登錄才用；Apple Pay 可用，但需韓國當地實體、請款期限內入帳。</td>
+            </tr>
+            <tr>
+              <td><b>小額實體消費</b></td>
+              <td>星展 eco 永續卡</td>
+              <td>5% 上限約 NT$15,000；LINE Pay 不算，Apple Pay 可用。</td>
+            </tr>
+            <tr>
+              <td><b>其他卡達上限後</b></td>
+              <td>滙豐現金回饋御璽卡</td>
+              <td>海外 2.22% 無上限，適合大額與不想分流的交易。</td>
+            </tr>
+            <tr>
+              <td><b>線上訂房 / 機票 / App</b></td>
+              <td>滙豐現金回饋御璽卡、第一 iLEO</td>
+              <td>富邦 J 卡與星展 eco 的高回饋多半鎖實體店，線上消費不要期待 5% 或 6%。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- END CREDIT CARD REWARDS TAB -->
+
     <!-- MEMO TAB -->
     <div id="memo" class="day-sec">
       <div class="day-head">
@@ -3916,6 +4231,78 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (id === 'memo') memoRenderAll();
       if (id === 'checklist') checklistRender();
+      if (id === 'card-rewards') cardRewardRenderAll();
+    }
+
+    /* ===== 信用卡優惠 Credit Card Rewards Tab ===== */
+    const CARD_REWARD_KEY = 'busan_card_rewards_v1';
+    const CARD_REWARD_LIMITS = {
+      'fubon-j': { limit: 33333, label: '6% 加碼上限前' },
+      'dbs-eco': { limit: 15000, label: '5% 加碼上限前' },
+      'first-ileo': { limit: 20000, label: '3% 實體上限前' },
+      'hsbc-cashback': { limit: 0, label: '無上限' },
+      'taishin-richart': { limit: 0, label: '需 App 確認' }
+    };
+
+    function cardRewardLoad() {
+      try {
+        const raw = localStorage.getItem(CARD_REWARD_KEY);
+        if (!raw) return {};
+        const data = JSON.parse(raw);
+        return data && typeof data === 'object' ? data : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function cardRewardSave(cardId) {
+      const data = cardRewardLoad();
+      const spentEl = document.getElementById(`spent-${cardId}`);
+      const noteEl = document.getElementById(`note-${cardId}`);
+      data[cardId] = {
+        spent: spentEl ? spentEl.value : '',
+        note: noteEl ? noteEl.value : ''
+      };
+      localStorage.setItem(CARD_REWARD_KEY, JSON.stringify(data));
+      cardRewardRender(cardId);
+    }
+
+    function cardRewardFormat(num) {
+      return Math.max(0, Math.round(num)).toLocaleString('zh-TW');
+    }
+
+    function cardRewardRender(cardId) {
+      const cfg = CARD_REWARD_LIMITS[cardId];
+      const out = document.getElementById(`remaining-${cardId}`);
+      const spentEl = document.getElementById(`spent-${cardId}`);
+      if (!cfg || !out || !spentEl) return;
+      const spent = Number(spentEl.value || 0);
+      if (!cfg.limit) {
+        if (cardId === 'hsbc-cashback') {
+          out.innerHTML = '無回饋上限，適合承接大額消費';
+        } else {
+          out.innerHTML = '請先在台新 App 確認 6 月權益與上限';
+        }
+        return;
+      }
+      const remaining = cfg.limit - spent;
+      if (remaining > 0) {
+        out.innerHTML = `${cfg.label}還可刷 <b>NT$${cardRewardFormat(remaining)}</b>`;
+      } else {
+        out.innerHTML = `${cfg.label}已達標，後續建議切回滙豐或下一張備用卡`;
+      }
+    }
+
+    function cardRewardRenderAll() {
+      const data = cardRewardLoad();
+      Object.keys(CARD_REWARD_LIMITS).forEach(cardId => {
+        const row = data[cardId] || {};
+        const spentEl = document.getElementById(`spent-${cardId}`);
+        const noteEl = document.getElementById(`note-${cardId}`);
+        if (spentEl && document.activeElement !== spentEl) spentEl.value = row.spent || '';
+        if (noteEl && document.activeElement !== noteEl) noteEl.value = row.note || '';
+        cardRewardRender(cardId);
+      });
     }
 
     /* ===== 行前檢查清單 Checklist Tab ===== */
@@ -4225,6 +4612,7 @@
       if (checklistTab) {
         checklistRender();
       }
+      cardRewardRenderAll();
     });
   </script>
 </body>
