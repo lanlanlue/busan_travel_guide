@@ -1288,6 +1288,42 @@
     .memo-status.show-saved{color:var(--teal-dark)}
     .memo-textarea{width:100%;font-size:13px;padding:10px 12px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit;resize:vertical;min-height:90px;line-height:1.6}
 
+    /* Travel expense tracker */
+    .expense-panel{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:16px}
+    .expense-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+    .expense-total{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px}
+    .expense-total-label{font-size:10px;font-weight:600;color:var(--text3);margin-bottom:3px}
+    .expense-total-value{font-size:16px;font-weight:700;color:var(--text1);line-height:1.25}
+    .expense-rate-row{display:flex;align-items:end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .expense-field{display:flex;flex-direction:column;gap:4px;min-width:120px;flex:1}
+    .expense-field label{font-size:10px;font-weight:600;color:var(--text3)}
+    .expense-input,.expense-select{width:100%;font-size:13px;padding:9px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--surface);color:var(--text1);font-family:inherit}
+    .expense-input:focus,.expense-select:focus{outline:none;border-color:var(--primary)}
+    .expense-currency-toggle{display:flex;gap:6px;flex-wrap:wrap}
+    .expense-currency-btn{height:38px;padding:0 13px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--surface);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer}
+    .expense-currency-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+    .expense-add-grid{display:grid;grid-template-columns:minmax(160px,1.4fr) minmax(110px,.9fr) minmax(120px,.9fr) auto;gap:8px;align-items:end}
+    .expense-add-btn{height:38px;min-width:42px;border-radius:var(--radius-sm);border:0.5px solid var(--primary);background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+    .expense-add-btn:hover{background:var(--primary);color:#fff}
+    .expense-list{display:flex;flex-direction:column;gap:8px}
+    .expense-item{display:grid;grid-template-columns:minmax(0,1fr) auto 26px;gap:10px;align-items:center;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;box-shadow:var(--shadow)}
+    .expense-name{font-size:13px;font-weight:600;color:var(--text1);line-height:1.45;min-width:0;word-break:break-word}
+    .expense-meta{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.4}
+    .expense-amount{text-align:right;font-size:13px;color:var(--text2);line-height:1.45;white-space:nowrap}
+    .expense-amount b{display:block;color:var(--text1);font-size:14px}
+    .expense-empty{font-size:12px;color:var(--text3);text-align:center;padding:20px;border:1px dashed var(--border2);border-radius:var(--radius)}
+    .expense-del{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text3);cursor:pointer;font-size:14px;transition:all .15s}
+    .expense-del:hover{background:var(--red-light);color:var(--red-dark)}
+
+    @media(max-width:640px){
+      .expense-summary{grid-template-columns:1fr}
+      .expense-rate-row{align-items:stretch}
+      .expense-add-grid{grid-template-columns:1fr}
+      .expense-add-btn{width:100%}
+      .expense-item{grid-template-columns:1fr 24px}
+      .expense-amount{grid-column:1 / -1;text-align:left;white-space:normal}
+    }
+
     /* Credit card rewards */
     .card-rewards{display:grid;gap:12px;margin-top:12px}
     .reward-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
@@ -1413,6 +1449,7 @@
       <button class="tab-btn" onclick="goTab('rain',this)">☂ 雨備行程</button>
       <button class="tab-btn" onclick="goTab('backuppass',this)">🎫 備用 Pass 景點</button>
       <button class="tab-btn" onclick="goTab('card-rewards',this)">💳 刷卡優惠</button>
+      <button class="tab-btn" onclick="goTab('expenses',this)">💸 快速記帳</button>
       <button class="tab-btn" onclick="goTab('memo',this)">📝 備忘清單</button>
     </div>
 
@@ -4524,6 +4561,83 @@
     </div>
     <!-- END CREDIT CARD REWARDS TAB -->
 
+    <!-- EXPENSE TRACKER TAB -->
+    <div id="expenses" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:38px">💸</div>
+        <div class="day-head-info">
+          <div class="day-head-title">旅行快速記帳</div>
+          <div class="day-head-sub">韓元 / 台幣快速輸入 · 自動換算加總 · 跟備忘清單一起匯出匯入</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:16px">
+        <i class="ti ti-calculator" aria-hidden="true"></i>
+        <div>
+          記錄 eSIM、票券、當地小吃與購物。資料會自動存在這台裝置的 localStorage，並會併入「備忘清單」的匯出備份 JSON。
+        </div>
+      </div>
+
+      <div class="expense-panel">
+        <div class="expense-summary">
+          <div class="expense-total">
+            <div class="expense-total-label">台幣總計</div>
+            <div class="expense-total-value" id="expenseTotalTwd">NT$0</div>
+          </div>
+          <div class="expense-total">
+            <div class="expense-total-label">韓元總計</div>
+            <div class="expense-total-value" id="expenseTotalKrw">₩0</div>
+          </div>
+          <div class="expense-total">
+            <div class="expense-total-label">紀錄筆數</div>
+            <div class="expense-total-value" id="expenseCount">0 筆</div>
+          </div>
+        </div>
+
+        <div class="expense-rate-row">
+          <div class="expense-field" style="max-width:220px">
+            <label for="expenseRate">匯率（₩1,000 = NT$）</label>
+            <input id="expenseRate" class="expense-input" type="number" min="0" step="0.1" inputmode="decimal" value="20.7" oninput="expenseSaveRate()">
+          </div>
+          <div class="expense-field" style="flex:0 0 auto">
+            <label>目前輸入幣別</label>
+            <div class="expense-currency-toggle" role="group" aria-label="切換輸入幣別">
+              <button type="button" id="expenseCurrencyKrw" class="expense-currency-btn active" onclick="expenseSetCurrency('KRW')">韓元 KRW</button>
+              <button type="button" id="expenseCurrencyTwd" class="expense-currency-btn" onclick="expenseSetCurrency('TWD')">台幣 TWD</button>
+            </div>
+          </div>
+          <button class="memo-btn danger" type="button" onclick="expenseClearAll()"><i class="ti ti-trash" aria-hidden="true"></i>清空記帳</button>
+        </div>
+
+        <div class="expense-add-grid">
+          <div class="expense-field">
+            <label for="expenseName">品項</label>
+            <input id="expenseName" class="expense-input" type="text" placeholder="例如：eSIM、海雲台魚糕、地鐵加值" onkeydown="if(event.key==='Enter'){expenseAdd();}">
+          </div>
+          <div class="expense-field">
+            <label for="expenseAmount">金額</label>
+            <input id="expenseAmount" class="expense-input" type="number" min="0" step="1" inputmode="decimal" placeholder="例如 5000" onkeydown="if(event.key==='Enter'){expenseAdd();}">
+          </div>
+          <div class="expense-field">
+            <label for="expenseCategory">分類</label>
+            <select id="expenseCategory" class="expense-select">
+              <option value="餐飲">餐飲</option>
+              <option value="票券">票券</option>
+              <option value="交通">交通</option>
+              <option value="通訊">通訊</option>
+              <option value="購物">購物</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <button class="expense-add-btn" type="button" onclick="expenseAdd()" aria-label="新增記帳"><i class="ti ti-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div id="expenseStatus" class="memo-status"></div>
+      <div id="expenseList" class="expense-list"></div>
+    </div>
+    <!-- END EXPENSE TRACKER TAB -->
+
     <!-- MEMO TAB -->
     <div id="memo" class="day-sec">
       <div class="day-head">
@@ -4531,14 +4645,14 @@
         <div class="day-head-info">
           <div class="day-head-title">備忘清單</div>
 
-          <div class="day-head-sub">採購清單 · 口袋店家 · 資料儲存在你的瀏覽器（可匯出備份）</div>
+          <div class="day-head-sub">採購清單 · 口袋店家 · 可連同快速記帳匯出備份</div>
         </div>
       </div>
 
       <div class="banner bn-info" style="margin-bottom:16px">
         <i class="ti ti-device-floppy" aria-hidden="true"></i>
         <div>
-          所有資料只存在<b>這個瀏覽器</b>（localStorage），換裝置或清除瀏覽器資料會消失。建議行前先<b>匯出備份</b>，到當地後也可以隨時匯出存到雲端筆記。
+          備忘清單與快速記帳都只存在<b>這個瀏覽器</b>（localStorage），換裝置或清除瀏覽器資料會消失。建議行前先<b>匯出備份</b>，到當地後也可以隨時匯出存到雲端筆記。
         </div>
       </div>
 
@@ -4595,6 +4709,7 @@
       if (id === 'memo') memoRenderAll();
       if (id === 'checklist') checklistRender();
       if (id === 'card-rewards') cardRewardRenderAll();
+      if (id === 'expenses') expenseRenderAll();
     }
 
     /* ===== 信用卡優惠 Credit Card Rewards Tab ===== */
@@ -4803,6 +4918,180 @@
       if (fillEl) fillEl.style.width = `${pct}%`;
     }
 
+    /* ===== 旅行快速記帳 Expense Tracker Tab ===== */
+    const EXPENSE_KEY = 'busan_expenses_v1';
+    const EXPENSE_DEFAULT_RATE = 20.7;
+
+    function expenseNormalize(data) {
+      const rawRate = Number(data && data.rateTwdPer1000Krw);
+      const rateTwdPer1000Krw = rawRate > 0 ? rawRate : EXPENSE_DEFAULT_RATE;
+      const currency = data && data.currency === 'TWD' ? 'TWD' : 'KRW';
+      const items = Array.isArray(data && data.items) ? data.items.map(item => {
+        const amount = Number(item && item.amount);
+        if (!item || !Number.isFinite(amount) || amount <= 0) return null;
+        return {
+          name: typeof item.name === 'string' && item.name.trim() ? item.name.trim() : '未命名品項',
+          amount,
+          currency: item.currency === 'TWD' ? 'TWD' : 'KRW',
+          category: typeof item.category === 'string' && item.category.trim() ? item.category.trim() : '其他',
+          ts: Number(item.ts) || Date.now()
+        };
+      }).filter(Boolean) : [];
+      return { rateTwdPer1000Krw, currency, items };
+    }
+
+    function expenseLoad() {
+      try {
+        const raw = localStorage.getItem(EXPENSE_KEY);
+        if (!raw) return expenseNormalize({});
+        return expenseNormalize(JSON.parse(raw));
+      } catch (e) {
+        return expenseNormalize({});
+      }
+    }
+
+    function expenseSave(data, silent) {
+      localStorage.setItem(EXPENSE_KEY, JSON.stringify(expenseNormalize(data)));
+      if (!silent) expenseShowStatus('已自動儲存');
+    }
+
+    function expenseShowStatus(msg) {
+      const el = document.getElementById('expenseStatus');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show-saved');
+      setTimeout(() => { el.textContent = ''; el.classList.remove('show-saved'); }, 1500);
+    }
+
+    function expenseSetCurrency(currency) {
+      const data = expenseLoad();
+      data.currency = currency === 'TWD' ? 'TWD' : 'KRW';
+      expenseSave(data);
+      expenseRenderAll();
+      const amountEl = document.getElementById('expenseAmount');
+      if (amountEl) amountEl.focus();
+    }
+
+    function expenseSaveRate() {
+      const data = expenseLoad();
+      const rateEl = document.getElementById('expenseRate');
+      const rate = Number(rateEl ? rateEl.value : 0);
+      if (rate > 0) data.rateTwdPer1000Krw = rate;
+      expenseSave(data);
+      expenseRenderAll();
+    }
+
+    function expenseAdd() {
+      const nameEl = document.getElementById('expenseName');
+      const amountEl = document.getElementById('expenseAmount');
+      const categoryEl = document.getElementById('expenseCategory');
+      const name = nameEl ? nameEl.value.trim() : '';
+      const amount = Number(amountEl ? amountEl.value : 0);
+      if (!name || !Number.isFinite(amount) || amount <= 0) {
+        expenseShowStatus('請輸入品項與有效金額');
+        return;
+      }
+      const data = expenseLoad();
+      data.items.unshift({
+        name,
+        amount,
+        currency: data.currency,
+        category: categoryEl ? categoryEl.value : '其他',
+        ts: Date.now()
+      });
+      expenseSave(data);
+      if (nameEl) nameEl.value = '';
+      if (amountEl) amountEl.value = '';
+      expenseRenderAll();
+      if (nameEl) nameEl.focus();
+    }
+
+    function expenseDelete(idx) {
+      const data = expenseLoad();
+      data.items.splice(idx, 1);
+      expenseSave(data);
+      expenseRenderAll();
+    }
+
+    function expenseClearAll() {
+      if (!confirm('確定要清空所有記帳紀錄嗎？此動作無法復原（建議先到備忘清單匯出備份）')) return;
+      const data = expenseLoad();
+      data.items = [];
+      expenseSave(data);
+      expenseRenderAll();
+    }
+
+    function expenseFormatCurrency(value, currency) {
+      const rounded = Math.round(value);
+      return currency === 'TWD'
+        ? `NT$${rounded.toLocaleString('zh-TW')}`
+        : `₩${rounded.toLocaleString('zh-TW')}`;
+    }
+
+    function expenseConverted(item, rateTwdPer1000Krw) {
+      if (item.currency === 'TWD') {
+        return {
+          twd: item.amount,
+          krw: rateTwdPer1000Krw > 0 ? item.amount / rateTwdPer1000Krw * 1000 : 0
+        };
+      }
+      return {
+        krw: item.amount,
+        twd: item.amount / 1000 * rateTwdPer1000Krw
+      };
+    }
+
+    function expenseRenderAll() {
+      const data = expenseLoad();
+      const rateEl = document.getElementById('expenseRate');
+      const krwBtn = document.getElementById('expenseCurrencyKrw');
+      const twdBtn = document.getElementById('expenseCurrencyTwd');
+      if (rateEl && document.activeElement !== rateEl) rateEl.value = data.rateTwdPer1000Krw;
+      if (krwBtn) krwBtn.classList.toggle('active', data.currency === 'KRW');
+      if (twdBtn) twdBtn.classList.toggle('active', data.currency === 'TWD');
+
+      let totalTwd = 0;
+      let totalKrw = 0;
+      data.items.forEach(item => {
+        const converted = expenseConverted(item, data.rateTwdPer1000Krw);
+        totalTwd += converted.twd;
+        totalKrw += converted.krw;
+      });
+      const totalTwdEl = document.getElementById('expenseTotalTwd');
+      const totalKrwEl = document.getElementById('expenseTotalKrw');
+      const countEl = document.getElementById('expenseCount');
+      if (totalTwdEl) totalTwdEl.textContent = expenseFormatCurrency(totalTwd, 'TWD');
+      if (totalKrwEl) totalKrwEl.textContent = expenseFormatCurrency(totalKrw, 'KRW');
+      if (countEl) countEl.textContent = `${data.items.length} 筆`;
+
+      const listEl = document.getElementById('expenseList');
+      if (!listEl) return;
+      if (!data.items.length) {
+        listEl.innerHTML = '<div class="expense-empty">尚無記帳紀錄。切換幣別、輸入品項與金額後按 + 新增。</div>';
+        return;
+      }
+      listEl.innerHTML = data.items.map((item, idx) => {
+        const converted = expenseConverted(item, data.rateTwdPer1000Krw);
+        const date = new Date(item.ts).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' });
+        const convertedText = item.currency === 'TWD'
+          ? `約 ${expenseFormatCurrency(converted.krw, 'KRW')}`
+          : `約 ${expenseFormatCurrency(converted.twd, 'TWD')}`;
+        return `
+          <div class="expense-item">
+            <div>
+              <div class="expense-name">${memoEscape(item.name)}</div>
+              <div class="expense-meta">${memoEscape(item.category)} · ${date}</div>
+            </div>
+            <div class="expense-amount">
+              <b>${expenseFormatCurrency(item.amount, item.currency)}</b>
+              ${convertedText}
+            </div>
+            <div class="expense-del" onclick="expenseDelete(${idx})"><i class="ti ti-x" aria-hidden="true"></i></div>
+          </div>
+        `;
+      }).join('');
+    }
+
     /* ===== 備忘清單 Memo Tab ===== */
     const MEMO_KEY = 'busan_memo_v1';
 
@@ -4918,8 +5207,13 @@
     }
 
     function memoExport() {
-      const data = memoLoad();
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const backup = {
+        version: 2,
+        exportedAt: new Date().toISOString(),
+        memo: memoLoad(),
+        expenses: expenseLoad()
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -4942,12 +5236,19 @@
       reader.onload = function (e) {
         try {
           const imported = JSON.parse(e.target.result);
+          const importedMemo = imported && imported.memo && typeof imported.memo === 'object'
+            ? imported.memo
+            : (imported || {});
           const data = {
-            shop: Array.isArray(imported.shop) ? imported.shop : [],
-            spot: Array.isArray(imported.spot) ? imported.spot : [],
-            note: typeof imported.note === 'string' ? imported.note : ''
+            shop: Array.isArray(importedMemo.shop) ? importedMemo.shop : [],
+            spot: Array.isArray(importedMemo.spot) ? importedMemo.spot : [],
+            note: typeof importedMemo.note === 'string' ? importedMemo.note : ''
           };
           memoSave(data);
+          if (imported && imported.expenses && typeof imported.expenses === 'object') {
+            expenseSave(imported.expenses, true);
+            expenseRenderAll();
+          }
           memoRenderAll();
           memoShowStatus('匯入成功！');
         } catch (err) {
@@ -4976,6 +5277,7 @@
         checklistRender();
       }
       cardRewardRenderAll();
+      expenseRenderAll();
     });
   </script>
 </body>
