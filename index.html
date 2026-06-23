@@ -832,6 +832,69 @@
       font-weight: 500
     }
 
+    @media(max-width:640px) {
+      table.restaurant-table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        table-layout: auto
+      }
+
+      table.restaurant-table tr:first-child {
+        display: none
+      }
+
+      table.restaurant-table tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden
+      }
+
+      table.restaurant-table td {
+        display: grid;
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 10px;
+        padding: 8px 10px;
+        border-bottom: 0.5px solid var(--border);
+        word-break: normal;
+        overflow-wrap: anywhere
+      }
+
+      table.restaurant-table td:last-child {
+        border-bottom: none
+      }
+
+      table.restaurant-table td::before {
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--primary-dark)
+      }
+
+      table.restaurant-table td:nth-child(3) {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        line-height: 1.65
+      }
+
+      table.restaurant-table td:nth-child(3)::before {
+        margin-bottom: 0
+      }
+
+      table.restaurant-table td:nth-child(4) a {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 10px;
+        border-radius: var(--radius-sm);
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        border: 0.5px solid var(--primary-border)
+      }
+    }
+
     /* Info grid */
     .info-grid {
       display: grid;
@@ -2734,7 +2797,7 @@
         </div>
       </div>
       <div class="tbl-wrap">
-        <table class="std">
+        <table class="std restaurant-table">
           <tr>
             <th style="width:92px">地區 / 行程</th>
             <th style="width:145px">餐廳</th>
@@ -2742,118 +2805,118 @@
             <th style="width:95px">連結</th>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>Day 2 上午</td>
-            <td><b>極東豬肉湯飯</b><br><span class="ko">극동돼지국밥</span></td>
-            <td>海雲台豬肉湯飯候選，適合早餐/早午餐。熱門時段排隊，通常不需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=극동돼지국밥+해운대" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>Day 2 上午</td>
+            <td data-label="餐廳"><b>極東豬肉湯飯</b><br><span class="ko">극동돼지국밥</span></td>
+            <td data-label="用途與備註">海雲台豬肉湯飯候選，適合早餐/早午餐。熱門時段排隊，通常不需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=극동돼지국밥+해운대" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>Day 2 上午</td>
-            <td><b>密陽血腸豬肉湯飯</b><br><span class="ko">밀양순대돼지국밥</span></td>
-            <td>另一間海雲台豬肉湯飯候選，可和極東二選一。尖峰排隊，通常不需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=밀양순대돼지국밥+해운대" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>Day 2 上午</td>
+            <td data-label="餐廳"><b>密陽血腸豬肉湯飯</b><br><span class="ko">밀양순대돼지국밥</span></td>
+            <td data-label="用途與備註">另一間海雲台豬肉湯飯候選，可和極東二選一。尖峰排隊，通常不需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=밀양순대돼지국밥+해운대" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>Day 2 上午</td>
-            <td><b>古來思魚糕</b><br><span class="ko">고래사어묵</span></td>
-            <td>海雲台市場/車站周邊小吃補給，適合外帶魚糕、伴手禮。無需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=고래사어묵+해운대" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>Day 2 上午</td>
+            <td data-label="餐廳"><b>古來思魚糕</b><br><span class="ko">고래사어묵</span></td>
+            <td data-label="用途與備註">海雲台市場/車站周邊小吃補給，適合外帶魚糕、伴手禮。無需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=고래사어묵+해운대" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>Day 2 / Day 4</td>
-            <td><b>海雲台名品蔘雞湯</b><br><span class="ko">해운대명품삼계탕</span></td>
-            <td>想吃清爽熱湯時的正餐候選，適合午餐。熱門用餐時間可能需排隊。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=해운대명품삼계탕" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>Day 2 / Day 4</td>
+            <td data-label="餐廳"><b>海雲台名品蔘雞湯</b><br><span class="ko">해운대명품삼계탕</span></td>
+            <td data-label="用途與備註">想吃清爽熱湯時的正餐候選，適合午餐。熱門用餐時間可能需排隊。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=해운대명품삼계탕" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>Day 2 / Day 4</td>
-            <td><b>錦繡河豚湯</b><br><span class="ko">금수복국</span></td>
-            <td>海雲台名店級河豚湯，適合早餐或午餐。分店/本店位置需現場確認。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=금수복국+해운대" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>Day 2 / Day 4</td>
+            <td data-label="餐廳"><b>錦繡河豚湯</b><br><span class="ko">금수복국</span></td>
+            <td data-label="用途與備註">海雲台名店級河豚湯，適合早餐或午餐。分店/本店位置需現場確認。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=금수복국+해운대" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>海雲台</b><br>晚餐備選</td>
-            <td><b>伍班長烤肉</b><br><span class="ko">오반장</span></td>
-            <td>烤肉候選，適合 Day 2 不去廣安里吃飯或 Day 4 海雲台晚餐。晚餐尖峰建議提早到或查是否可訂位。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=오반장+해운대" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>海雲台</b><br>晚餐備選</td>
+            <td data-label="餐廳"><b>伍班長烤肉</b><br><span class="ko">오반장</span></td>
+            <td data-label="用途與備註">烤肉候選，適合 Day 2 不去廣安里吃飯或 Day 4 海雲台晚餐。晚餐尖峰建議提早到或查是否可訂位。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=오반장+해운대" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>廣安里</b><br>Day 2 晚餐</td>
-            <td><b>廣安里大門烤肉</b><br><span class="ko">대문집 광안리</span></td>
-            <td>無人機秀前的烤肉候選。週六晚餐熱門，建議 18:00 前抵達；若可訂位，提前處理。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=대문집+광안리" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>廣安里</b><br>Day 2 晚餐</td>
+            <td data-label="餐廳"><b>廣安里大門烤肉</b><br><span class="ko">대문집 광안리</span></td>
+            <td data-label="用途與備註">無人機秀前的烤肉候選。週六晚餐熱門，建議 18:00 前抵達；若可訂位，提前處理。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=대문집+광안리" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>廣安里</b><br>Day 2 晚餐</td>
-            <td><b>水邊最高豬肉湯飯</b><br><span class="ko">수변최고돼지국밥</span></td>
-            <td>廣安里/民樂周邊豬肉湯飯候選，適合不想吃烤肉時。熱門時段排隊，通常不需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=수변최고돼지국밥+광안리" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>廣安里</b><br>Day 2 晚餐</td>
+            <td data-label="餐廳"><b>水邊最高豬肉湯飯</b><br><span class="ko">수변최고돼지국밥</span></td>
+            <td data-label="用途與備註">廣安里/民樂周邊豬肉湯飯候選，適合不想吃烤肉時。熱門時段排隊，通常不需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=수변최고돼지국밥+광안리" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>西面</b><br>備用商圈</td>
-            <td><b>松亭三代豬肉湯飯</b><br><span class="ko">송정3대국밥</span></td>
-            <td>西面豬肉湯飯老店候選。若行程臨時轉西面/田浦，可作正餐。通常不需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=송정3대국밥+서면" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>西面</b><br>備用商圈</td>
+            <td data-label="餐廳"><b>松亭三代豬肉湯飯</b><br><span class="ko">송정3대국밥</span></td>
+            <td data-label="用途與備註">西面豬肉湯飯老店候選。若行程臨時轉西面/田浦，可作正餐。通常不需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=송정3대국밥+서면" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>西面</b><br>備用商圈</td>
-            <td><b>李在模披薩</b><br><span class="ko">이재모피자</span></td>
-            <td>人氣披薩，排隊風險高。若要吃，建議避開正餐尖峰；不適合作為趕時間行程。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=이재모피자+서면" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>西面</b><br>備用商圈</td>
+            <td data-label="餐廳"><b>李在模披薩</b><br><span class="ko">이재모피자</span></td>
+            <td data-label="用途與備註">人氣披薩，排隊風險高。若要吃，建議避開正餐尖峰；不適合作為趕時間行程。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=이재모피자+서면" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>西面</b><br>備用商圈</td>
-            <td><b>釜山烤肋排</b><br><span class="ko">부산갈비 서면</span></td>
-            <td>西面烤肉/烤肋排候選。晚餐尖峰建議查訂位或提早到。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=부산갈비+서면" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>西面</b><br>備用商圈</td>
+            <td data-label="餐廳"><b>釜山烤肋排</b><br><span class="ko">부산갈비 서면</span></td>
+            <td data-label="用途與備註">西面烤肉/烤肋排候選。晚餐尖峰建議查訂位或提早到。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=부산갈비+서면" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>田浦</b><br>備用咖啡</td>
-            <td><b>田浦咖啡街</b><br><span class="ko">전포카페거리</span></td>
-            <td>咖啡廳密集區，適合西面/田浦臨時休息。無需預訂，現場挑店即可。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=전포카페거리" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>田浦</b><br>備用咖啡</td>
+            <td data-label="餐廳"><b>田浦咖啡街</b><br><span class="ko">전포카페거리</span></td>
+            <td data-label="用途與備註">咖啡廳密集區，適合西面/田浦臨時休息。無需預訂，現場挑店即可。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=전포카페거리" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>機張</b><br>Day 3 午餐</td>
-            <td><b>機張大蟹</b><br><span class="ko">기장대게 / 기장시장</span></td>
-            <td>若把午餐改到機張市場，適合吃大蟹/海鮮。價格浮動大，入座前先確認公斤價與總價。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=기장시장+대게" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>機張</b><br>Day 3 午餐</td>
+            <td data-label="餐廳"><b>機張大蟹</b><br><span class="ko">기장대게 / 기장시장</span></td>
+            <td data-label="用途與備註">若把午餐改到機張市場，適合吃大蟹/海鮮。價格浮動大，入座前先確認公斤價與總價。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=기장시장+대게" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>機張</b><br>Day 3 龍宮寺</td>
-            <td><b>海東龍宮寺炸醬麵</b><br><span class="ko">해동용궁사 짜장면</span></td>
-            <td>龍宮寺入口附近快速午餐候選，適合不想特地去機張市場時。無需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=해동용궁사+짜장면" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>機張</b><br>Day 3 龍宮寺</td>
+            <td data-label="餐廳"><b>海東龍宮寺炸醬麵</b><br><span class="ko">해동용궁사 짜장면</span></td>
+            <td data-label="用途與備註">龍宮寺入口附近快速午餐候選，適合不想特地去機張市場時。無需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=해동용궁사+짜장면" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>南浦</b><br>Day 5 採購</td>
-            <td><b>札嘎其 / 扎嘎其市場海鮮</b><br><span class="ko">자갈치시장</span></td>
-            <td>海鮮市場型餐點，適合想吃生魚片/烤魚/海鮮湯。先確認價格、料理費與座位費。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=자갈치시장" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>南浦</b><br>Day 5 採購</td>
+            <td data-label="餐廳"><b>札嘎其 / 扎嘎其市場海鮮</b><br><span class="ko">자갈치시장</span></td>
+            <td data-label="用途與備註">海鮮市場型餐點，適合想吃生魚片/烤魚/海鮮湯。先確認價格、料理費與座位費。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=자갈치시장" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>南浦</b><br>Day 5 晚餐</td>
-            <td><b>海田烤腸</b><br><span class="ko">해전곱창</span></td>
-            <td>南浦烤腸候選，適合採購後晚餐。熱門時段可能排隊；兩人以上較適合。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=해전곱창+남포" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>南浦</b><br>Day 5 晚餐</td>
+            <td data-label="餐廳"><b>海田烤腸</b><br><span class="ko">해전곱창</span></td>
+            <td data-label="用途與備註">南浦烤腸候選，適合採購後晚餐。熱門時段可能排隊；兩人以上較適合。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=해전곱창+남포" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>南浦</b><br>Day 5 晚餐</td>
-            <td><b>南浦蔘雞湯</b><br><span class="ko">남포삼계탕</span></td>
-            <td>南浦清爽正餐候選，適合購物後想吃熱湯。通常不需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=남포삼계탕" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>南浦</b><br>Day 5 晚餐</td>
+            <td data-label="餐廳"><b>南浦蔘雞湯</b><br><span class="ko">남포삼계탕</span></td>
+            <td data-label="用途與備註">南浦清爽正餐候選，適合購物後想吃熱湯。通常不需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=남포삼계탕" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>南浦</b><br>Day 5 小吃</td>
-            <td><b>BIFF 廣場糖餅</b><br><span class="ko">BIFF광장 씨앗호떡</span></td>
-            <td>BIFF 廣場小吃，適合邊逛邊吃。通常現金更快，無需預訂。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=BIFF광장+씨앗호떡" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>南浦</b><br>Day 5 小吃</td>
+            <td data-label="餐廳"><b>BIFF 廣場糖餅</b><br><span class="ko">BIFF광장 씨앗호떡</span></td>
+            <td data-label="用途與備註">BIFF 廣場小吃，適合邊逛邊吃。通常現金更快，無需預訂。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=BIFF광장+씨앗호떡" target="_blank">地圖</a></td>
           </tr>
           <tr>
-            <td><b>南浦</b><br>Day 5 備選</td>
-            <td><b>豆田裡嫩豆腐</b><br><span class="ko">순두부 남포</span></td>
-            <td>嫩豆腐鍋類備選；中文譯名與韓文店名可能有差異，務必用地圖搜尋結果、評分與距離確認後再前往。</td>
-            <td><a href="https://www.google.com/maps/search/?api=1&query=豆田裡嫩豆腐+南浦+釜山" target="_blank">地圖</a></td>
+            <td data-label="地區 / 行程"><b>南浦</b><br>Day 5 備選</td>
+            <td data-label="餐廳"><b>豆田裡嫩豆腐</b><br><span class="ko">순두부 남포</span></td>
+            <td data-label="用途與備註">嫩豆腐鍋類備選；中文譯名與韓文店名可能有差異，務必用地圖搜尋結果、評分與距離確認後再前往。</td>
+            <td data-label="連結"><a href="https://www.google.com/maps/search/?api=1&query=豆田裡嫩豆腐+南浦+釜山" target="_blank">地圖</a></td>
           </tr>
         </table>
       </div>
