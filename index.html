@@ -893,6 +893,144 @@
         color: var(--primary-dark);
         border: 0.5px solid var(--primary-border)
       }
+
+      table.pass-table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        table-layout: auto
+      }
+
+      table.pass-table tr:first-child {
+        display: none
+      }
+
+      table.pass-table tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden
+      }
+
+      table.pass-table td {
+        display: grid;
+        grid-template-columns: 88px minmax(0, 1fr);
+        gap: 10px;
+        padding: 8px 10px;
+        border-bottom: 0.5px solid var(--border);
+        word-break: normal;
+        overflow-wrap: anywhere
+      }
+
+      table.pass-table td:last-child {
+        border-bottom: none
+      }
+
+      table.pass-table td::before {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--primary-dark)
+      }
+
+      table.pass-table td:nth-child(1)::before {
+        content: "景點名稱"
+      }
+
+      table.pass-table td:nth-child(2)::before {
+        content: "一般票價"
+      }
+
+      table.pass-table td:nth-child(3)::before {
+        content: "需預約"
+      }
+
+      table.pass-table td:nth-child(4)::before {
+        content: "室內/外"
+      }
+
+      table.pass-table td:nth-child(5)::before {
+        content: "交通便利度"
+      }
+
+      table.pass-table td:nth-child(6)::before {
+        content: "推薦度"
+      }
+
+      table.pass-table td:nth-child(7)::before {
+        content: "備註"
+      }
+
+      table.pass-table td:first-child,
+      table.pass-table td:nth-child(7) {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        line-height: 1.65
+      }
+
+      table.rain-table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        table-layout: auto
+      }
+
+      table.rain-table tr:first-child {
+        display: none
+      }
+
+      table.rain-table tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden
+      }
+
+      table.rain-table td {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 10px;
+        padding: 8px 10px;
+        border-bottom: 0.5px solid var(--border);
+        word-break: normal;
+        overflow-wrap: anywhere
+      }
+
+      table.rain-table td:last-child {
+        border-bottom: none
+      }
+
+      table.rain-table td::before {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--primary-dark)
+      }
+
+      table.rain-table td:nth-child(1)::before {
+        content: "景點"
+      }
+
+      table.rain-table td:nth-child(2)::before {
+        content: "交通"
+      }
+
+      table.rain-table td:nth-child(3)::before {
+        content: "費用"
+      }
+
+      table.rain-table td:nth-child(4)::before {
+        content: "適合時機"
+      }
+
+      table.rain-table td:first-child,
+      table.rain-table td:nth-child(4) {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        line-height: 1.65
+      }
     }
 
     /* Info grid */
@@ -3616,7 +3754,7 @@
       <!-- Rain-friendly indoor spots -->
       <div class="sec-h"><i class="ti ti-building" aria-hidden="true"></i>釜山最佳雨天室內景點備選庫</div>
       <div class="tbl-wrap">
-        <table class="std">
+        <table class="std rain-table">
           <tr>
             <th style="width:160px">景點</th>
             <th style="width:90px">交通</th>
@@ -3726,7 +3864,7 @@
       </div>
 
       <div class="tbl-wrap">
-        <table class="std">
+        <table class="std pass-table">
           <tr>
             <th style="width:150px">景點名稱</th>
             <th style="width:75px">一般票價</th>
@@ -3837,7 +3975,7 @@
       </div>
 
       <div class="tbl-wrap">
-        <table class="std">
+        <table class="std pass-table">
           <tr>
             <th style="width:150px">景點名稱</th>
             <th style="width:75px">一般票價</th>
