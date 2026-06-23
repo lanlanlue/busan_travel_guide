@@ -1302,7 +1302,11 @@
     .expense-currency-toggle{display:flex;gap:6px;flex-wrap:wrap}
     .expense-currency-btn{height:38px;padding:0 13px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--surface);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer}
     .expense-currency-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
-    .expense-add-grid{display:grid;grid-template-columns:minmax(160px,1.4fr) minmax(110px,.9fr) minmax(120px,.9fr) auto;gap:8px;align-items:end}
+    .expense-add-grid{display:grid;grid-template-columns:minmax(160px,1.4fr) minmax(110px,.9fr) minmax(110px,.9fr) minmax(96px,.7fr) auto;gap:8px;align-items:end}
+    .expense-qty-row{display:flex;align-items:center;gap:6px}
+    .expense-qty-row .expense-input{min-width:0}
+    .expense-operator-btn{height:38px;min-width:42px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--surface2);color:var(--text1);font-size:16px;font-weight:700;cursor:pointer;flex-shrink:0}
+    .expense-operator-btn.active{background:var(--primary-light);border-color:var(--primary-border);color:var(--primary-dark)}
     .expense-add-btn{height:38px;min-width:42px;border-radius:var(--radius-sm);border:0.5px solid var(--primary);background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
     .expense-add-btn:hover{background:var(--primary);color:#fff}
     .expense-list{display:flex;flex-direction:column;gap:8px}
@@ -1319,6 +1323,8 @@
       .expense-summary{grid-template-columns:1fr}
       .expense-rate-row{align-items:stretch}
       .expense-add-grid{grid-template-columns:1fr}
+      .expense-qty-row{width:100%}
+      .expense-operator-btn{width:44px}
       .expense-add-btn{width:100%}
       .expense-item{grid-template-columns:1fr 24px}
       .expense-amount{grid-column:1 / -1;text-align:left;white-space:normal}
@@ -4619,6 +4625,13 @@
             <input id="expenseAmount" class="expense-input" type="number" min="0" step="1" inputmode="decimal" placeholder="例如 5000" onkeydown="if(event.key==='Enter'){expenseAdd();}">
           </div>
           <div class="expense-field">
+            <label for="expenseQty">數量</label>
+            <div class="expense-qty-row">
+              <input id="expenseQty" class="expense-input" type="number" min="1" step="1" inputmode="numeric" value="1" placeholder="1" onkeydown="if(event.key==='Enter'){expenseAdd();}">
+              <button id="expenseOperatorBtn" class="expense-operator-btn active" type="button" onclick="expenseToggleOperator()" aria-label="切換乘除號">×</button>
+            </div>
+          </div>
+          <div class="expense-field">
             <label for="expenseCategory">分類</label>
             <select id="expenseCategory" class="expense-select">
               <option value="餐飲">餐飲</option>
@@ -4926,18 +4939,22 @@
       const rawRate = Number(data && data.rateTwdPer1000Krw);
       const rateTwdPer1000Krw = rawRate > 0 ? rawRate : EXPENSE_DEFAULT_RATE;
       const currency = data && data.currency === 'TWD' ? 'TWD' : 'KRW';
+      const operator = data && data.operator === '÷' ? '÷' : '×';
       const items = Array.isArray(data && data.items) ? data.items.map(item => {
         const amount = Number(item && item.amount);
+        const qty = Number(item && item.qty);
         if (!item || !Number.isFinite(amount) || amount <= 0) return null;
         return {
           name: typeof item.name === 'string' && item.name.trim() ? item.name.trim() : '未命名品項',
           amount,
           currency: item.currency === 'TWD' ? 'TWD' : 'KRW',
           category: typeof item.category === 'string' && item.category.trim() ? item.category.trim() : '其他',
+          qty: Number.isFinite(qty) && qty > 0 ? qty : 1,
+          op: item.op === '÷' ? '÷' : '×',
           ts: Number(item.ts) || Date.now()
         };
       }).filter(Boolean) : [];
-      return { rateTwdPer1000Krw, currency, items };
+      return { rateTwdPer1000Krw, currency, operator, items };
     }
 
     function expenseLoad() {
@@ -4972,6 +4989,18 @@
       if (amountEl) amountEl.focus();
     }
 
+    function expenseToggleOperator() {
+      const data = expenseLoad();
+      data.operator = data.operator === '÷' ? '×' : '÷';
+      const btn = document.getElementById('expenseOperatorBtn');
+      const next = data.operator;
+      if (btn) btn.textContent = next;
+      if (btn) btn.classList.toggle('active', next === '×');
+      expenseSave(data, true);
+      const qtyEl = document.getElementById('expenseQty');
+      if (qtyEl) qtyEl.focus();
+    }
+
     function expenseSaveRate() {
       const data = expenseLoad();
       const rateEl = document.getElementById('expenseRate');
@@ -4984,37 +5013,49 @@
     function expenseAdd() {
       const nameEl = document.getElementById('expenseName');
       const amountEl = document.getElementById('expenseAmount');
+      const qtyEl = document.getElementById('expenseQty');
       const categoryEl = document.getElementById('expenseCategory');
       const name = nameEl ? nameEl.value.trim() : '';
       const amount = Number(amountEl ? amountEl.value : 0);
-      if (!name || !Number.isFinite(amount) || amount <= 0) {
-        expenseShowStatus('請輸入品項與有效金額');
+      const qty = Number(qtyEl ? qtyEl.value : 0);
+      const data = expenseLoad();
+      const op = data.operator === '÷' ? '÷' : '×';
+      if (!name || !Number.isFinite(amount) || amount <= 0 || !Number.isFinite(qty) || qty <= 0) {
+        expenseShowStatus('請輸入品項、有效金額與數量');
         return;
       }
-      const data = expenseLoad();
       data.items.unshift({
         name,
         amount,
         currency: data.currency,
         category: categoryEl ? categoryEl.value : '其他',
+        qty,
+        op,
         ts: Date.now()
       });
       expenseSave(data);
       if (nameEl) nameEl.value = '';
       if (amountEl) amountEl.value = '';
+      if (qtyEl) qtyEl.value = '1';
       expenseRenderAll();
       if (nameEl) nameEl.focus();
     }
 
     function expenseDelete(idx) {
       const data = expenseLoad();
+      const item = data.items[idx];
+      if (!item) return;
+      const title = item.name || '這筆記錄';
+      if (!confirm(`確定刪除「${title}」嗎？`)) return;
+      if (!confirm('再確認一次：刪除後無法還原。')) return;
       data.items.splice(idx, 1);
       expenseSave(data);
       expenseRenderAll();
     }
 
     function expenseClearAll() {
-      if (!confirm('確定要清空所有記帳紀錄嗎？此動作無法復原（建議先到備忘清單匯出備份）')) return;
+      if (!confirm('確定要清空所有記帳紀錄嗎？')) return;
+      if (!confirm('再確認一次：清空後無法復原，建議先匯出備份。')) return;
       const data = expenseLoad();
       data.items = [];
       expenseSave(data);
@@ -5029,16 +5070,28 @@
     }
 
     function expenseConverted(item, rateTwdPer1000Krw) {
+      const qty = Number(item.qty) > 0 ? Number(item.qty) : 1;
+      const baseAmount = Number(item.amount) || 0;
+      const total = item.op === '÷' ? (qty ? baseAmount / qty : 0) : baseAmount * qty;
       if (item.currency === 'TWD') {
         return {
-          twd: item.amount,
-          krw: rateTwdPer1000Krw > 0 ? item.amount / rateTwdPer1000Krw * 1000 : 0
+          twd: total,
+          krw: rateTwdPer1000Krw > 0 ? total / rateTwdPer1000Krw * 1000 : 0
         };
       }
       return {
-        krw: item.amount,
-        twd: item.amount / 1000 * rateTwdPer1000Krw
+        krw: total,
+        twd: total / 1000 * rateTwdPer1000Krw
       };
+    }
+
+    function expenseFormulaText(item, converted) {
+      const qty = Number(item.qty) > 0 ? Number(item.qty) : 1;
+      const op = item.op === '÷' ? '÷' : '×';
+      const amountText = expenseFormatCurrency(Number(item.amount) || 0, item.currency);
+      const totalText = expenseFormatCurrency(item.currency === 'TWD' ? converted.twd : converted.krw, item.currency);
+      if (qty === 1) return `${amountText} = ${totalText}`;
+      return `${amountText} ${op} ${qty} = ${totalText}`;
     }
 
     function expenseRenderAll() {
@@ -5046,9 +5099,14 @@
       const rateEl = document.getElementById('expenseRate');
       const krwBtn = document.getElementById('expenseCurrencyKrw');
       const twdBtn = document.getElementById('expenseCurrencyTwd');
+      const opBtn = document.getElementById('expenseOperatorBtn');
       if (rateEl && document.activeElement !== rateEl) rateEl.value = data.rateTwdPer1000Krw;
       if (krwBtn) krwBtn.classList.toggle('active', data.currency === 'KRW');
       if (twdBtn) twdBtn.classList.toggle('active', data.currency === 'TWD');
+      if (opBtn) {
+        opBtn.textContent = data.operator === '÷' ? '÷' : '×';
+        opBtn.classList.toggle('active', data.operator !== '÷');
+      }
 
       let totalTwd = 0;
       let totalKrw = 0;
@@ -5080,10 +5138,10 @@
           <div class="expense-item">
             <div>
               <div class="expense-name">${memoEscape(item.name)}</div>
-              <div class="expense-meta">${memoEscape(item.category)} · ${date}</div>
+              <div class="expense-meta">${memoEscape(item.category)} · ${memoEscape(expenseFormulaText(item, converted))} · ${date}</div>
             </div>
             <div class="expense-amount">
-              <b>${expenseFormatCurrency(item.amount, item.currency)}</b>
+              <b>${item.currency === 'TWD' ? expenseFormatCurrency(converted.twd, 'TWD') : expenseFormatCurrency(converted.krw, 'KRW')}</b>
               ${convertedText}
             </div>
             <div class="expense-del" onclick="expenseDelete(${idx})"><i class="ti ti-x" aria-hidden="true"></i></div>
