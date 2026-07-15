@@ -1480,11 +1480,17 @@
       <button class="tab-btn" onclick="goTab('quick-ref',this)">現場速查包</button>
       <button class="tab-btn" onclick="goTab('checklist',this)">行前檢查清單</button>
       <button class="tab-btn" onclick="goTab('korea-notes',this)">韓國注意事項</button>
+      <button class="tab-btn" onclick="goTab('privacy',this)">隱私權／第三方服務</button>
       <button class="tab-btn" onclick="goTab('rain',this)">☂ 雨備行程</button>
       <button class="tab-btn" onclick="goTab('backuppass',this)">🎫 備用 Pass 景點</button>
       <button class="tab-btn" onclick="goTab('card-rewards',this)">💳 刷卡優惠</button>
       <button class="tab-btn" onclick="goTab('expenses',this)">💸 快速記帳</button>
       <button class="tab-btn" onclick="goTab('memo',this)">📝 備忘清單</button>
+    </div>
+
+    <div class="banner bn-warn" style="margin-top:-8px;margin-bottom:16px">
+      <i class="ti ti-clock-check" aria-hidden="true"></i>
+      <div><b>出發前與當日確認：</b>本指南的行程、天氣、交通出口、營業時間、票價與套票內容僅供規劃參考；特別是颱風季、Skyline Luge 與其他戶外設施，請以官方公告、Naver Map 與現場標示為準。</div>
     </div>
 
     <!-- DAY 1 -->
@@ -2910,8 +2916,8 @@
       <div class="day-head">
         <div class="day-num-big" style="font-size:36px;color:var(--primary)">M</div>
         <div class="day-head-info">
-          <div class="day-head-title">釜山地鐵懶人包路線圖</div>
-          <div class="day-head-sub">機場進市區 · 主要轉乘站 · 本行程常用站點</div>
+          <div class="day-head-title">釜山官方地鐵路線圖</div>
+          <div class="day-head-sub">Busan 官方提供 · 機場進市區 · 主要轉乘站</div>
         </div>
       </div>
 
@@ -2919,12 +2925,12 @@
         <i class="ti ti-info-circle" aria-hidden="true"></i>
         <div>
           <div class="banner-title">使用方式</div>
-          手機查看時可左右滑動放大路線圖。實際搭乘仍以 Naver Map 與站內即時標示為準，特別是出口編號與施工改道。
+          手機查看時可左右滑動放大路線圖。本圖為 Busan 官方提供版本；實際搭乘仍以 Naver Map 與站內即時標示為準，特別是出口編號、施工改道與末班車。
         </div>
       </div>
 
       <div class="metro-map-wrap">
-        <img class="metro-map-img" src="釜山地鐵懶人包地圖.png" alt="釜山地鐵懶人包地圖：標示金海機場、沙上、西面、南浦、Centum City、海雲台等行程常用站">
+        <img class="metro-map-img" src="釜山官方地鐵路線圖.jpg" alt="Busan 官方釜山地鐵路線圖：1 至 4 號線、東海線與釜山金海輕軌">
       </div>
 
       <div class="sec-h"><i class="ti ti-map-2" aria-hidden="true"></i>外部參考地圖</div>
@@ -3371,6 +3377,53 @@
             <div class="link-row">
               <a class="lnk lnk-web" href="https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140632" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i>1330 旅遊諮詢</a>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIVACY -->
+    <div id="privacy" class="day-sec">
+      <div class="day-head">
+        <div class="day-num-big" style="font-size:36px;color:var(--teal)"><i class="ti ti-shield-lock" aria-hidden="true"></i></div>
+        <div class="day-head-info">
+          <div class="day-head-title">隱私權／第三方服務</div>
+          <div class="day-head-sub">本網站的資料儲存方式與外部嵌入內容說明</div>
+        </div>
+      </div>
+
+      <div class="banner bn-info" style="margin-bottom:12px">
+        <i class="ti ti-info-circle" aria-hidden="true"></i>
+        <div>這是一個旅程規劃工具。本網站不設會員登入、不直接收集姓名、電話、護照、信用卡或付款資料。</div>
+      </div>
+
+      <div class="tl">
+        <div class="tl-spine"></div>
+        <div class="blk">
+          <div class="blk-dot dot-teal"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">瀏覽器本機儲存</div>
+            <div class="cn">行前清單、備忘與支出資料只保留在你的裝置</div>
+            <div class="cd"><div class="route-note"><b>localStorage：</b>本網站會在你目前使用的瀏覽器中，儲存行前檢查勾選、備忘清單與快速記帳資料，讓重新整理頁面後仍可繼續使用。資料不會由本網站上傳至伺服器，也不會同步到其他裝置。<br><br><b>管理方式：</b>你可在「備忘清單」匯出備份、清除清單，或在瀏覽器設定中清除本網站資料；使用無痕模式或清除瀏覽資料後，這些內容可能消失。</div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-purple"><i class="ti ti-ticket" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">KKday 第三方嵌入服務</div>
+            <div class="cn">頁尾商品區由 KKday / KKpartners 提供</div>
+            <div class="cd"><div class="route-note">頁尾的 KKday 商品元件會從 <span class="ko">kkpartners.kkday.com</span> 載入。當你瀏覽或點擊該元件時，KKday 可能依其服務需要處理 Cookie、裝置或瀏覽相關資訊；訂購、付款、取消與客服均由 KKday 處理，並適用其條款與隱私權政策。<br><br><b>聯盟合作揭露：</b>透過頁尾 KKday 商品連結完成購買，我可能獲得佣金；商品價格不因此增加，價格與內容以 KKday 結帳頁顯示為準。</div></div>
+            <div class="link-row"><a class="lnk lnk-web" href="https://www.kkday.com/static/en/about/privacy.html" target="_blank" rel="noopener noreferrer"><i class="ti ti-external-link" aria-hidden="true"></i>KKday 隱私權政策</a></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-dot dot-blue"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+          <div class="card">
+            <div class="ct">外部連結與旅遊資訊</div>
+            <div class="cn">地圖、票券與營運資訊請以第三方當日公告為準</div>
+            <div class="cd"><div class="route-note">本網站提供 Naver Map、景點官網與票券平台等外部連結，點擊後將適用該服務各自的隱私權與使用規則。行程、天氣、交通出口、營業時間、票價及套票內容會變動，尤其是颱風季、戶外設施與活動場次；出發前與當日請以官方公告、Naver Map 和現場標示為準。</div></div>
           </div>
         </div>
       </div>
@@ -4757,7 +4810,7 @@
     <div class="partner-footer-inner">
       <div class="partner-footer-title"><i class="ti ti-ticket" aria-hidden="true"></i>KKday 旅遊商品推薦</div>
       <ins class="kkday-product-media" data-oid="8695" data-amount="6" data-origin="https://kkpartners.kkday.com"></ins>
-      <p class="partner-footer-note">商品資訊與價格以 KKday 顯示內容為準。</p>
+      <p class="partner-footer-note">本頁含 KKday 聯盟合作推薦；透過此區連結完成購買，我可能獲得佣金，價格不因此增加。商品資訊與價格以 KKday 顯示內容為準。</p>
     </div>
   </footer>
   <script type="text/javascript" src="https://kkpartners.kkday.com/iframe.init.1.0.js"></script>
