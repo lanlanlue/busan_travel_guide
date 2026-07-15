@@ -72,6 +72,34 @@
       padding: 24px 16px 60px
     }
 
+    .partner-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 16px 32px;
+      color: var(--text2)
+    }
+
+    .partner-footer-inner {
+      padding-top: 18px;
+      border-top: 1px solid var(--border2)
+    }
+
+    .partner-footer-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text1)
+    }
+
+    .partner-footer-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text3)
+    }
+
     /* Hero */
     .hero {
       background: var(--primary-dark);
@@ -4725,6 +4753,14 @@
     <!-- END MEMO TAB -->
 
   </div>
+  <footer class="partner-footer">
+    <div class="partner-footer-inner">
+      <div class="partner-footer-title"><i class="ti ti-ticket" aria-hidden="true"></i>KKday 旅遊商品推薦</div>
+      <ins class="kkday-product-media" data-oid="8695" data-amount="6" data-origin="https://kkpartners.kkday.com"></ins>
+      <p class="partner-footer-note">商品資訊與價格以 KKday 顯示內容為準。</p>
+    </div>
+  </footer>
+  <script type="text/javascript" src="https://kkpartners.kkday.com/iframe.init.1.0.js"></script>
   <script>
     function goTab(id, el) {
       document.querySelectorAll('.day-sec').forEach(s => s.classList.remove('show'));
